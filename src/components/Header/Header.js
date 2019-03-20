@@ -1,25 +1,30 @@
 import React from 'react';
-import './Header.scss'
 import Grid from '@material-ui/core/Grid';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+
+
 const header = (props) => (
     <header className="header">
-        <div className="container">
-        <Grid container spacing={24}>
-            <Grid item xs={12}>
+        <Grid container direction="row" className="container"  alignItems="center">
+            <Grid item>
                 <div id="logo">    
-                    کیدزشاپ
+                    <span>کیدزشاپ</span>
                 </div>
             </Grid>
+            <Grid item className="categories">
+                <span>همه دسته بندی ها</span>
+                <KeyboardArrowDown style={{verticalAlign:"middle"}} />
+            </Grid>
             <Grid>
-                <div>
-                    <span>همه دسته بندی ها</span>
-                </div> 
+                <form role="search" method="get">
+                    <TextField>
+
+                    </TextField>
+                </form>
             </Grid>
         </Grid>
-
-        
-          
-        </div>
     </header>
 );
 export default header ;
