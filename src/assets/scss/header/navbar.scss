@@ -1,0 +1,17 @@
+nav {
+    background: $secondary-pink-color;
+    height: 6.5rem;
+    li {
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 1.4rem;
+    }
+    #onSale {
+        color: $primary-yellow-color;
+       img {
+           width: 1.8rem;
+           vertical-align: middle;
+           margin: 0 5px;
+       }
+    }
+}
