@@ -1,15 +1,11 @@
 import React , {Component} from 'react';
 import Axiliary from '../Auxiliary/Auxiliary';
-import Header from '../../components/Header/Header'
-import Navabar from '../../components/Header/Navbar'
-import Slider from '../../components/Slider/Slider'
+import TopSection from '../../components/TopSection/TopSection';
 class Layout extends Component {
     render() {
         return(
             <Axiliary>
-               <Header />
-               <Navabar />
-               <Slider />
+               <TopSection />
             </Axiliary>
         );
     }

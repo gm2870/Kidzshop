@@ -5,12 +5,31 @@
     .slider_images {
         width: 94.3rem;
         height: 83.7rem;
-        position: relative;
+        position: absolute;
         padding-top: 10rem;
         img {
             width: 100%;
-            position: absolute;
-            right: -25rem;
         }
+    }
+    .slider_text {
+        position: absolute;
+        top:8rem;
+        left:5rem;
+        .slider_text_header1{
+            color:$primary-yellow-color;
+            font-size: 6rem;
+        }
+        .slider_text_header2{
+            color:$primary-white-color;
+            font-size: 8rem;
+            font-weight: 900;
+        }
+    }
+    .moreButton{
+        background-color:$primary-yellow-color;
+        border-radius: 25px;
+        border:none;
+        color:$primary-pink-color;
+        font-weight: 500;
     }
 }
