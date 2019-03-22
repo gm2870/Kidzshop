@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import priceTag from '../../assets/images/price-tag.svg'
+import priceTag from '../../../assets/images/price-tag.svg'
 const navbar = () => (
 
     <nav>
