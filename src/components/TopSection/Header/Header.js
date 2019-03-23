@@ -40,12 +40,30 @@ const header = (props) => (
                 </div>
                 <div><FavoriteBorder id="like-icon"/></div>
             </div>
-            <div className="login_register">
-                <ul>
-                    <li className="user_icon"><img src={user} alt="user icon"/></li>
-                    <li className="auth_text"><span>ورود یا ثبت نام</span></li>
-                    <li className="ArrowDropDown"><ArrowDropDown /></li>
-                </ul>
+            <div className="login_register_container">
+                <div className="login_register">
+                    <ul>
+                        <li className="user_icon"><img src={user} alt="user icon"/></li>
+                        <li className="auth_text"><span>ورود یا ثبت نام</span></li>
+                        <li className="ArrowDropDown"><ArrowDropDown /></li>
+                    </ul>
+                    <div className="sub-menu">
+                        <Paper>
+                            <div className="mega-menu">
+                                <div className="register-sign-in-dropdown-inner">
+                                    <div className="sign-in">
+                                        <p>بازگشت مشتری؟</p>
+                                        <div className="sign-in-action"><a href="http://demo.takplus.com/uneno/my-account/" className="sign-in-button">ورود</a></div>
+                                    </div>
+                                    <div className="register">
+                                        <p>حساب کاربری ندارید؟</p>
+                                        <div className="register-action"><a href="http://demo.takplus.com/uneno/my-account/">ثبت نام</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Paper>
+                    </div>
+                </div>
             </div>
         </Grid>
     </header>
