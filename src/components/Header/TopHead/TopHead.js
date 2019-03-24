@@ -13,60 +13,65 @@ import user from '../../../assets/images/user.svg';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 
 
-const TopHead = (props) => (
-    <header className="header">
-        <Grid container direction="row" className="container" justify="center"  alignItems="center">
-                <div id="logo">    
-                    <Link to="/">کیدزشاپ</Link>
+const TopHead = (props) => {
+    console.log(props);
+    // const formHandler = () => {
+    //     alert('ok');
+    // }
+    return (
+        <header className="header">
+            <Grid container direction="row" className="container" justify="center"  alignItems="center">
+                    <div id="logo">    
+                        <Link to="/">کیدزشاپ</Link>
+                    </div>
+                <div className="categories">
+                    <span>همه دسته بندی ها</span>
+                    <KeyboardArrowDown style={{verticalAlign:"middle"}} />
                 </div>
-            <div className="categories">
-                <span>همه دسته بندی ها</span>
-                <KeyboardArrowDown style={{verticalAlign:"middle"}} />
-            </div>
-            <div>
-                <Paper>
-                    <form role="search" method="get" className="header-search">
-                        <IconButton aria-label="Search">
-                            <SearchIcon />
-                        </IconButton>
-                        <InputBase style={{verticalAlign:"middle"}} placeholder="به دنبال چیزی می گردید؟" />
-                    </form>
-                </Paper>
-            </div>
-            <div className="header-icons">
-                <div className="cart_container">
-                    <ShoppingCart id="ShoppingCart"/>
-                    <span id="counter_body">0</span>
+                <div>
+                    <Paper>
+                        <form role="search" method="get" className="header-search">
+                            <IconButton aria-label="Search">
+                                <SearchIcon />
+                            </IconButton>
+                            <InputBase style={{verticalAlign:"middle"}} placeholder="به دنبال چیزی می گردید؟" />
+                        </form>
+                    </Paper>
                 </div>
-                <div><FavoriteBorder id="like-icon"/></div>
-            </div>
-            <div className="login_register_container">
-                <div className="login_register">
-                    <ul>
-                        <li className="user_icon"><img src={user} alt="user icon"/></li>
-                        <li className="auth_text"><span>ورود یا ثبت نام</span></li>
-                        <li className="ArrowDropDown"><ArrowDropDown /></li>
-                    </ul>
-                    <div className="sub-menu">
-                        <Paper>
-                            <div className="mega-menu">
-                                <div className="register-sign-in-dropdown-inner">
-                                    <div className="sign-in">
-                                        <p>بازگشت مشتری؟</p>
-                                        <div className="sign-in-action"><Link to="/users/login" className="sign-in-button">ورود</Link></div>
-                                    </div>
-                                    <div className="register">
-                                        <p>حساب کاربری ندارید؟</p>
-                                        <div className="register-action"><Link to="/users/register">ثبت نام</Link></div>
+                <div className="header-icons">
+                    <div className="cart_container">
+                        <ShoppingCart id="ShoppingCart"/>
+                        <span id="counter_body">0</span>
+                    </div>
+                    <div><FavoriteBorder id="like-icon"/></div>
+                </div>
+                <div className="login_register_container">
+                    <div className="login_register">
+                        <ul>
+                            <li className="user_icon"><img src={user} alt="user icon"/></li>
+                            <li className="auth_text"><span>ورود یا ثبت نام</span></li>
+                            <li className="ArrowDropDown"><ArrowDropDown /></li>
+                        </ul>
+                        <div className="sub-menu">
+                            <Paper>
+                                <div className="mega-menu">
+                                    <div className="register-sign-in-dropdown-inner">
+                                        <div className="sign-in">
+                                            <p>بازگشت مشتری؟</p>
+                                            <div className="sign-in-action"><Link to="/users/login" className="sign-in-button" onClick={props.formHandler}>ورود</Link></div>
+                                        </div>
+                                        <div className="register">
+                                            <p>حساب کاربری ندارید؟</p>
+                                            <div className="register-action"><Link to="/users/register">ثبت نام</Link></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Paper>
+                            </Paper>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Grid>
-    </header>
- 
- );
+            </Grid>
+        </header>
+    );
+ };
 export default TopHead ;

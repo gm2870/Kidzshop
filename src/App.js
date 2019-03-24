@@ -6,6 +6,7 @@ import Content from './components/Content/Content';
 import { Switch } from 'react-router-dom';
 
 class App extends Component {
+  state 
   render() {
     return ( 
       <div>
