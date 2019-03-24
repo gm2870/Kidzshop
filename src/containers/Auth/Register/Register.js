@@ -34,7 +34,7 @@ class Register extends Component {
                     <div>
                     <div>
                          <label><Checkbox style={{padding: "0 0 0 5px"}} /></label>
-                         <a href="#" id="rules">با قوانین موافقم</a>
+                         <Link to="/" id="rules">با قوانین موافقم</Link>
                     </div>
                         <button className="login_btn">ثبت نام</button>
                     </div>
