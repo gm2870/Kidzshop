@@ -23,7 +23,7 @@
     border-top-left-radius: 0;
     &.active{
         background: $primary-pink-color;
-        color: white;
+        color: $primary-white-color;
     }
 }
 .loginTab {
@@ -31,7 +31,7 @@
     border-top-right-radius: 0; 
     &.active{
         background: $primary-pink-color;
-        color: white;
+        color: $primary-white-color;
     }
 }
 .input_body {
@@ -42,7 +42,7 @@
     }
 }
 .login_btn{
-    font-family: IRANSANS;
+    font-family: $fontFamily;
     border:none;
     font-size: 1.6rem;
     color: $primary-white-color;

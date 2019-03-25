@@ -6,9 +6,9 @@ import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 const Header = (props) => {
     return(
         <Auxiliary>
-        <TopHead />
-        <Navbar />
-    </Auxiliary>
+            <TopHead />
+             <Navbar />
+        </Auxiliary>
     )
     };
 export default Header;

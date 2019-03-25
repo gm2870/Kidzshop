@@ -1,31 +1,4 @@
-@keyframes moveInImg {
-    0% {
-        opacity: 0;
-        transform: translateY(3rem);
-    }
-    50% {
-        opacity: .5;
-    }
-  
-    100% {
-        opacity: 1;
-        transform: translate(0);
-    }
-}
-@keyframes moveInRight {
-    0% {
-        opacity:0;
-        transform: translateX(-10rem) ;
-    }
-  
-    80% {
-        transform: translateX(1rem) ;
-    }
-    100% {
-        opacity: 1;
-        transform: translate(0);
-    }
-}
+
 .slider_container {
     // background-image: url('../../images/backimg1.jpg');
     background-color: $primary-pink-color;
@@ -70,7 +43,7 @@
         text-align: left;
         .moreButton{
             background-color:$primary-yellow-color;
-            font-family: IRANSANS;
+            font-family: $fontFamily;
             padding: 15px 55px 15px 45px;
             border-radius: 40px;
             border:none;
