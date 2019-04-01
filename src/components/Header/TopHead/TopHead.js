@@ -14,10 +14,7 @@ import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 
 
 const TopHead = (props) => {
-    console.log(props);
-    // const formHandler = () => {
-    //     alert('ok');
-    // }
+  
     return (
         <header className="header">
             <Grid container direction="row" className="container" justify="center"  alignItems="center">

@@ -15,11 +15,11 @@ class SignIn extends Component {
                         <form>
                             <div className="input_body">
                                 <label>نام کاربری یا ایمیل</label>
-                                <TextField variant="outlined" margin="normal" className="signIn_input" />
+                                <TextField variant="outlined" margin="normal" className="auth_input" />
                             </div>
                             <div className="input_body">
                                 <label>رمز عبور</label>
-                                <TextField className="signIn_input"
+                                <TextField className="auth_input"
                                 margin="normal"
                                 variant="outlined"
                                 />

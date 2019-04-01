@@ -4,12 +4,10 @@ import SignIn from './SignIn/SignIn';
 import Register from './Register/Register';
 import authBoy from '../../assets/images/auth_boy.png';
 class Auth extends Component {
-    // state = {
-    //     isSignUp:true
-    // }
+   
     render () {
         let form = <Register />
-        if(this.props.match.url==='/users/login'){
+        if(this.props.match.url === '/users/login'){
              form = <SignIn />
         }
         return (
@@ -19,7 +17,8 @@ class Auth extends Component {
                 </Grid>
                {form}
             </Grid>
-        )
-    }
-}
+        );
+    };
+};
+
 export default Auth;
