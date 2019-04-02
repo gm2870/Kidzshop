@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
 import {Link} from 'react-router-dom';
-import Input from '../../../components/UI/Forms/Register/Input/Input';
+import Input from '../../../components/UI/Forms/Auth/Input/Input';
 class Register extends Component {
     state = {
         controls: {
@@ -115,8 +115,7 @@ class Register extends Component {
             [controlName]:{
                 ...this.state.controls[controlName],
                 value:event.target.value,
-                filledIn:false,
-                
+                filledIn:false 
             }
         };
         
@@ -166,30 +165,30 @@ class Register extends Component {
         return (
             <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
                 <Paper className="form_body">
-                <Link to="/users/register" className="registerTab active">ثبت نام</Link>
-                <Link to="/users/login" className="loginTab">ورود</Link>
-                <form onSubmit={this.submitHandler}>
-                    {formEelementsArray.map(formElement => (
-                       <Input 
-                       labelName={formElement.config.label}
-                       key={formElement.id} 
-                       elementType={formElement.config.elementType} 
-                       elementConfig={formElement.config.elementConfig}
-                       value={formElement.config.value}
-                       invalid={!formElement.config.valid}
-                       onBlur={(event)=> this.onInputBlur(event,formElement.id)}
-                       filledIn={formElement.config.filledIn}
-                       errorMessage={formElement.config.errorMessage}
-                       changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
-                    ))}
-                    <div>
-                    <div>
-                         <label><Checkbox onChange={this.checkboxHandler} checked={this.state.siteRules} style={{padding: "0 0 0 5px"}} /></label>
-                         <Link to="/" id="rules">با قوانین موافقم</Link>
-                    </div>
-                        <button className="login_btn">ثبت نام</button>
-                        <p style={{color:"red"}}>{this.state.formMessage}</p>
-                    </div>
+                    <Link to="/users/register" className="registerTab active">ثبت نام</Link>
+                    <Link to="/users/login" className="loginTab">ورود</Link>
+                    <form onSubmit={this.submitHandler}>
+                        {formEelementsArray.map(formElement => (
+                        <Input 
+                        labelName={formElement.config.label}
+                        key={formElement.id} 
+                        elementType={formElement.config.elementType} 
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        invalid={!formElement.config.valid}
+                        onBlur={(event)=> this.onInputBlur(event,formElement.id)}
+                        filledIn={formElement.config.filledIn}
+                        errorMessage={formElement.config.errorMessage}
+                        changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
+                        ))}
+                        <div>
+                            <div>
+                                <label><Checkbox onChange={this.checkboxHandler} checked={this.state.siteRules} style={{padding: "0 0 0 5px"}} /></label>
+                                <Link to="/" id="rules">با قوانین موافقم</Link>
+                            </div>
+                            <button className="login_btn">ثبت نام</button>
+                            <p style={{color:"red"}}>{this.state.formMessage}</p>
+                        </div>
                     </form>
                 </Paper>
             </Grid>
@@ -198,7 +197,7 @@ class Register extends Component {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth:(username,password,email,repeatPass) => dispatch(actions.auth(username,password,email,repeatPass))
+        onAuth:(username,password,email,repeatPass) => dispatch(actions.registerAuth(username,password,email,repeatPass))
     }
 }
 

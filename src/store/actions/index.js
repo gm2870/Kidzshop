@@ -1,1 +1,1 @@
-export {auth} from './auth'
+export {registerAuth,loginAuth} from './auth'
