@@ -5,7 +5,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {Link} from 'react-router-dom';
 import Input from '../../../components/UI/Forms/Auth/Input/Input';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index'
+import * as actions from '../../../store/actions/index';
+import Spinner from '../../../components/UI/Spinner/Spinner'
 class SignIn extends Component {
     state = {
         controls: {
@@ -75,7 +76,6 @@ class SignIn extends Component {
         };
         
        this.setState({controls:updatedControls});
-       console.log(this.state.controls);
     }
     onInputBlur = (event ,controlName) => {
         const updatedControls =  {
@@ -91,7 +91,6 @@ class SignIn extends Component {
             formIsValid = updatedControls[inputIdentifier].valid
         }
        this.setState({controls:updatedControls,formIsValid:formIsValid});
-       console.log(this.state.controls.username.value);
     }
     submitHandler = (event) => {
         event.preventDefault();
@@ -112,26 +111,28 @@ class SignIn extends Component {
                 config :this.state.controls[key]
             })
         }
-
+        const form = formEelementsArray.map(formElement => (
+            <Input 
+                labelName={formElement.config.label}
+                key={formElement.id} 
+                elementType={formElement.config.elementType} 
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value}
+                invalid={!formElement.config.valid}
+                onBlur={(event)=> this.onInputBlur(event,formElement.id)}
+                filledIn={formElement.config.filledIn}
+                errorMessage={formElement.config.errorMessage}
+                changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
+            ))
+          
         return (
             <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
+                {this.props.loading ? <Spinner /> : null}
                 <Paper className="form_body">
                     <Link to="/users/register" className="registerTab">ثبت نام</Link>
                     <Link to="/users/login" className="loginTab active">ورود</Link>
                 <form onSubmit={this.submitHandler}>
-                {formEelementsArray.map(formElement => (
-                    <Input 
-                        labelName={formElement.config.label}
-                        key={formElement.id} 
-                        elementType={formElement.config.elementType} 
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        invalid={!formElement.config.valid}
-                        onBlur={(event)=> this.onInputBlur(event,formElement.id)}
-                        filledIn={formElement.config.filledIn}
-                        errorMessage={formElement.config.errorMessage}
-                        changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
-                    ))}
+                {form}
                     <div>
                         <button className="login_btn">ورود</button>
                         <label><Checkbox style={{padding: "0 2rem 0 5px"}} /></label>
@@ -146,9 +147,14 @@ class SignIn extends Component {
         );
     };
 };
+const mapStateToProps = (state) => {
+    return {
+        loading:state.auth.loading
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         onAuth:(username,password) => dispatch(actions.loginAuth(username,password))
     }
 }
-export default connect(null , mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps , mapDispatchToProps)(SignIn);

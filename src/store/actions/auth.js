@@ -11,7 +11,7 @@ export const authSuccess = (token , userId) => {
 	return {
 		type:actionTypes.AUTH_SUCCESS,
 		sessionToken:token,
-		userId:userId
+		objectId:userId
 	};
 };
 
@@ -70,7 +70,7 @@ export const loginAuth = (username,password) => {
 		axios.post('https://parseapi.back4app.com/login',authData,{headers:headers})
 		.then(response => {
 			console.log(response);
-			dispatch(authSuccess(response.data));
+			dispatch(authSuccess(response.data.sessionToken ,response.data.objectId));
 		})
 		.catch(error => {
 			console.log(error);
