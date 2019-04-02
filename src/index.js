@@ -5,16 +5,25 @@ import './assets/scss/main.scss'
 import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
-// import {Provider} from 'react-redux';
-// import {createStore} from 'redux';
-// import reducer from './store/reducers/reducer';
-// const store = createStore(reducer);
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {createStore , applyMiddleware,compose,combineReducers} from 'redux';
+import authReducer from './store/reducers/auth';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers({
+    auth:authReducer
+})
+
+const store = createStore(rootReducer,composeEnhancers(
+    applyMiddleware(thunk)
+));
 const app = (
-    // <Provider store={store}>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    // </Provider>
+    </Provider>
 );
 ReactDOM.render(app, document.getElementById('root'));
 

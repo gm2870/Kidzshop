@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
+import * as actions from '../../../store/actions/index';
+import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
 import {Link} from 'react-router-dom';
-import Input from '../../../components/UI/Forms/Input/Input';
+import Input from '../../../components/UI/Forms/Register/Input/Input';
 class Register extends Component {
     state = {
         controls: {
+            username:{
+                elementType:"TextField",
+                elementConfig: {
+                    type:"text",
+                    margin:"normal",
+                    variant:"outlined",
+                },
+                label:"نام کاربری",
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 3
+                },
+                errorMessage:"نام کاربری باید حداقل 3 کارکتر باشد.",
+                valid: false,
+                filledIn: false
+            },
             email: {
                 elementType:"TextField",
                 elementConfig: {
-                    type:"email",
+                    type:"text",
                     margin:"normal",
                     variant:"outlined",
                 },
@@ -20,8 +39,9 @@ class Register extends Component {
                     required: true,
                     isEmail: true
                 },
+                errorMessage:"ایمیل صحیح نمی باشد.",
                 valid: false,
-                touched: false
+                filledIn: false
             },
             password:{
                 elementType:"TextField",
@@ -36,8 +56,9 @@ class Register extends Component {
                     required: true,
                     minLength: 6
                 },
+                errorMessage:"رمز عبور باید حداقل 6 کارکتر باشد.",
                 valid: false,
-                touched: false
+                filledIn: false
 
             },
             repeatPass:{
@@ -52,12 +73,17 @@ class Register extends Component {
                 validation: {
                     required: true,
                     minLength: 6,
-                    sameAsPass:false
+                    sameAsPass:true
                 },
+                errorMessage:"رمز عبور یکسان نیست",
                 valid: false,
-                touched: false
+                filledIn: false
             }
-        }
+        },
+        formIsValid:false,
+        formMessage:null,
+        loading:false,
+        siteRules:true
     }
     checkValidity(value, rules) {
         let isValid = true;
@@ -83,17 +109,49 @@ class Register extends Component {
     }
 
     inputChangedHandler = (event ,controlName) => {
-        const updatedContols =  {
+        this.setState({formMessage:null});
+        const updatedControls =  {
             ...this.state.controls,
             [controlName]:{
                 ...this.state.controls[controlName],
                 value:event.target.value,
-                valid:this.checkValidity(event.target.value ,this.state.controls[controlName].validation),
-                touched:true
+                filledIn:false,
+                
             }
         };
-    //    console.log(updatedContols);
-       this.setState({controls:updatedContols});
+        
+       this.setState({controls:updatedControls});
+    }
+    onInputBlur = (event ,controlName) => {
+        const updatedControls =  {
+            ...this.state.controls,
+            [controlName]:{
+                ...this.state.controls[controlName],
+                valid:this.checkValidity(event.target.value ,this.state.controls[controlName].validation),
+                filledIn:true
+            }
+        };
+     let formIsValid = true;
+        for(let inputIdentifier in updatedControls){
+            formIsValid = updatedControls[inputIdentifier].valid
+        }
+       this.setState({controls:updatedControls,formIsValid:formIsValid});
+    }
+    submitHandler = (event) => {
+        event.preventDefault();
+        if(!this.state.formIsValid){
+            this.setState({formMessage:"لطفا اطلاعات را بطور کامل وارد کنید."});
+            return false;
+        }
+        this.props.onAuth(
+            this.state.controls.username.value,
+            this.state.controls.password.value,
+            this.state.controls.email.value,
+            this.state.controls.repeatPass
+        )
+    }
+    checkboxHandler = () => {
+
     }
 
     render () {
@@ -104,12 +162,13 @@ class Register extends Component {
                 config :this.state.controls[key]
             })
         }
+
         return (
-            <Grid item xs={12} md={6} style={{padding: "11rem 0"}} className="form_container">
+            <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
                 <Paper className="form_body">
-                <Link to="register/register" className="registerTab active">ثبت نام</Link>
+                <Link to="/users/register" className="registerTab active">ثبت نام</Link>
                 <Link to="/users/login" className="loginTab">ورود</Link>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     {formEelementsArray.map(formElement => (
                        <Input 
                        labelName={formElement.config.label}
@@ -117,14 +176,19 @@ class Register extends Component {
                        elementType={formElement.config.elementType} 
                        elementConfig={formElement.config.elementConfig}
                        value={formElement.config.value}
+                       invalid={!formElement.config.valid}
+                       onBlur={(event)=> this.onInputBlur(event,formElement.id)}
+                       filledIn={formElement.config.filledIn}
+                       errorMessage={formElement.config.errorMessage}
                        changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
                     ))}
                     <div>
                     <div>
-                         <label><Checkbox style={{padding: "0 0 0 5px"}} /></label>
+                         <label><Checkbox onChange={this.checkboxHandler} checked={this.state.siteRules} style={{padding: "0 0 0 5px"}} /></label>
                          <Link to="/" id="rules">با قوانین موافقم</Link>
                     </div>
                         <button className="login_btn">ثبت نام</button>
+                        <p style={{color:"red"}}>{this.state.formMessage}</p>
                     </div>
                     </form>
                 </Paper>
@@ -132,5 +196,10 @@ class Register extends Component {
         );
     };
 };
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth:(username,password,email,repeatPass) => dispatch(actions.auth(username,password,email,repeatPass))
+    }
+}
 
-export default Register;
+export default connect(null,mapDispatchToProps)(Register);

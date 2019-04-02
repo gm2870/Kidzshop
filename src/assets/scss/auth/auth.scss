@@ -35,10 +35,11 @@
     }
 }
 .input_body {
+    margin-top: 2rem;
+
     .auth_input{
         width: 100%;
         margin-top: 1rem;
-        margin-bottom: 2rem;
     }
 }
 .login_btn{
@@ -51,7 +52,7 @@
     padding: 1rem 4rem ;
     cursor: pointer;
     margin-top: 2rem;
-    &:hover{
+    &:enabled:hover{
         background-color:$dark-pink-color;
     }
 }
@@ -66,4 +67,19 @@
     &:hover {
         color:$dark-pink-color;
     }
+}
+
+.showError {
+    display:block;
+    color:red
+}
+.hideError {
+    display: none;
+}
+button:disabled{
+    background-color:$light-pink-color;
+    cursor: not-allowed;
+}
+.emptyInput{
+    border:2px solid red;
 }
