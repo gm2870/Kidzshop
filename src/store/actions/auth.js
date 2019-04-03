@@ -14,14 +14,18 @@ export const authSuccess = (token , userId) => {
 		objectId:userId
 	};
 };
-
+export const setAuthUserName = (userName) => {
+	return {
+		type:actionTypes.SET_AUTH_USERNAME,
+		username:userName
+	};
+};
 export const authFail = (error) => {
 	return {
 		type:actionTypes.AUTH_FAIL,
 		error:error
 	};
 };
-
 export const registerAuth = ( username,password,email,repeatPass) => {
 	return dispatch => {
 		dispatch(authStart());
@@ -44,6 +48,7 @@ export const registerAuth = ( username,password,email,repeatPass) => {
 		.then(response => {
 			console.log(response);
 			dispatch(authSuccess(response.data));
+			dispatch(setAuthUserName());
 		})
 		.catch(error => {
 			console.log(error);
@@ -71,10 +76,11 @@ export const loginAuth = (username,password) => {
 		.then(response => {
 			console.log(response);
 			dispatch(authSuccess(response.data.sessionToken ,response.data.objectId));
+			dispatch(setAuthUserName(response.data.username));
 		})
 		.catch(error => {
-			console.log(error);
-			dispatch(authFail(error));
-		})
+			console.log(error.response.data.error);
+			dispatch(authFail(error.response.data.code));
+		});
 	};
 };

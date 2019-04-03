@@ -4,7 +4,9 @@ const initialState = {
     token:null,
     userId:null,
     error:null,
-    loading:false
+    loading:false,
+    userName:null,
+    authRedirectPath:'users/my-account'
 }
 const authStart = (state ,action) => {
     return updateObject(state,{error:null,loading:true});
@@ -18,6 +20,9 @@ const authSuccess = (state ,action) => {
         loading:false
     });
 };
+const setAuthUserName = (state , action) => {
+    return updateObject(state , {userName:action.username})
+}
 
 const authFail = (state,action) => {
     return updateObject(state, {
@@ -31,6 +36,7 @@ const reducer = (state=initialState,action) => {
         case actionTypes.AUTH_START: return authStart(state,action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state,action);
         case actionTypes.AUTH_FAIL: return authFail(state,action);
+        case actionTypes.SET_AUTH_USERNAME: return setAuthUserName(state,action);
         default:
           return state;
     };

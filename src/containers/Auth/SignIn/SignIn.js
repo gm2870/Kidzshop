@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
-import {Link} from 'react-router-dom';
+import {Link ,Redirect} from 'react-router-dom';
 import Input from '../../../components/UI/Forms/Auth/Input/Input';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
@@ -103,6 +103,7 @@ class SignIn extends Component {
             this.state.controls.password.value
         )
     }
+    
     render () {
         let formEelementsArray = [];
         for(let key in this.state.controls){
@@ -123,12 +124,30 @@ class SignIn extends Component {
                 filledIn={formElement.config.filledIn}
                 errorMessage={formElement.config.errorMessage}
                 changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
-            ))
+            ));
+            let errorMessage = null ;
+            if(this.props.error){
+                switch (this.props.error) {
+                    case 101:
+                    errorMessage = (
+                        <p className="errorColor">نام کاربری یا رمز عبور صحیح نمی باشد.</p>
+                    );  
+                        break;
+                    default:
+                        break;
+                }
+             
+            }
+            let authRedirect = null;
+            if(this.props.isAuthenticated){
+                authRedirect = <Redirect to="/" />
+            }
           
         return (
             <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
-                {this.props.loading ? <Spinner /> : null}
+                {authRedirect}
                 <Paper className="form_body">
+                {this.props.loading ? <Spinner /> : null}
                     <Link to="/users/register" className="registerTab">ثبت نام</Link>
                     <Link to="/users/login" className="loginTab active">ورود</Link>
                 <form onSubmit={this.submitHandler}>
@@ -139,7 +158,7 @@ class SignIn extends Component {
                         <span id="rememberMe">مرا به خاطر بسپار</span>
                     </div>
                     <p style={{color:"red",display:"inline-block"}}>{this.state.formMessage}</p>
-
+                    {errorMessage}
                     <p id="lost_password">رمز عبور خود را فراموش کرده اید؟</p>
                 </form>
                 </Paper>
@@ -149,12 +168,15 @@ class SignIn extends Component {
 };
 const mapStateToProps = (state) => {
     return {
-        loading:state.auth.loading
-    }
-}
+        loading:state.auth.loading,
+        error:state.auth.error,
+        isAuthenticated: state.auth.token !== null
+    };
+};
 const mapDispatchToProps = dispatch => {
     return {
         onAuth:(username,password) => dispatch(actions.loginAuth(username,password))
-    }
-}
+    };
+};
+
 export default connect(mapStateToProps , mapDispatchToProps)(SignIn);

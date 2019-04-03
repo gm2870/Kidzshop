@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Layout from './hoc/Layout/Layout';
 import Auth from './containers/Auth/Auth';
+import UserAccount from './containers/UserAccount/UserAccount';
 import Content from './components/Content/Content';
 import {Route, Switch } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ class App extends Component {
             <Switch>
                 <Route path="/users/login" component={Auth} />
                 <Route path="/users/register" component={Auth} />
+                <Route path="/users/my-account" component={UserAccount} />
                 <Route path="/" exact component={Content} />
                 <Route component={Content} />
             </Switch>

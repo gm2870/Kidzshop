@@ -3,10 +3,10 @@ import TopHead from './TopHead/TopHead';
 import Navbar from './Navbar/Navbar';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 
-const Header = () => {
+const Header = (props) => {
     return(
         <Auxiliary>
-            <TopHead />
+            <TopHead isAuthenticated={props.isAuthenticated} />
             <Navbar />
         </Auxiliary>
     );

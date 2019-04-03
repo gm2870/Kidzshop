@@ -3,7 +3,10 @@
     height: 10.8rem;
     background-color: $primary-pink-color ;
     font-size: 2.5rem;
-
+    li{
+        list-style: none;
+        display: inline-block;
+    }
     #logo {
         font-size: 3.5rem; 
         font-weight: 900;
@@ -97,6 +100,58 @@
         }
     }
   }
+  .users_container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .users_box{
+        border-radius: 4px;
+        border-style: dashed;
+        border-width: 1px;
+        .sub-menu{
+            position: absolute;
+            display: none;
+        }
+        .user_menu {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            padding: 0 1rem;
+            .ArrowDropDown{
+                svg {
+                    vertical-align: middle;
+                }
+            }
+            .user_info{
+                padding: 0 1rem;
+                p {
+                    margin: 0
+                }
+                .hello_text{
+                    color:$primary-yellow-color;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    &:hover{
+        color:$primary-yellow-color;
+        cursor: pointer;
+        .users_box {
+            color: $primary-yellow-color;
+          
+
+        }
+        .user_icon{
+            background: $primary-yellow-color;
+        }
+        .sub-menu{
+            display: block !important;
+        }
+    }
+   
+  }
   .login_register {
     position: relative;
     border-radius: 4px;
@@ -131,7 +186,7 @@
 .sub-menu {
     position: absolute;
     top: 110%;
-    right: 0;
+    right: -1.1rem;
     display: none;
     z-index: 1000;
     min-width: 10rem;

@@ -1,12 +1,15 @@
+
 .auth_box {
     padding: 56px;
 }
 .form_body{
+    position: relative;
     padding: 56px;
     label {
         color: $primary-gray-color;
     }
 }
+
 .registerTab , .loginTab {
     display: inline-block;
     width: 50%;
