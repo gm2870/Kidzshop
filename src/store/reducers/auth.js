@@ -16,13 +16,11 @@ const authSuccess = (state ,action) => {
     return updateObject(state,{
         token:action.sessionToken,
         userId:action.objectId,
+        userName:action.username,
         error:null,
         loading:false
     });
 };
-const setAuthUserName = (state , action) => {
-    return updateObject(state , {userName:action.username})
-}
 
 const authFail = (state,action) => {
     return updateObject(state, {
@@ -30,13 +28,19 @@ const authFail = (state,action) => {
         loading:false
     });
 };
+const authLogout = (state,action) => {
+    return updateObject(state,{
+        token:null,
+        userId:null
+    })
+}
 
 const reducer = (state=initialState,action) => {
     switch (action.type) {
         case actionTypes.AUTH_START: return authStart(state,action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state,action);
         case actionTypes.AUTH_FAIL: return authFail(state,action);
-        case actionTypes.SET_AUTH_USERNAME: return setAuthUserName(state,action);
+        case actionTypes.AUTH_LOGOUT:return authLogout(state,action);
         default:
           return state;
     };

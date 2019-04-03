@@ -1,1 +1,1 @@
-export {registerAuth,loginAuth} from './auth'
+export {registerAuth,loginAuth,logout,authCheckState} from './auth'

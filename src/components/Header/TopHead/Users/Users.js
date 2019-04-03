@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import Paper from '@material-ui/core/Paper';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import user from '../../../../assets/images/user.png';
-import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 class UsersBox extends Component {
     render () {
         return (
@@ -12,7 +12,7 @@ class UsersBox extends Component {
                         <img className="user_icon" src={user} alt="user icon"/>
                         <div className="user_info">
                             <p className="hello_text">سلام</p>
-                            <p className="userName_text">{this.props.userName}</p>
+                            <p className="userName_text">{localStorage.getItem('username')}</p>
                         </div>      
                         <div className="ArrowDropDown"><ArrowDropDown /></div>
                     </div>
@@ -24,7 +24,7 @@ class UsersBox extends Component {
                                    <li>link2</li>
                                    <li>link3</li>
                                    <li>link4</li>
-                                   <li>logout</li>
+                                   <li><Link to='/logout'>logout</Link></li>
                                </ul>
                             </div>
                         </Paper>
@@ -34,9 +34,5 @@ class UsersBox extends Component {
         );
     };
 };
-const mapStateToProps = state => {
-    return {
-        userName:state.auth.userName
-    }
-}
-export default connect(mapStateToProps)(UsersBox);
+
+export default UsersBox;

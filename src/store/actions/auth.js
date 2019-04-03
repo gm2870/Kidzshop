@@ -7,19 +7,32 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token , userId) => {
+export const authSuccess = (token , userId,userName) => {
 	return {
 		type:actionTypes.AUTH_SUCCESS,
 		sessionToken:token,
-		objectId:userId
-	};
-};
-export const setAuthUserName = (userName) => {
-	return {
-		type:actionTypes.SET_AUTH_USERNAME,
+		objectId:userId,
 		username:userName
 	};
 };
+export const logout = () => {
+	localStorage.removeItem('token');
+	localStorage.removeItem('expirationDate');
+	localStorage.removeItem('userId');
+	localStorage.removeItem('username');
+
+	return {
+		type:actionTypes.AUTH_LOGOUT
+	};
+};
+
+export const setAuthTimeout = () => {
+	return dispatch => {
+		setTimeout(() => {
+			dispatch(logout())
+		}, 24*60000);
+	}
+}
 export const authFail = (error) => {
 	return {
 		type:actionTypes.AUTH_FAIL,
@@ -47,8 +60,13 @@ export const registerAuth = ( username,password,email,repeatPass) => {
 		axios.post('https://parseapi.back4app.com/users',authData,{headers:headers})
 		.then(response => {
 			console.log(response);
+			const expirationDate = new Date(new Date().getTime() + 24*60000);
+			localStorage.setItem('token',response.data.sessionToken);
+			localStorage.setItem('expirationDate',expirationDate);
+			localStorage.setItem('userId',response.data.objectId);
+			localStorage.setItem('username',response.data.username);
+
 			dispatch(authSuccess(response.data));
-			dispatch(setAuthUserName());
 		})
 		.catch(error => {
 			console.log(error);
@@ -75,8 +93,15 @@ export const loginAuth = (username,password) => {
 		axios.post('https://parseapi.back4app.com/login',authData,{headers:headers})
 		.then(response => {
 			console.log(response);
-			dispatch(authSuccess(response.data.sessionToken ,response.data.objectId));
-			dispatch(setAuthUserName(response.data.username));
+			const expiresIn = 24*60000;
+			const expirationDate = new Date(new Date().getTime() + expiresIn);
+			localStorage.setItem('token',response.data.sessionToken);
+			localStorage.setItem('expirationDate',expirationDate);
+			localStorage.setItem('userId',response.data.objectId);
+			localStorage.setItem('username',response.data.username);
+
+			dispatch(authSuccess(response.data.sessionToken ,response.data.objectId,response.data.username));
+			dispatch(setAuthTimeout(24*60000))
 		})
 		.catch(error => {
 			console.log(error.response.data.error);
@@ -84,3 +109,21 @@ export const loginAuth = (username,password) => {
 		});
 	};
 };
+
+export const authCheckState = () => {
+	return dispatch => {
+		const token =localStorage.getItem('token');
+		if(!token){
+			dispatch(logout());
+		}else {
+			const expirationDate = new Date(localStorage.getItem('expirationDate'));
+			if(expirationDate <= new Date()){
+				dispatch(logout());
+			}else{
+				const userId = localStorage.getItem('userId');
+				dispatch(authSuccess(token,userId));
+				dispatch(setAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+			}
+		}
+	}
+}

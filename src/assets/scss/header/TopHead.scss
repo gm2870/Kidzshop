@@ -112,6 +112,11 @@
         .sub-menu{
             position: absolute;
             display: none;
+            top: 85%;
+            right: -.9rem;
+            li{
+                display: block;
+            }
         }
         .user_menu {
             display: flex;
