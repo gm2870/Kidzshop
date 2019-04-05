@@ -1,0 +1,103 @@
+.popluar_section{
+    background-image: url('../images/bubbly_bg.jpg');
+    background-repeat: repeat;
+    background-position: top left;
+    background-size: auto,cover
+}
+.product_body{
+    position: relative;
+    &:hover{
+        .addToCart_container{
+            display: block;
+        }
+    }
+}
+.cardView_body{
+    padding:12.5px 12.5px 0;
+    margin: 5px;
+    background-color:$primary-white-color;
+    box-shadow:7.986px 6.018px 7.68px 0.32px rgba(206,206,206,.36);
+    cursor: pointer;
+    &:hover{
+        box-shadow: 10px 10px 40px 0px rgba(91, 90, 91, 0.2);
+        -webkit-transition: all .3s ease 0.1s;
+        transition: all .3s ease 0.1s;
+    } 
+    .product_image{
+        img {
+            max-width: 100%;
+        }
+    }
+    p{
+        margin: 0
+    }
+  
+    .product_title{
+        color:#9e9e9e;
+      
+    }
+    .product_detatils_body{
+        padding: 19px 24px 20px;
+    
+        .product_name{
+            font-size: 1.7rem;
+            color:#3a3a3a;
+            margin-bottom: 1.5rem !important;
+        }
+        .product_price{
+            color:$primary-pink-color;
+            font-size: 1.6rem;
+            font-weight: 900
+        }
+    }
+    .addToCart_container{
+        background-color: $primary-white-color;
+        display: none;
+        width: 96.3%;
+        position: absolute;
+        bottom: -11rem;
+        left: .6rem;
+        z-index: 7;
+        padding: 0 .5rem;
+      
+        .addItem_container{
+            width: 100%;
+            padding: .5rem 6.8rem;
+            display: flex;
+            justify-content: space-between;
+            .product_qty{
+                font-size: 1.6rem;
+                line-height: 3.6rem;
+                color:#495057;
+            }
+        }
+        .addToCart_btn_container{
+            padding: 1rem 0;
+            .addToCart_btn{
+                background-color: $primary-pink-color;
+                color:$primary-white-color;
+                border: $primary-pink-color;
+                display: block;
+                margin: 0 auto;
+                padding: 13.5px 18px;
+                font-size: 18px;
+                line-height: 1.75;
+                border-radius: 30px;
+                cursor: pointer;
+                &:hover{
+                    background-color: $dark-pink-color;
+                }
+    
+            }
+        }
+     
+    }   
+}
+
+@media screen and (max-width:600px){
+    .product_image{
+        img {
+            width: 33rem;
+        }
+    }
+}
