@@ -7,7 +7,7 @@ const initialState = {
     loading:false,
     userName:null,
     authRedirectPath:'users/my-account'
-}
+};
 const authStart = (state ,action) => {
     return updateObject(state,{error:null,loading:true});
 };

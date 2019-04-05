@@ -3,7 +3,7 @@ import {Grid} from '@material-ui/core';
 import CardView from '../../UI/CardView/CardView';
 
 class Popular extends Component {
-   products = {
+    products = {
         popular:{
             p1:{
                 title:'لباس',
@@ -61,7 +61,6 @@ class Popular extends Component {
                 image:require('../../../assets/images/shirt7.jpg'),
                 alt:"shirt7"
             },
-            
         }
     }
     render(){
@@ -72,8 +71,6 @@ class Popular extends Component {
                 itemDetail:this.products.popular[key]
             })
         }
-
-
         const products = PopularProducts.map(item => (
             <CardView key={item.id}
                 image={item.itemDetail.image}

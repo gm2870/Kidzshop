@@ -15,6 +15,7 @@ export const authSuccess = (token , userId,userName) => {
 		username:userName
 	};
 };
+
 export const logout = () => {
 	localStorage.removeItem('token');
 	localStorage.removeItem('expirationDate');
