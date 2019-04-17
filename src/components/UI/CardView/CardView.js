@@ -5,7 +5,8 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingBasket from '@material-ui/icons/ShoppingCart';
-
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index'
 const cardView = (props) => {
     const styles = {
         fab: {
@@ -25,10 +26,10 @@ const cardView = (props) => {
                     <Grid className='addToCart_container'>
                         <Grid container direction='row'>
                             <ul className='addItem_container'>
-                                <li>
+                                <li onClick={props.onAddItem}>
                                     <Fab style={styles.fab} color='primary' aria-label="Add" ><AddIcon /></Fab>
                                 </li>
-                                <li><span className='product_qty'>1</span></li>
+                                <li><span className='product_qty'>{props.qty}</span></li>
                                 <li><Fab style={styles.fab} color='secondary' aria-label="Remove" ><RemoveIcon /></Fab></li>
                             </ul>
                         </Grid>
@@ -41,4 +42,14 @@ const cardView = (props) => {
         </Auxiliary>
     )
 };
-export default cardView;
+const mapStateToProps = state => {
+    return {
+        qty : state.itemQty.items
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddItem : (itemId) => dispatch(actions.addItem(itemId))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(cardView);

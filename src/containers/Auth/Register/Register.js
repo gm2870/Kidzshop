@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
-import {Link} from 'react-router-dom';
+import {Link ,Redirect} from 'react-router-dom';
 import Input from '../../../components/UI/Forms/Auth/Input/Input';
+import Spinner from '../../../components/UI/Spinner/Spinner'
 class Register extends Component {
     state = {
         controls: {
@@ -161,10 +162,15 @@ class Register extends Component {
                 config :this.state.controls[key]
             })
         }
-
+        let authRedirect = null;
+            if(this.props.isAuthenticated){
+                authRedirect = <Redirect to="/" />
+            }
         return (
             <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
+                {authRedirect}
                 <Paper className="form_body">
+                    {this.props.loading ? <Spinner /> : null}
                     <Link to="/users/register" className="registerTab active">ثبت نام</Link>
                     <Link to="/users/login" className="loginTab">ورود</Link>
                     <form onSubmit={this.submitHandler}>
@@ -195,10 +201,16 @@ class Register extends Component {
         );
     };
 };
+const mapStateToProps = state => {
+    return {
+        loading:state.auth.loading,
+        isAuthenticated: state.auth.token !== null
+    }
+};
 const mapDispatchToProps = dispatch => {
     return {
         onAuth:(username,password,email,repeatPass) => dispatch(actions.registerAuth(username,password,email,repeatPass))
-    }
-}
+    };
+};
 
-export default connect(null,mapDispatchToProps)(Register);
+export default connect(mapStateToProps,mapDispatchToProps)(Register);

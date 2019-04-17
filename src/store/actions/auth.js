@@ -65,7 +65,7 @@ export const registerAuth = ( username,password,email,repeatPass) => {
 			localStorage.setItem('token',response.data.sessionToken);
 			localStorage.setItem('expirationDate',expirationDate);
 			localStorage.setItem('userId',response.data.objectId);
-			localStorage.setItem('username',response.data.username);
+			localStorage.setItem('username',username);
 
 			dispatch(authSuccess(response.data));
 		})

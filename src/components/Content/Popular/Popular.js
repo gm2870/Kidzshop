@@ -77,9 +77,10 @@ class Popular extends Component {
                 alt={item.itemDetail.alt}
                 title={item.itemDetail.title}
                 name={item.itemDetail.name}
-                price={item.itemDetail.price} />
+                price={item.itemDetail.price}
+               
+            />
         ));
-     
       
         return(
             <section className="popluar_section">
