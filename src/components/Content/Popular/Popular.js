@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Grid} from '@material-ui/core';
 import CardView from '../../UI/CardView/CardView';
-
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index';
 class Popular extends Component {
     products = {
         popular:{
@@ -69,7 +70,7 @@ class Popular extends Component {
             PopularProducts.push({
                 id:key,
                 itemDetail:this.products.popular[key]
-            })
+            });
         }
         const products = PopularProducts.map(item => (
             <CardView key={item.id}
@@ -78,7 +79,8 @@ class Popular extends Component {
                 title={item.itemDetail.title}
                 name={item.itemDetail.name}
                 price={item.itemDetail.price}
-               
+                added = {() => this.props.onAddItem(item.id)}
+                
             />
         ));
       
@@ -91,6 +93,17 @@ class Popular extends Component {
                 </Grid>
             </section>
         );
-    }
+    };
 };
-export default Popular;
+const mapStateToProps = state => {
+    return {
+        qty : state.itemQty.items
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddItem : (itemId) => dispatch(actions.addItem(itemId))
+    };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Popular);

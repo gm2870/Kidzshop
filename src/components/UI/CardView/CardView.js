@@ -6,13 +6,14 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingBasket from '@material-ui/icons/ShoppingCart';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index'
+// import * as actions from '../../../store/actions/index';
 const cardView = (props) => {
     const styles = {
         fab: {
             width: 35, height: 35,
         }
     };
+    
     return(
         <Auxiliary>
             <Grid className='product_body' item xs={12} sm={6} md={3}>
@@ -26,7 +27,7 @@ const cardView = (props) => {
                     <Grid className='addToCart_container'>
                         <Grid container direction='row'>
                             <ul className='addItem_container'>
-                                <li onClick={props.onAddItem}>
+                                <li onClick={props.added}>
                                     <Fab style={styles.fab} color='primary' aria-label="Add" ><AddIcon /></Fab>
                                 </li>
                                 <li><span className='product_qty'>{props.qty}</span></li>
@@ -45,11 +46,11 @@ const cardView = (props) => {
 const mapStateToProps = state => {
     return {
         qty : state.itemQty.items
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        onAddItem : (itemId) => dispatch(actions.addItem(itemId))
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(cardView);
+    };
+};
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onAddItem : (itemId) => dispatch(actions.addItem(itemId))
+//     };
+// };
+export default connect(mapStateToProps)(cardView);
