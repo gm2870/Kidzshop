@@ -5,3 +5,5 @@ export const SET_AUTH_USERNAME = 'SET_AUTH_USERNAME';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const ADD_ITEM = 'ADD_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const GET_POPULAR = 'GET_POPULAR';
+export const GET_POPULAR_FAILED = 'GET_POPULAR_FAILED';

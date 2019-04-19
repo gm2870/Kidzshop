@@ -45,7 +45,7 @@ const cardView = (props) => {
 };
 const mapStateToProps = state => {
     return {
-        qty : state.itemQty.items
+        qty : state.itemQty.qty
     };
 };
 // const mapDispatchToProps = dispatch => {

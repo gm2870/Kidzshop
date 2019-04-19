@@ -1,8 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../../shared/utility'
 const initialState = {
-    items: 0,
-    totalPrice:0
+    qty: 0,
 };
 const addItem = (state,action) => {
     // const updatedItem = {[action.itemId]:state.items[action.itemId] + 1};
@@ -13,7 +12,7 @@ const addItem = (state,action) => {
     // };
     return {
         ...state,
-        [action.itemId]:state.items[action.itemId] + 1
+        qty:state.qty + 1
     };
 };
 const removeItem = (state,action) => {
