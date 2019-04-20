@@ -4,3 +4,6 @@ export const updateObject = (oldObject ,updatedProperties) => {
         ...updatedProperties
     }
 };
+export const updateObject2 =(oldObject, newValues)=>{
+    return Object.assign({}, oldObject, newValues);
+  }

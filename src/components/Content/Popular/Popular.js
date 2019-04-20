@@ -4,12 +4,18 @@ import CardView from '../../UI/CardView/CardView';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 class Popular extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.onGetPopular();
-        console.log(this.props.pp)
-        
-    } 
-
+    }
+    componentDidMount(){
+        console.log(this.props.pp.popularProduct)
+        // for (let key in this.props.pp){
+        //     console.log(this.props.pp[key])
+        //     for(let index in this.props.pp[key]){
+        //         console.log(this.props.pp[key][index])
+        //     }
+        // }
+    }
     products = {
         popular:{
             p1:{
@@ -71,7 +77,8 @@ class Popular extends Component {
         }
     }
     render(){
-        const mypp =this.props.pp;
+        console.log(this.props.pp.cc[0])
+
         const PopularProducts = [];
         for(let key in this.products.popular){
             PopularProducts.push({
@@ -105,7 +112,7 @@ class Popular extends Component {
 const mapStateToProps = state => {
     return {
         qty : state.itemQty.items,
-        pp: state.popular.popularProduct
+        pp:state.popular
     };
 };
 const mapDispatchToProps = dispatch => {

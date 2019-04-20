@@ -1,10 +1,10 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-export const setPopular = (p) => {
-
+export const setPopular = (payload) => {
+    // console.log(payload);
     return {
         type:actionTypes.GET_POPULAR,
-        payload:p
+        payload
     };
 
 };

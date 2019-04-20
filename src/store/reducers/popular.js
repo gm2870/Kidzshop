@@ -1,20 +1,23 @@
 import * as actionTypes from '../actions/actionTypes';
-import {updateObject} from '../../shared/utility';
 const initialState = {
-    popularProduct:[],
-    total:false,
-    new:null
-}; 
+    cc:[]
+}
 const getPopular = (state,action) => {
     for (let key in action.payload){
-        state.popularProduct.push({
+        state.cc.push({
             ...action.payload[key],
             id:key
         })
-    } 
-    const popularP =state.popularProduct;
-    console.log(popularP)
-}
+    }
+    // console.log(state.popularProduct)
+    return state;
+//     const arrayToObject = (array) =>
+//    array.reduce((obj, item) => {
+//      obj[item.id] = item
+//      return obj
+//    }, {})
+//  arrayToObject(state.popularProduct)
+};
  const reducer = (state = initialState,action) => {
     switch (action.type) {
         case actionTypes.GET_POPULAR:return getPopular(state,action);
