@@ -16,8 +16,8 @@ const addItem = (state,action) => {
     };
 };
 const removeItem = (state,action) => {
-    const updatedItem = {[action.itemId]:state.items[action.itemId] - 1};
-    const updateItems = updateObject(state,updatedItem);
+    // const updatedItem = {[action.itemId]:state.items[action.itemId] - 1};
+    // const updateItems = updateObject(state,updatedItem);
     const updatedState = {
         items : 0,
         totalPrice:0

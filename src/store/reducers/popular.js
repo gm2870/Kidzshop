@@ -1,22 +1,14 @@
 import * as actionTypes from '../actions/actionTypes';
 const initialState = {
-    cc:[]
+    popular:[],
+    isFetched:false
 }
 const getPopular = (state,action) => {
-    for (let key in action.payload){
-        state.cc.push({
-            ...action.payload[key],
-            id:key
-        })
-    }
-    // console.log(state.popularProduct)
-    return state;
-//     const arrayToObject = (array) =>
-//    array.reduce((obj, item) => {
-//      obj[item.id] = item
-//      return obj
-//    }, {})
-//  arrayToObject(state.popularProduct)
+    return {
+        ...state,
+        popular:[...action.payload],
+        isFetched:true
+    };
 };
  const reducer = (state = initialState,action) => {
     switch (action.type) {

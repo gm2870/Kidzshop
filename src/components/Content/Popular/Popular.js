@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import {Grid} from '@material-ui/core';
 import CardView from '../../UI/CardView/CardView';
 import {connect} from 'react-redux';
+import Spinner from '../../UI/Spinner/Spinner'
 import * as actions from '../../../store/actions/index';
 class Popular extends Component {
+    constructor(props) {
+        super(props)
+        console.log('constructor');
+      }
     componentWillMount() {
-        this.props.onGetPopular();
+        console.log('will');  
     }
     componentDidMount(){
-        console.log(this.props.pp.popularProduct)
-        // for (let key in this.props.pp){
-        //     console.log(this.props.pp[key])
-        //     for(let index in this.props.pp[key]){
-        //         console.log(this.props.pp[key][index])
-        //     }
-        // }
+        console.log('did');
+        this.props.onGetPopular();
     }
     products = {
         popular:{
@@ -77,42 +77,37 @@ class Popular extends Component {
         }
     }
     render(){
-        console.log(this.props.pp.cc[0])
+           let products = <Spinner />
+           if(this.props.isFetched){
 
-        const PopularProducts = [];
-        for(let key in this.products.popular){
-            PopularProducts.push({
-                id:key,
-                itemDetail:this.products.popular[key]
-            });
-        }
-        const products = PopularProducts.map(item => (
-            <CardView key={item.id}
-                image={item.itemDetail.image}
-                alt={item.itemDetail.alt}
-                title={item.itemDetail.title}
-                name={item.itemDetail.name}
-                price={item.itemDetail.price}
-                added = {() => this.props.onAddItem(item.id)}
-                
+             products = this.props.pp.map(item => (
+            <CardView key={item.objectId}
+                image={item.icon.url}
+                alt={item.imgAlt}
+                title={item.title}
+                name={item.name}
+                price={item.price}
+                added = {() => this.props.onAddItem(item.id)}    
             />
-        ));
-      
+            ));
+             }     
+       
         return(
             <section className="popluar_section">
-                <h1 style={{textAlign:'center',paddingTop:'50px'}}>محبوب ترین محصولات</h1>
-                <p style={{textAlign:'center',margin:'10px 0'}}>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است!</p>
-                <Grid container direction="row" className="container">
-                  {products}
-                </Grid>
-            </section>
+            <h1 style={{textAlign:'center',paddingTop:'50px'}}>محبوب ترین محصولات</h1>
+            <p style={{textAlign:'center',margin:'10px 0'}}>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است!</p>
+            <Grid container direction="row" className="container">
+              {products}
+            </Grid>
+        </section>
         );
     };
 };
 const mapStateToProps = state => {
     return {
         qty : state.itemQty.items,
-        pp:state.popular
+        pp:state.popular.popular,
+        isFetched:state.popular.isFetched
     };
 };
 const mapDispatchToProps = dispatch => {

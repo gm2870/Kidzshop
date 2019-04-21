@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+
 export const setPopular = (payload) => {
-    // console.log(payload);
     return {
         type:actionTypes.GET_POPULAR,
         payload
@@ -19,7 +19,6 @@ export const getPopular = () => {
 			"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
             "X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
         };
-
         axios.get('https://kidzshop.back4app.io/classes/Popular',{headers:headers})
         .then(response => {
             const fetchPopularProducts = [];
@@ -29,7 +28,6 @@ export const getPopular = () => {
                     id:key
                 })
             }
-
             dispatch(setPopular(fetchPopularProducts));
         })
         .catch( error => {
