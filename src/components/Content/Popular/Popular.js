@@ -5,92 +5,37 @@ import {connect} from 'react-redux';
 import Spinner from '../../UI/Spinner/Spinner'
 import * as actions from '../../../store/actions/index';
 class Popular extends Component {
-    constructor(props) {
-        super(props)
-        console.log('constructor');
-      }
-    componentWillMount() {
-        console.log('will');  
-    }
+   
     componentDidMount(){
-        console.log('did');
         this.props.onGetPopular();
     }
-    products = {
-        popular:{
-            p1:{
-                title:'لباس',
-                name:'لباس دخترانه رنگی',
-                price:20,
-                image:require('../../../assets/images/shirt1.jpg'),
-                alt:"shirt1"
-            },
-            p2:{
-                title:'تیشرت',
-                name:'تیشرت سفید طرح دار',
-                price:30,
-                image:require('../../../assets/images/shirt2.jpg'),
-                alt:"shirt2"
-            },
-            p3:{
-                title:'تیشرت',
-                name:'تیشرت پسرانه سورمه ای',
-                price:40,
-                image:require('../../../assets/images/shirt3.jpg'),
-                alt:"shirt3"
-            },
-            p4:{
-                title:'لباس',
-                name:'لباس زرد',
-                price:40,
-                image:require('../../../assets/images/shirt4.jpg'),
-                alt:"shirt4"
-            },   
-            p5:{
-                title:'لباس دخترانه',
-                name:'لباس',
-                price:50,
-                image:require('../../../assets/images/dress1.jpg'),
-                alt:"shirt5"
-            },  
-            p6:{
-                title:'تیشرت',
-                name:'تیشرت فرایدی',
-                price:60,
-                image:require('../../../assets/images/shirt6.jpg'),
-                alt:"shirt6"
-            },
-            p7:{
-                title:'لباس دخترانه',
-                name:'دانکر آبی دخترانه',
-                price:70,
-                image:require('../../../assets/images/cozie.jpg'),
-                alt:"cozie"
-            },
-            p8:{
-                title:'تیشرت',
-                name:'تیشرت قرمز',
-                price:80,
-                image:require('../../../assets/images/shirt7.jpg'),
-                alt:"shirt7"
-            },
-        }
+    
+    incrementHandler = (id)=> {
+        this.props.onIncrement(id);
     }
-    render(){
-           let products = <Spinner />
-           if(this.props.isFetched){
+    decrementHandler = (id)=> {
+        this.props.onDecrement(id);
+    }
 
-             products = this.props.pp.map(item => (
-            <CardView key={item.objectId}
-                image={item.icon.url}
-                alt={item.imgAlt}
-                title={item.title}
-                name={item.name}
-                price={item.price}
-                added = {() => this.props.onAddItem(item.id)}    
+    render(){
+        let products = <Spinner />
+        if(this.props.isFetched){
+
+        products = this.props.popularP.map((item,index) => (
+            <CardView key = {item.objectId}
+                image = {item.icon.url}
+                alt = {item.imgAlt}
+                title = {item.title}
+                name = {item.name}
+                price = {item.price}
+                // incremented={this.props.onIncrement}
+                // decremented={this.props.onDecrement}
+                incremented = {() => {this.incrementHandler(item.objectId);this.qantityHandler(index)}} 
+                decremented = {() => this.decrementHandler(item.objectId)} 
+                // qty = {this.state.itemQty}   
             />
             ));
-             }     
+        }     
        
         return(
             <section className="popluar_section">
@@ -105,15 +50,15 @@ class Popular extends Component {
 };
 const mapStateToProps = state => {
     return {
-        qty : state.itemQty.items,
-        pp:state.popular.popular,
+        popularP:state.popular.popular,
         isFetched:state.popular.isFetched
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem : (id) => dispatch(actions.addItem(id)),
-        onGetPopular: () => dispatch(actions.getPopular())
+        onIncrement : (id) => dispatch(actions.incrementQty(id)),
+        onDecrement : (id) => dispatch(actions.decrementQty(id)),
+        onGetPopular: () => dispatch(actions.getPopularProducts())
     };
 };
 

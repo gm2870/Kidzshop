@@ -27,11 +27,11 @@ const cardView = (props) => {
                     <Grid className='addToCart_container'>
                         <Grid container direction='row'>
                             <ul className='addItem_container'>
-                                <li onClick={props.added}>
+                                <li onClick={props.incremented}>
                                     <Fab style={styles.fab} color='primary' aria-label="Add" ><AddIcon /></Fab>
                                 </li>
                                 <li><span className='product_qty'>{props.qty}</span></li>
-                                <li><Fab style={styles.fab} color='secondary' aria-label="Remove" ><RemoveIcon /></Fab></li>
+                                <li onClick={props.decremented}><Fab style={styles.fab} color='secondary' aria-label="Remove" ><RemoveIcon /></Fab></li>
                             </ul>
                         </Grid>
                         <Grid className='addToCart_btn_container'>
@@ -43,9 +43,9 @@ const cardView = (props) => {
         </Auxiliary>
     )
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        qty : state.itemQty.qty
+        qty2 : state.popular.popular
     };
 };
 // const mapDispatchToProps = dispatch => {

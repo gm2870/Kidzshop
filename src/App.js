@@ -32,7 +32,6 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onTryStayLoggedin: () => dispatch(actions.authCheckState())
-
   }
 };
 
