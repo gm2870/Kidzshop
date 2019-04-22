@@ -28,11 +28,10 @@ class Popular extends Component {
                 title = {item.title}
                 name = {item.name}
                 price = {item.price}
-                // incremented={this.props.onIncrement}
-                // decremented={this.props.onDecrement}
-                incremented = {() => {this.incrementHandler(item.objectId);this.qantityHandler(index)}} 
-                decremented = {() => this.decrementHandler(item.objectId)} 
-                // qty = {this.state.itemQty}   
+                qty = {item.qty} 
+                availableQty={item.availableQty}
+                incremented = {() => this.incrementHandler(item.objectId)} 
+                decremented = {() => this.decrementHandler(item.objectId)}   
             />
             ));
         }     
@@ -51,7 +50,8 @@ class Popular extends Component {
 const mapStateToProps = state => {
     return {
         popularP:state.popular.popular,
-        isFetched:state.popular.isFetched
+        isFetched:state.popular.isFetched,
+        qty:state.popular.qty
     };
 };
 const mapDispatchToProps = dispatch => {

@@ -11,7 +11,9 @@ export const incrementQty = (id) => {
 export const decrementQty = (id) => {
     return {
         type:actionTypes.DECREMENT_QTY,
-        id
+        payload:{
+            id:id
+        }
     };
 };
 export const setPopular = (payload) => {
