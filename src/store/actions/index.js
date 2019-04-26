@@ -1,3 +1,3 @@
 
 export {registerAuth,loginAuth,logout,authCheckState} from './auth';
-export {incrementQty, decrementQty , getPopularProducts} from './popular';
+export {addToCart,incrementQty, decrementQty , getPopularProducts} from './popular';

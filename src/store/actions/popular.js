@@ -16,6 +16,12 @@ export const decrementQty = (id) => {
         }
     };
 };
+export const addToCart = (id) => {
+    return {
+        type:actionTypes.ADD_TO_CART,
+        id:id
+    };
+};
 export const setPopular = (payload) => {
     return {
         type:actionTypes.GET_POPULAR,

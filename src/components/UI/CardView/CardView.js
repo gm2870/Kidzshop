@@ -29,7 +29,7 @@ class CardView extends Component {
                                 </ul>
                             </Grid>
                             <Grid className='addToCart_btn_container'>
-                                <button className='addToCart_btn'><ShoppingBasket style={{verticalAlign:'middle',margin:'0 5px'}}/><span>افزودن به سبد خرید</span></button>
+                                <button className='addToCart_btn' onClick={this.props.addedToCart}><ShoppingBasket style={{verticalAlign:'middle',margin:'0 5px'}}/><span>افزودن به سبد خرید</span></button>
                             </Grid>
                         </Grid>
                     </Grid>

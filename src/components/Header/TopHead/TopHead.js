@@ -9,10 +9,11 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import AuthBox from './Authentication/Authentication';
-import UsersBox from './Users/Users'
+import UsersBox from './Users/Users';
+import {connect} from 'react-redux';
+import MiniCart from '../../../containers/MiniCart/MiniCart'
 
 const TopHead = (props) => {
-  
     return (
         <header className="header">
             <Grid container direction="row" className="container" justify="center"  alignItems="center">
@@ -36,8 +37,10 @@ const TopHead = (props) => {
                 <div className="header-icons">
                     <div className="cart_container">
                         <ShoppingCart id="ShoppingCart"/>
-                        <span id="counter_body">0</span>
+                        <span id="counter_body">{props.totalQty}</span>
+                        <MiniCart />
                     </div>
+
                     <div><FavoriteBorder id="like-icon"/></div>
                 </div>
                 {!props.isAuthenticated ? <AuthBox /> : <UsersBox /> }
@@ -45,4 +48,9 @@ const TopHead = (props) => {
         </header>
     );
  };
-export default TopHead ;
+const mapStateToProps = state => {
+    return {
+        totalQty:state.popular.totalQty
+    }
+}
+export default connect(mapStateToProps)(TopHead) ;

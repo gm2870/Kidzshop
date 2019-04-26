@@ -2,7 +2,17 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     popular:[],
+    cart:[],
     isFetched:false,
+    loading:false,
+    totalQty:0
+};
+const addToCart = (state,action) => {
+    const addedItem = state.popular.find(item => item.objectId === action.id);
+    const newState = Object.assign({},state);
+    newState.cart.push(addedItem);
+    newState.totalQty +=1;
+    return newState;
 };
 const incrementQty = (state,action) => {
     let addedItem = state.popular.find(item => item.objectId === action.payload.id);
@@ -10,7 +20,7 @@ const incrementQty = (state,action) => {
         addedItem.qty += 1 ;
     }else{
         addedItem.qty = addedItem.availableQty;
-    }
+    };
     return {
         ...state,
         popular:[...state.popular]
@@ -19,11 +29,11 @@ const incrementQty = (state,action) => {
 const decrementQty = (state,action) => {
    
     let addedItem = state.popular.find(item => item.objectId === action.payload.id);
-    if(addedItem.qty>1){
+    if(addedItem.qty > 1){
         addedItem.qty -= 1 ;
     }else{
         addedItem.qty = 1;
-    }
+    };
     return {
         ...state,
         popular:[...state.popular]
@@ -41,7 +51,8 @@ const getPopularProducts = (state,action) => {
     switch (action.type) {
         case actionTypes.GET_POPULAR:return getPopularProducts(state,action);
         case actionTypes.INCREMENT_QTY:return incrementQty(state,action);
-        case actionTypes.DECREMENT_QTY:return decrementQty(state,action)
+        case actionTypes.DECREMENT_QTY:return decrementQty(state,action);
+        case actionTypes.ADD_TO_CART:return addToCart(state,action)
         default:return state;
     };
 };

@@ -7,3 +7,5 @@ export const INCREMENT_QTY = 'INCREMENT_QTY';
 export const DECREMENT_QTY = 'DECREMENT_QTY';
 export const GET_POPULAR = 'GET_POPULAR';
 export const GET_POPULAR_FAILED = 'GET_POPULAR_FAILED';
+export const ADD_TO_CART = 'ADD_TO_CART';
+

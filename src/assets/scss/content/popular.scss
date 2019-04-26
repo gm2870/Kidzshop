@@ -2,7 +2,13 @@
     background-image: url('../images/bubbly_bg.jpg');
     background-repeat: repeat;
     background-position: top left;
-    background-size: auto,cover
+    background-size: auto,cover;
+    position: relative;
+    .fetch-popular-spinner {
+        position: absolute;
+        top: 4%;
+        left: 50%;
+    }
 }
 .product_body{
     position: relative;
