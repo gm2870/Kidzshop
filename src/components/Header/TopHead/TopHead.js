@@ -11,7 +11,7 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import AuthBox from './Authentication/Authentication';
 import UsersBox from './Users/Users';
 import {connect} from 'react-redux';
-import MiniCart from '../../../containers/MiniCart/MiniCart'
+import MiniCart from '../../../containers/MiniCart/MiniCart';
 
 const TopHead = (props) => {
     return (

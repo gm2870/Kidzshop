@@ -20,11 +20,11 @@ class UsersBox extends Component {
                         <Paper>
                             <div className="mega-menu">
                                <ul className="users_drop_menu">
-                                   <li>dashboard</li>
-                                   <li>link2</li>
-                                   <li>link3</li>
-                                   <li>link4</li>
-                                   <li><Link to='/logout'>logout</Link></li>
+                                   <li>داشبورد</li>
+                                   <li>پروفایل</li>
+                                   <li>لینک</li>
+                                   <li>لینک</li>
+                                   <li><Link to='/logout'>خروج</Link></li>
                                </ul>
                             </div>
                         </Paper>

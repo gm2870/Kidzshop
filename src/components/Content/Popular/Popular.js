@@ -18,7 +18,6 @@ class Popular extends Component {
     }
     addToCartHandler = (id) => {
         this.props.onAddToCart(id);
-        console.log(this.props.cart);
     }
 
     render(){

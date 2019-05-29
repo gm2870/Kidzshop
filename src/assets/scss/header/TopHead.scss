@@ -128,6 +128,25 @@
             margin-right: .5rem;
         }
     }
+    .users_drop_menu{
+        text-align: right;
+        width: 17rem;
+
+        li {
+            padding: 1rem;
+            a{
+                color:$dark-gray-color;
+            }
+          
+            &:hover {
+                background: $secondary-pink-color;
+                color:$primary-white-color;
+                a{
+                    color:$primary-white-color;
+                }
+            }
+        }
+    }
   .user_icon {
       background: $primary-white-color;
       width: 25px;

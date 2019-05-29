@@ -13,12 +13,10 @@ class Slider extends Component {
                         <div className="slider_text">
                             <div className="slider_text_header1 animated_text">تابستان پسرانه</div>
                             <div className="slider_text_header2 animated_text">پوشاک و لباس</div>
-
                             <h3 className="slider_sub_text animated_text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </h3>
                         </div>
                         <div className="moreButton_div animated_text"><button className="moreButton">نمایش بیشتر <span id="left_arrow_symbol">&larr;</span></button></div>
                     </div>
-
                 </Grid>
             </div>
         );
