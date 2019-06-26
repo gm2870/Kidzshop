@@ -13,7 +13,7 @@ const imgs = {
         index:1
     },
     {
-        "src":require("../../../assets/images/auth_boy.png"),
+        "src":require("../../../assets/images/kid5.png"),
         "alt":"boy",
         "id":"id3",
         index:2

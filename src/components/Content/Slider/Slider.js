@@ -11,30 +11,31 @@ class Slider extends Component {
         property:imgs.properties[0]
     }
     componentDidMount(){
-        let newIndex = null;
+        this.startSlideShow();
+    }
+    startSlideShow = () => {
         this.interval = setInterval(() => {
-
-            newIndex = this.state.property.index + 1
-            console.log(this.state.property);
+            console.log(this.state.activeIndex);
             this.setState({
-                property:imgs.properties[newIndex]
+                activeIndex:this.state.activeIndex + 1,
+                property:imgs.properties[this.state.activeIndex]
             });
-            if(newIndex==3){
-                
-                this.setState({property:imgs.properties[0]});
+        setTimeout(() => {
+            if(this.state.activeIndex === 2){   
+                this.setState({
+                    activeIndex:0,
+                    property:imgs.properties[this.state.activeIndex]
+                });  
             }
-            // console.log(this.state.property);
-
-          }, 2000);
-         
+        }, 2500);
+        }, 4000); 
     }
     render () {
-        const {appearHome,property} = this.state
+        const {appearHome,property} =  this.state
 
-        let imgItems = 
-        (
-            <TransitionGroup>
-                <CSSTransition  key={property.id} in={appearHome} appear={true} classNames='fade' timeout={2000}>
+        let imgItems = (
+            <TransitionGroup style={{width:"100%"}} id="slide-conainer">
+                <CSSTransition key={property.id} in={appearHome} appear={true} classNames='fade' timeout={4000}>
                     <img src={property.src} alt={property.alt} />
                 </CSSTransition>
             </TransitionGroup>

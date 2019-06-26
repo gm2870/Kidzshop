@@ -1,10 +1,15 @@
-
+// #slide-conainer{
+//     img {
+//         width: 50%;
+//         height: 70rem;
+//     }
+// }
 .slider_container {
     // background-image: url('../../images/backimg1.jpg');
     background-color: $primary-pink-color;
     position: relative;
     .slider_images {
-        width: 60%;
+        width: 50%;
         margin-left: auto;
         margin-top: 10rem;
         .animated_img {
@@ -16,7 +21,7 @@
     .leftSide_slider{
         position: absolute;
         top: 12rem;
-        left: 5%;
+        left: 0;
         width: 50%;
     }
     .slider_text {

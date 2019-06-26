@@ -63,7 +63,6 @@ class SignIn extends Component {
         }
         return isValid;
     }
-
     inputChangedHandler = (event ,controlName) => {
         this.setState({formMessage:null});
         const updatedControls =  {
@@ -74,7 +73,6 @@ class SignIn extends Component {
                 filledIn:false 
             }
         };
-        
        this.setState({controls:updatedControls});
     }
     onInputBlur = (event ,controlName) => {
