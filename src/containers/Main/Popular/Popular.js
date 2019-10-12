@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Grid} from '@material-ui/core';
-import CardView from '../../UI/CardView/CardView';
+import CardView from '../../../components/UI/CardView/CardView';
 import {connect} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 

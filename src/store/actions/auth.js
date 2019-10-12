@@ -19,7 +19,6 @@ export const authSuccess = (token , userId,userName) => {
 export const logout = () => {
 	localStorage.removeItem('token');
 	localStorage.removeItem('expirationDate');
-	localStorage.removeItem('userId');
 	localStorage.removeItem('username');
 
 	return {
@@ -43,35 +42,41 @@ export const authFail = (error) => {
 export const registerAuth = ( username,password,email,repeatPass) => {
 	return dispatch => {
 		dispatch(authStart());
-		const headers = {
-			"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
+		// const headers = {
+		// 	"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
 
-			"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
+		// 	"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
 
-			"X-Parse-Revocable-Session": 1,
+		// 	"X-Parse-Revocable-Session": 1,
 
-			"Content-Type": "application/json"
-		};
+		// 	"Content-Type": "application/json"
+		// };
 		const authData = {
 			username:username,
 			password:password,
 			email:email,
 			repeatPass:repeatPass,
 		};
-		axios.post('https://parseapi.back4app.com/users',authData,{headers:headers})
+		axios.post('http://localhost/laravel_kidzshop/public/api/signup',authData)
 		.then(response => {
-			console.log(response);
-			const expirationDate = new Date(new Date().getTime() + 24*60000);
-			localStorage.setItem('token',response.data.sessionToken);
-			localStorage.setItem('expirationDate',expirationDate);
-			localStorage.setItem('userId',response.data.objectId);
-			localStorage.setItem('username',username);
+			if(response.data.status === 'true'){
+				const expirationDate = new Date(new Date().getTime() + 24*60000);
+				localStorage.setItem('token',response.data.sessionId);
+				localStorage.setItem('expirationDate',expirationDate);
+				localStorage.setItem('username',username);
+				localStorage.setItem('userId',response.data.userId);
+	
+				dispatch(authSuccess(response.data));
+			}else {
+				// console.log(response.data);
+				dispatch(authFail(response.data.message));
 
-			dispatch(authSuccess(response.data));
+				console.log(response.data.message);
+			}
+
 		})
 		.catch(error => {
 			console.log(error);
-			dispatch(authFail(error));
 		})
 	};
 };
@@ -79,34 +84,37 @@ export const registerAuth = ( username,password,email,repeatPass) => {
 export const loginAuth = (username,password) => {
 	return dispatch => {
 		dispatch(authStart());
-		const headers = {
-			"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
+		// const headers = {
+		// 	"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
 
-			"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
+		// 	"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
 
-			"X-Parse-Revocable-Session": 1
-		};
+		// 	"X-Parse-Revocable-Session": 1
+		// };
 		const authData = {
 			username:username,
 			password:password
 		};
-		console.log(authData);
-		axios.post('https://parseapi.back4app.com/login',authData,{headers:headers})
+		axios.post('http://localhost/laravel_kidzshop/public/api/login',authData)
 		.then(response => {
 			console.log(response);
-			const expiresIn = 24*60000;
-			const expirationDate = new Date(new Date().getTime() + expiresIn);
-			localStorage.setItem('token',response.data.sessionToken);
-			localStorage.setItem('expirationDate',expirationDate);
-			localStorage.setItem('userId',response.data.objectId);
-			localStorage.setItem('username',response.data.username);
+			if(response.data.status === 'true'){
+				const expiresIn = 24*60000;
+				const expirationDate = new Date(new Date().getTime() + expiresIn);
+				localStorage.setItem('token',response.data.sessionId);
+				localStorage.setItem('expirationDate',expirationDate);
+				localStorage.setItem('username',response.data.username);
+				localStorage.setItem('userId',response.data.userId);
 
-			dispatch(authSuccess(response.data.sessionToken ,response.data.objectId,response.data.username));
-			dispatch(setAuthTimeout(24*60000))
+				dispatch(authSuccess(response.data.sessionId,response.data.username));
+				dispatch(setAuthTimeout(24*60000));
+			}else {
+				dispatch(authFail(response.data.message));
+			}
 		})
 		.catch(error => {
-			console.log(error.response.data.error);
-			dispatch(authFail(error.response.data.code));
+			console.log(error);
+		
 		});
 	};
 };

@@ -11,12 +11,6 @@ const imgs = {
         "alt":"girl",
         "id":"id2",
         index:1
-    },
-    {
-        "src":require("../../../assets/images/kid5.png"),
-        "alt":"boy",
-        "id":"id3",
-        index:2
     }
 ]
 };

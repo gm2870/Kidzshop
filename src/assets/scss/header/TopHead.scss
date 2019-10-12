@@ -133,9 +133,14 @@
         width: 17rem;
 
         li {
-            padding: 1rem;
+            span{
+                padding: 1rem;
+                display: inline-block
+            }
             a{
                 color:$dark-gray-color;
+                padding: 1rem;
+                display: inline-block;
             }
           
             &:hover {

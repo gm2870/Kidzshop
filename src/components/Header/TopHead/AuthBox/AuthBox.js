@@ -4,7 +4,7 @@ import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import {Link} from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 
-const authentication = (props) => (
+const authBox = (props) => (
     <div className="login_register_container">
         <div className="login_register">
             <ul>
@@ -31,4 +31,4 @@ const authentication = (props) => (
         </div>
     </div>
 );
-export default authentication;
+export default authBox;

@@ -1,9 +1,9 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 import {Grid} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import {connect} from 'react-redux';
 class MiniCart extends Component {
-    render(){
+    render() {
         let cartItems ;
             cartItems = this.props.items.map(item =>
                     <Grid className="cart_item_container" key={item.objectId} item container direction="row">
@@ -24,7 +24,7 @@ class MiniCart extends Component {
                 
             </Grid>
         );
-    };
+    }
 };
 
 const mapStateToProps = state => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid , Typography} from '@material-ui/core';
 import Tshirt1 from '../../../assets/images/T-shirt1.png';
 import product2 from '../../../assets/images/product2.jpg';
-const Main = () => (
+const productWithCarousel = () => (
     <main style={{backgroundColor:"#fafafa",padding:"110px 0"}}>
         <Grid container className="container" alignItems="center"  direction="row">
             <Grid xs={12} md={8} item style={{padding:'0 25px'}}>
@@ -27,4 +27,4 @@ const Main = () => (
         </Grid>
     </main>
 );
-export default Main;
+export default productWithCarousel;

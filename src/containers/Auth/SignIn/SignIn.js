@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
 import {Link ,Redirect} from 'react-router-dom';
-import Input from '../../../components/UI/Forms/Auth/Input/Input';
+import Input from '../../../components/UI/Input/Input';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner'
@@ -13,6 +13,7 @@ class SignIn extends Component {
             username:{
                 elementType:"TextField",
                 elementConfig: {
+                    name:"username",
                     type:"text",
                     margin:"normal",
                     variant:"outlined",
@@ -30,6 +31,7 @@ class SignIn extends Component {
             password:{
                 elementType:"TextField",
                 elementConfig:{
+                    name:"password",
                     type:"password",
                     margin:"normal",
                     variant:"outlined"
@@ -125,16 +127,9 @@ class SignIn extends Component {
             ));
             let errorMessage = null ;
             if(this.props.error){
-                switch (this.props.error) {
-                    case 101:
-                    errorMessage = (
-                        <p className="errorColor">نام کاربری یا رمز عبور صحیح نمی باشد.</p>
-                    );  
-                        break;
-                    default:
-                        break;
-                }
-             
+                errorMessage = (
+                    <p className="errorColor">{this.props.error}</p>
+                );
             }
             let authRedirect = null;
             if(this.props.isAuthenticated){

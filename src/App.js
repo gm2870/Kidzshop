@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Layout from './hoc/Layout/Layout';
 import Auth from './containers/Auth/Auth';
 import UserAccount from './containers/UserAccount/UserAccount';
-import Content from './components/Content/Content';
+import Main from './containers/Main/Main';
 import {Route, Switch , withRouter} from 'react-router-dom';
 import Logout from './containers/Auth/Logout/Logout';
 import {connect} from 'react-redux';
@@ -20,8 +20,8 @@ class App extends Component {
                 <Route path="/users/register" component={Auth} />
                 <Route path="/users/my-account" component={UserAccount} />
                 <Route path="/logout" component={Logout} />
-                <Route path="/" exact component={Content} />
-                <Route component={Content} />
+                <Route path="/" exact component={Main} />
+                <Route component={Main} />
             </Switch>
         </Layout>
       </div>

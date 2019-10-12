@@ -8,10 +8,10 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import AuthBox from './Authentication/Authentication';
-import UsersBox from './Users/Users';
+import AuthBox from './AuthBox/AuthBox';
+import UsersBox from './UserBox/UserBox';
 import {connect} from 'react-redux';
-import MiniCart from '../../../containers/MiniCart/MiniCart';
+import MiniCart from '../MiniCart/MiniCart';
 
 const TopHead = (props) => {
     return (

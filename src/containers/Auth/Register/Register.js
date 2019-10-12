@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from "@material-ui/core/Checkbox";
 import {Link ,Redirect} from 'react-router-dom';
-import Input from '../../../components/UI/Forms/Auth/Input/Input';
+import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner'
 class Register extends Component {
     state = {
@@ -13,6 +13,7 @@ class Register extends Component {
             username:{
                 elementType:"TextField",
                 elementConfig: {
+                    name:'username',
                     type:"text",
                     margin:"normal",
                     variant:"outlined",
@@ -30,6 +31,7 @@ class Register extends Component {
             email: {
                 elementType:"TextField",
                 elementConfig: {
+                    name:"email",
                     type:"text",
                     margin:"normal",
                     variant:"outlined",
@@ -47,6 +49,7 @@ class Register extends Component {
             password:{
                 elementType:"TextField",
                 elementConfig:{
+                    name:'password',
                     type:"password",
                     margin:"normal",
                     variant:"outlined"
@@ -65,6 +68,7 @@ class Register extends Component {
             repeatPass:{
                 elementType:"TextField",
                 elementConfig:{
+                    name:"confirmation_password",
                     type:"password",
                     margin:"normal",
                     variant:"outlined"
@@ -137,22 +141,21 @@ class Register extends Component {
         }
        this.setState({controls:updatedControls,formIsValid:formIsValid});
     }
-    submitHandler = (event) => {
+    submitHandler = event => {
         event.preventDefault();
         if(!this.state.formIsValid){
             this.setState({formMessage:"لطفا اطلاعات را بطور کامل وارد کنید."});
             return false;
         }
+
         this.props.onAuth(
             this.state.controls.username.value,
             this.state.controls.password.value,
             this.state.controls.email.value,
             this.state.controls.repeatPass
-        )
+        );
     }
-    checkboxHandler = () => {
 
-    }
 
     render () {
         let formEelementsArray = [];
@@ -162,10 +165,41 @@ class Register extends Component {
                 config :this.state.controls[key]
             })
         }
-        let authRedirect = null;
-            if(this.props.isAuthenticated){
-                authRedirect = <Redirect to="/" />
+        const form = formEelementsArray.map(formElement => {
+            return (
+                <Input 
+                labelName={formElement.config.label}
+                key={formElement.id} 
+                elementType={formElement.config.elementType} 
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value}
+                invalid={!formElement.config.valid}
+                onBlur={(event) => this.onInputBlur(event,formElement.id)}
+                filledIn={formElement.config.filledIn}
+                errorMessage = {formElement.config.errorMessage}
+                changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
+            );
+        });
+
+        let errorMessage = null ;
+        if(this.props.error) {
+            if(this.props.error['username']) {
+                errorMessage = (
+                    <p className="errorColor">این نام کاربری قبلا انتخاب شده است</p>
+                );
             }
+            if(this.props.error['email']) {
+                errorMessage = (
+                    <p className="errorColor">این ایمیل قبلا انتخاب شده است</p>
+                );
+            }
+        }
+           
+            
+        let authRedirect = null;
+        if(this.props.isAuthenticated){
+            authRedirect = <Redirect to="/" />
+        }
         return (
             <Grid item xs={12} md={6} style={{padding: "10rem 0"}} className="form_container">
                 {authRedirect}
@@ -174,19 +208,7 @@ class Register extends Component {
                     <Link to="/users/register" className="registerTab active">ثبت نام</Link>
                     <Link to="/users/login" className="loginTab">ورود</Link>
                     <form onSubmit={this.submitHandler}>
-                        {formEelementsArray.map(formElement => (
-                        <Input 
-                        labelName={formElement.config.label}
-                        key={formElement.id} 
-                        elementType={formElement.config.elementType} 
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        invalid={!formElement.config.valid}
-                        onBlur={(event)=> this.onInputBlur(event,formElement.id)}
-                        filledIn={formElement.config.filledIn}
-                        errorMessage={formElement.config.errorMessage}
-                        changed={(event) => this.inputChangedHandler(event ,formElement.id)} /> 
-                        ))}
+                        {form}
                         <div>
                             <div>
                                 <label><Checkbox onChange={this.checkboxHandler} checked={this.state.siteRules} style={{padding: "0 0 0 5px"}} /></label>
@@ -194,6 +216,7 @@ class Register extends Component {
                             </div>
                             <button className="login_btn">ثبت نام</button>
                             <p style={{color:"red"}}>{this.state.formMessage}</p>
+                            {errorMessage}
                         </div>
                     </form>
                 </Paper>
@@ -204,6 +227,7 @@ class Register extends Component {
 const mapStateToProps = state => {
     return {
         loading:state.auth.loading,
+        error:state.auth.error,
         isAuthenticated: state.auth.token !== null
     }
 };

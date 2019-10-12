@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import user from '../../../../assets/images/user.png';
 import {Link} from 'react-router-dom';
-class UsersBox extends Component {
+class UserBox extends Component {
     render () {
         return (
             <div className="users_container">
@@ -20,10 +20,10 @@ class UsersBox extends Component {
                         <Paper>
                             <div className="mega-menu">
                                <ul className="users_drop_menu">
-                                   <li>داشبورد</li>
-                                   <li>پروفایل</li>
-                                   <li>لینک</li>
-                                   <li>لینک</li>
+                                   <li><span>داشبورد</span></li>
+                                   <li><span>پروفایل</span></li>
+                                   <li><span>لینک</span></li>
+                                   <li><span>لینک</span></li>
                                    <li><Link to='/logout'>خروج</Link></li>
                                </ul>
                             </div>
@@ -35,4 +35,4 @@ class UsersBox extends Component {
     };
 };
 
-export default UsersBox;
+export default UserBox;
