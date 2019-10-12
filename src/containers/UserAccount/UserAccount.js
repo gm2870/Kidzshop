@@ -1,11 +1,8 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
+
 class UserAccount extends Component {
     render() {
-        return (
-            <div>
-                UserAccount
-            </div>
-        );
-    };
-};
-export default UserAccount ;
+        return <div>UserAccount</div>;
+    }
+}
+export default UserAccount;
