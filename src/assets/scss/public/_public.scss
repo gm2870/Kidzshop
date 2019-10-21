@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    font-family: IRANSANS;
+}
+
+html {
+    font-size: 62.5%; // 1rem = 10px ; 10px/16 = 62.5%
+
+    @include respond(lg) {
+        font-size: 59.375%;
+    }
+    @include respond(md) {
+        font-size: 56.25%; // 1 rem = 9px ; 9px/16px = 56.25%
+    }
+    @include respond(xs) {
+        font-size: 50%; // 1 rem = 8px ; 8px/16px = 50%
+    }
+}
+.container {
+    width: 100%;
+    height: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+    }
+}
+.errorColor {
+    color: red;
+}
+
+/*
+$breakpoint argument choices:
+1.phone
+2.tab-port
+3.tab-land
+4.big-desktop
+
+*/
+// 1em = 16px
+
+@media (min-width: 75em) {
+    .container {
+        max-width: 120rem;
+    }
+}
+svg {
+    vertical-align: middle;
+}

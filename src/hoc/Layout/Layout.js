@@ -2,7 +2,17 @@ import React, { Component } from "react";
 import Axiliary from "../Auxiliary/Auxiliary";
 import Header from "../../components/Header/Header";
 import { connect } from "react-redux";
+import axios from "axios";
 class Layout extends Component {
+    componentDidMount() {
+        axios
+            .post(
+                "http://localhost/laravel_kidzshop_backend/public/api/sessionStart"
+            )
+            .then(response => {
+                sessionStorage.setItem("session_id", response.data.session_id);
+            });
+    }
     render() {
         return (
             <Axiliary>

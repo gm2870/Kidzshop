@@ -1,20 +1,22 @@
 nav {
     background: $secondary-pink-color;
     height: 6.5rem;
+    @include respond(lg) {
+        display: none;
+    }
     li {
         color: $primary-white-color;
-        padding: 21.5px 16.5px;
+        padding: 2.15rem 1.65rem;
         font-size: 1.4rem;
         display: inline-block;
         list-style: none;
-        
     }
     #onSale {
         color: $primary-yellow-color;
-       img {
-           width: 1.8rem;
-           vertical-align: middle;
-           margin: 0 5px;
-       }
+        img {
+            width: 1.8rem;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+        }
     }
 }

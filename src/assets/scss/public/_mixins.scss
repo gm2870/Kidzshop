@@ -1,0 +1,26 @@
+@mixin respond($breakpoint) {
+    @if $breakpoint == xs {
+        // Extra small devices (portrait phones, less than 576px)
+        @media (max-width: 35.99875em) {
+            @content;
+        } // 575.98px
+    }
+    @if $breakpoint == sm {
+        // small devices (landscape phones, less than 768px)
+        @media (max-width: 47.99875em) {
+            @content;
+        } // 767.98px
+    }
+    @if $breakpoint == md {
+        // medium devices (tablets, less than 992px)
+        @media (max-width: 61.99875em) {
+            @content;
+        } //991.98px
+    }
+    @if $breakpoint == lg {
+        // large devices (desktops, more than 1200px)
+        @media (max-width: 75em) {
+            @content;
+        } //1199.98px
+    }
+}

@@ -12,6 +12,8 @@ const addToCart = (state, action) => {
     const newState = Object.assign({}, state);
     newState.cart.push(addedItem);
     newState.totalQty += 1;
+    localStorage.setItem("cart_items", JSON.stringify(initialState.cart));
+
     return newState;
 };
 const incrementQty = (state, action) => {

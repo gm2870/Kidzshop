@@ -12,11 +12,14 @@ class CardView extends Component {
                 <Grid className="product_body" item xs={12} sm={6} md={3}>
                     <Grid className="cardView_body">
                         <Grid className="product_image">
-                            <img src={this.props.image} alt={this.props.alt} />
+                            <img
+                                src={`http://localhost/laravel_kidzshop_adminlte/public/images/product/${this.props.image}`}
+                                alt={this.props.name}
+                            />
                         </Grid>
                         <Grid className="product_detatils_body">
                             <Grid className="product_title">
-                                <p>{this.props.title}</p>
+                                <p>لباس</p>
                             </Grid>
                             <Grid className="product_name">
                                 <p>{this.props.name}</p>

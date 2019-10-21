@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import * as actionTypes from "./actionTypes";
 export const incrementQty = id => {
     return {
@@ -35,27 +35,41 @@ export const getPopularFailed = () => {
 };
 export const getPopularProducts = () => {
     return dispatch => {
-        const headers = {
-            "X-Parse-Application-Id":
-                "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
-            "X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a"
-        };
-        axios
-            .get("https://kidzshop.back4app.io/classes/Popular", {
-                headers: headers
-            })
-            .then(response => {
+        // const headers = {
+        //     "X-Parse-Application-Id":
+        //         "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
+        //     "X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a"
+        // };
+        fetch("http://localhost/laravel_kidzshop_adminlte/public/api/products")
+            .then(response => response.json())
+            .then(data => {
                 const fetchPopularProducts = [];
-                for (let key in response.data.results) {
+                for (let key in data) {
                     fetchPopularProducts.push({
-                        ...response.data.results[key],
+                        ...data[key],
                         id: key
                     });
                 }
+                console.log(fetchPopularProducts);
                 dispatch(setPopular(fetchPopularProducts));
-            })
-            .catch(error => {
-                dispatch(getPopularFailed());
             });
+        // axios
+        //     .get(
+        //         "http://localhost/laravel_kidzshop_adminlte/public/api/products"
+        //     )
+        //     .then(response => {
+        //         console.log(response.data);
+        //         // const fetchPopularProducts = [];
+        //         // for (let key in data) {
+        //         //     fetchPopularProducts.push({
+        //         //         ...data[key],
+        //         //         id: key
+        //         //     });
+        //         // }
+        //         // dispatch(setPopular(fetchPopularProducts));
+        //     });
+        // .catch(error => {
+        //     dispatch(getPopularFailed(error));
+        // });
     };
 };
