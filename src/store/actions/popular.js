@@ -35,11 +35,6 @@ export const getPopularFailed = () => {
 };
 export const getPopularProducts = () => {
     return dispatch => {
-        // const headers = {
-        //     "X-Parse-Application-Id":
-        //         "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
-        //     "X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a"
-        // };
         fetch("http://localhost/laravel_kidzshop_adminlte/public/api/products")
             .then(response => response.json())
             .then(data => {
@@ -50,26 +45,11 @@ export const getPopularProducts = () => {
                         id: key
                     });
                 }
-                console.log(fetchPopularProducts);
+                // console.log(fetchPopularProducts);
                 dispatch(setPopular(fetchPopularProducts));
+            })
+            .catch(error => {
+                dispatch(getPopularFailed(error));
             });
-        // axios
-        //     .get(
-        //         "http://localhost/laravel_kidzshop_adminlte/public/api/products"
-        //     )
-        //     .then(response => {
-        //         console.log(response.data);
-        //         // const fetchPopularProducts = [];
-        //         // for (let key in data) {
-        //         //     fetchPopularProducts.push({
-        //         //         ...data[key],
-        //         //         id: key
-        //         //     });
-        //         // }
-        //         // dispatch(setPopular(fetchPopularProducts));
-        //     });
-        // .catch(error => {
-        //     dispatch(getPopularFailed(error));
-        // });
     };
 };

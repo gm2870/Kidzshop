@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 class MiniCart extends Component {
+    // componentDidMount() {
+    //     console.log(JSON.parse(localStorage.getItem("cart_items")));
+    // }
     render() {
         let cartItems;
         if (localStorage.getItem("cart_items")) {
@@ -13,7 +16,7 @@ class MiniCart extends Component {
                 item => (
                     <Grid
                         className="item"
-                        key={item.objectId}
+                        key={item.id}
                         item
                         container
                         direction="row"
@@ -21,12 +24,11 @@ class MiniCart extends Component {
                         <Link to="#" className="item__details">
                             <img
                                 className="item__img"
-                                src={item.icon.url}
-                                alt={item.imgAlt}
+                                src={`http://localhost/laravel_kidzshop_adminlte/public/images/product/${item.photo}`}
+                                alt={item.name}
                             />
                             <div>
                                 <p className="item__name">{item.name}</p>
-                                <span className="item__qty">x{item.qty}</span>
                                 <p className="item__price">
                                     <small>{item.price}</small> هزار تومان
                                 </p>

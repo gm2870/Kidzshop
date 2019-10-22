@@ -14,6 +14,11 @@ import UsersBox from "./UserBox/UserBox";
 import MiniCart from "../MiniCart/MiniCart";
 
 const desktopHeader = props => {
+    let cartQty = 0;
+    if (localStorage.getItem("cart_items")) {
+        cartQty = JSON.parse(localStorage.getItem("cart_items")).length;
+    }
+
     return (
         <header className="header">
             <Grid
@@ -41,13 +46,7 @@ const desktopHeader = props => {
                 <div className="header__icons">
                     <div className="cart">
                         <ShoppingCart id="ShoppingCart" />
-                        {/* <span className="cart__counter">
-                            {JSON.parse(localStorage.getItem("cart_items"))
-                                .length
-                                ? JSON.parse(localStorage.getItem("cart_items"))
-                                      .length
-                                : null}
-                        </span> */}
+                        <span className="cart__counter">{cartQty}</span>
                         <MiniCart />
                     </div>
                     <div>

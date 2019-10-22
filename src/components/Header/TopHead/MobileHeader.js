@@ -7,7 +7,7 @@ import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import user from "../../../assets/images/user.svg";
 import { Paper, InputBase } from "@material-ui/core";
 
-const mobileHeader = props => {
+const mobileHeader = () => {
     const [searchIconClicked, setSearchIconSate] = useState(false);
     const onClickedHandler = () => {
         setSearchIconSate(!searchIconClicked);

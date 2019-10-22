@@ -9,13 +9,13 @@ class Popular extends Component {
     componentDidMount() {
         this.props.onGetPopular();
     }
-    incrementHandler = id => () => {
-        this.props.onIncrement(id);
-    };
+    // incrementHandler = id => () => {
+    //     this.props.onIncrement(id);
+    // };
 
-    decrementHandler = id => () => {
-        this.props.onDecrement(id);
-    };
+    // decrementHandler = id => () => {
+    //     this.props.onDecrement(id);
+    // };
 
     addToCartHandler = id => () => {
         this.props.onAddToCart(id);
@@ -35,10 +35,10 @@ class Popular extends Component {
                     image={item.photo}
                     name={item.name}
                     price={item.price}
-                    qty={item.quantity}
                     availableQty={item.quantity}
-                    incremented={this.incrementHandler(item.id)}
-                    decremented={this.decrementHandler(item.id)}
+                    added={item.added ? item.added : false}
+                    // incremented={this.incrementHandler(item.id)}
+                    // decremented={this.decrementHandler(item.id)}
                     addedToCart={this.addToCartHandler(item.id)}
                 />
             ));
@@ -63,12 +63,12 @@ class Popular extends Component {
 const mapStateToProps = state => ({
     popularP: state.popular.popular,
     isFetched: state.popular.isFetched,
-    qty: state.popular.qty,
-    cart: state.popular.cart
+    cart: state.popular.cart,
+    totalQty: state.popular.totalQty
 });
 const mapDispatchToProps = dispatch => ({
-    onIncrement: id => dispatch(actions.incrementQty(id)),
-    onDecrement: id => dispatch(actions.decrementQty(id)),
+    // onIncrement: id => dispatch(actions.incrementQty(id)),
+    // onDecrement: id => dispatch(actions.decrementQty(id)),
     onGetPopular: () => dispatch(actions.getPopularProducts()),
     onAddToCart: id => dispatch(actions.addToCart(id))
 });
