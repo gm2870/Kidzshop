@@ -12,6 +12,10 @@ const mobileHeader = () => {
     const onClickedHandler = () => {
         setSearchIconSate(!searchIconClicked);
     };
+    let cartQty = 0;
+    if (localStorage.getItem("cart_items")) {
+        cartQty = JSON.parse(localStorage.getItem("cart_items")).length;
+    }
     return (
         <header className="header mobileHeader">
             <div className="mobileHeader-right">
@@ -26,9 +30,7 @@ const mobileHeader = () => {
                 </IconButton>
                 <div className="cart">
                     <ShoppingCart id="ShoppingCart" />
-                    <span className="cart__counter">
-                        {JSON.parse(localStorage.getItem("cart_items")).length}
-                    </span>
+                    <span className="cart__counter">{cartQty}</span>
                 </div>
                 <Link to="/users/login" className="user_icon">
                     <img src={user} alt="user icon" />

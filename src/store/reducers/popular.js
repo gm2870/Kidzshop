@@ -1,21 +1,12 @@
 import * as actionTypes from "../actions/actionTypes";
+// import { removeCartItem, getState } from "../actions";
 
 const initialState = {
     popular: [],
-    cart: [],
     isFetched: false,
-    loading: false,
-    totalQty: 0
+    loading: false
 };
-const addToCart = (state, action) => {
-    const addedItem = state.popular.find(item => item.id === action.id);
-    addedItem.added = true;
-    const newState = Object.assign({}, state);
-    newState.totalQty += 1;
-    newState.cart.push(addedItem);
-    localStorage.setItem("cart_items", JSON.stringify(initialState.cart));
-    return newState;
-};
+
 // const incrementQty = (state, action) => {
 //     let addedItem = state.popular.find(
 //         item => item.objectId === action.payload.id
@@ -44,7 +35,6 @@ const addToCart = (state, action) => {
 //         popular: [...state.popular]
 //     };
 // };
-
 const getPopularProducts = (state, action) => {
     return {
         ...state,
@@ -52,16 +42,17 @@ const getPopularProducts = (state, action) => {
         isFetched: true
     };
 };
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_POPULAR:
             return getPopularProducts(state, action);
+        // case actionTypes.REMOVE_CART_ITEM:
+        //     return removeCartItem(state, action);
         // case actionTypes.INCREMENT_QTY:
         //     return incrementQty(state, action);
         // case actionTypes.DECREMENT_QTY:
         //     return decrementQty(state, action);
-        case actionTypes.ADD_TO_CART:
-            return addToCart(state, action);
         default:
             return state;
     }

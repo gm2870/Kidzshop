@@ -1,7 +1,8 @@
 export { registerAuth, loginAuth, logout, authCheckState } from "./auth";
+export { getPopularProducts } from "./popular";
 export {
-    addToCart,
+    addItemToCart,
     incrementQty,
     decrementQty,
-    getPopularProducts
-} from "./popular";
+    removeCartItem
+} from "./cart";

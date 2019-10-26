@@ -16,12 +16,12 @@ export const decrementQty = id => {
         }
     };
 };
-export const addToCart = id => {
-    return {
-        type: actionTypes.ADD_TO_CART,
-        id: id
-    };
-};
+// export const addToCart = id => {
+//     return {
+//         type: actionTypes.ADD_TO_CART,
+//         id: id
+//     };
+// };
 export const setPopular = payload => {
     return {
         type: actionTypes.GET_POPULAR,
@@ -35,7 +35,7 @@ export const getPopularFailed = () => {
 };
 export const getPopularProducts = () => {
     return dispatch => {
-        fetch("http://localhost/laravel_kidzshop_adminlte/public/api/products")
+        fetch("http://localhost/laravel_kidzshop_backend/public/api/products")
             .then(response => response.json())
             .then(data => {
                 const fetchPopularProducts = [];
@@ -45,7 +45,6 @@ export const getPopularProducts = () => {
                         id: key
                     });
                 }
-                // console.log(fetchPopularProducts);
                 dispatch(setPopular(fetchPopularProducts));
             })
             .catch(error => {

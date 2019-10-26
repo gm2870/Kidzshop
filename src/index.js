@@ -11,11 +11,12 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import authReducer from "./store/reducers/auth";
 // import itemQtyReducer from './store/reducers/itemQty';
 import popularReducer from "./store/reducers/popular";
+import cartReducer from "./store/reducers/cart";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    // itemQty:itemQtyReducer,
+    cart: cartReducer,
     popular: popularReducer
 });
 

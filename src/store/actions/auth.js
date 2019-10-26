@@ -42,15 +42,7 @@ export const authFail = error => {
 export const registerAuth = (username, password, email, repeatPass) => {
     return dispatch => {
         dispatch(authStart());
-        // const headers = {
-        // 	"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
 
-        // 	"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
-
-        // 	"X-Parse-Revocable-Session": 1,
-
-        // 	"Content-Type": "application/json"
-        // };
         const authData = {
             username: username,
             password: password,
@@ -59,7 +51,7 @@ export const registerAuth = (username, password, email, repeatPass) => {
         };
         axios
             .post(
-                "http://localhost/laravel_kidzshop/public/api/signup",
+                "http://localhost/laravel_kidzshop_backend/public/api/register",
                 authData
             )
             .then(response => {
@@ -89,20 +81,14 @@ export const registerAuth = (username, password, email, repeatPass) => {
 export const loginAuth = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        // const headers = {
-        // 	"X-Parse-Application-Id": "jhPII7vY81BUn3qDQFkSwcJhw6UVP3lOQw7HZBhP",
 
-        // 	"X-Parse-REST-API-Key": "NsQ83M6tPrTVCHJnhSAM0i8feJm0SsuXK5nbVZ4a",
-
-        // 	"X-Parse-Revocable-Session": 1
-        // };
         const authData = {
             username: username,
             password: password
         };
         axios
             .post(
-                "http://localhost/laravel_kidzshop/public/api/login",
+                "http://localhost/laravel_kidzshop_backend/public/api/login",
                 authData
             )
             .then(response => {

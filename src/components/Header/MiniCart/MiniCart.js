@@ -1,48 +1,53 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
-// import axios from "axios";
 import { Link } from "react-router-dom";
+import * as actions from "../../../store/actions/index";
+
 class MiniCart extends Component {
-    // componentDidMount() {
-    //     console.log(JSON.parse(localStorage.getItem("cart_items")));
-    // }
+    removeItemHandler = item => () => {
+        this.props.onRemoveCartItem(item);
+    };
     render() {
         let cartItems;
-        if (localStorage.getItem("cart_items")) {
-            cartItems = JSON.parse(localStorage.getItem("cart_items")).map(
-                item => (
-                    <Grid
-                        className="item"
-                        key={item.id}
-                        item
-                        container
-                        direction="row"
+        if (JSON.parse(localStorage.getItem("cart_items"))) {
+            const cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+            cartItems = cart.map(item => (
+                <Grid
+                    className="item"
+                    key={item.id}
+                    item
+                    container
+                    direction="row"
+                >
+                    <Link to="#" className="item__details">
+                        <img
+                            className="item__img"
+                            src={`http://localhost/laravel_kidzshop_adminlte/public/images/product/${item.photo}`}
+                            alt={item.name}
+                        />
+                        <div>
+                            <p className="item__name">{item.name}</p>
+                            <p className="item__price">
+                                <small>{item.price}</small> هزار تومان
+                            </p>
+                        </div>
+                    </Link>
+                    <small
+                        onClick={this.removeItemHandler(item)}
+                        className="item__remove"
                     >
-                        <Link to="#" className="item__details">
-                            <img
-                                className="item__img"
-                                src={`http://localhost/laravel_kidzshop_adminlte/public/images/product/${item.photo}`}
-                                alt={item.name}
-                            />
-                            <div>
-                                <p className="item__name">{item.name}</p>
-                                <p className="item__price">
-                                    <small>{item.price}</small> هزار تومان
-                                </p>
-                            </div>
-                        </Link>
-                        <small className="item__remove">x</small>
-                    </Grid>
-                )
-            );
+                        x
+                    </small>
+                </Grid>
+            ));
         }
         let cartQty;
         if (localStorage.getItem("cart_items")) {
             cartQty =
-                JSON.parse(localStorage.getItem("cart_items")).length === 0 ? (
+                JSON.parse(localStorage.getItem("cart_items")).cart.length ===
+                0 ? (
                     <Grid className="empty_cart">
                         <p id="empty_cart_text">سبد خرید خالی است</p>
                     </Grid>
@@ -67,7 +72,13 @@ class MiniCart extends Component {
 }
 
 const mapStateToProps = state => ({
-    items: state.popular.cart,
-    totalQty: state.popular.totalQty
+    items: state.cart.cart,
+    totalQty: state.cart.totalQty
 });
-export default connect(mapStateToProps)(MiniCart);
+const mapDispatchToProps = dispatch => ({
+    onRemoveCartItem: item => dispatch(actions.removeCartItem(item))
+});
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MiniCart);

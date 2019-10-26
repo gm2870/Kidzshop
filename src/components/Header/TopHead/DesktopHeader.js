@@ -15,8 +15,9 @@ import MiniCart from "../MiniCart/MiniCart";
 
 const desktopHeader = props => {
     let cartQty = 0;
-    if (localStorage.getItem("cart_items")) {
-        cartQty = JSON.parse(localStorage.getItem("cart_items")).length;
+    if (JSON.parse(localStorage.getItem("cart_items"))) {
+        const cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+        cartQty = cart.length;
     }
 
     return (
@@ -59,6 +60,6 @@ const desktopHeader = props => {
     );
 };
 const mapStateToProps = state => ({
-    totalQty: state.popular.totalQty
+    totalQty: state.cart.totalQty
 });
 export default connect(mapStateToProps)(desktopHeader);
