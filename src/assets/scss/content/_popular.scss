@@ -1,14 +1,30 @@
-.popluar_section {
+.popluar {
     background-image: url("../images/bubbly_bg.jpg");
     background-repeat: repeat;
     background-position: top left;
     background-size: auto, cover;
     position: relative;
+    padding-bottom: 10rem;
+
     .fetch-popular-spinner {
         position: absolute;
         top: 4%;
         left: 50%;
     }
+}
+.popluar__inner {
+    padding-block: 5rem;
+}
+.popular__heading {
+    text-align: center;
+    margin-top: 5rem;
+}
+.popular__paragraph {
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 300;
+    text-align: center;
 }
 .product_body {
     position: relative;
@@ -58,10 +74,10 @@
     .addToCart_container {
         background-color: $primary-white-color;
         display: none;
-        width: 96.3%;
+        width: 96.7%;
         position: absolute;
-        bottom: -7rem;
-        left: 0.6rem;
+        bottom: -3rem;
+        left: 0.49rem;
         z-index: 7;
         padding: 0 0.5rem;
 

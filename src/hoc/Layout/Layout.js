@@ -3,6 +3,7 @@ import Axiliary from "../Auxiliary/Auxiliary";
 import Header from "../../components/Header/Header";
 import { connect } from "react-redux";
 import axios from "axios";
+import Footer from "../../components/Footer/Footer";
 class Layout extends Component {
     componentDidMount() {
         axios
@@ -18,6 +19,7 @@ class Layout extends Component {
             <Axiliary>
                 <Header isAuthenticated={this.props.isAuthenticated} />
                 <main>{this.props.children}</main>
+                <Footer />
             </Axiliary>
         );
     }

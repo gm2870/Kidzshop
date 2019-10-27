@@ -1,0 +1,31 @@
+.footer {
+    margin: 4rem 0;
+    .MuiGrid-container {
+        max-width: 120rem;
+        margin: 0 auto;
+    }
+
+    &-menu-container {
+        h2 {
+            color: #000;
+            font-size: 1.6rem;
+            line-height: 2.6rem;
+            margin-bottom: 1.3rem;
+        }
+    }
+
+    .menu {
+        &__item {
+            display: flex;
+        }
+        &__link {
+            color: $primary-gray-color;
+            font-size: 1.4rem;
+            line-height: 2.8rem;
+            transition: all 0.3s ease 0s;
+            &:hover {
+                color: $dark-gray-color;
+            }
+        }
+    }
+}

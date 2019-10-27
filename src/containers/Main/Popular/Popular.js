@@ -45,17 +45,17 @@ class Popular extends Component {
         }
 
         return (
-            <section className="popluar_section">
-                <h1 style={{ textAlign: "center", paddingTop: "50px" }}>
-                    محبوب ترین محصولات
-                </h1>
-                <p style={{ textAlign: "center", margin: "10px 0" }}>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                    با استفاده از طراحان گرافیک است!
-                </p>
-                <Grid container direction="row" className="container">
-                    {products}
-                </Grid>
+            <section className="popluar">
+                <div className="popular__inner">
+                    <h1 className="popular__heading">محبوب ترین محصولات</h1>
+                    <p className="popular__paragraph">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
+                        چاپ و با استفاده از طراحان گرافیک است!
+                    </p>
+                    <Grid container direction="row" className="container">
+                        {products}
+                    </Grid>
+                </div>
             </section>
         );
     }

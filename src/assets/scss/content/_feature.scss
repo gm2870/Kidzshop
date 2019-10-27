@@ -1,0 +1,100 @@
+.feature {
+    background-image: url("../images/kids-bg-1.jpg");
+    background-position: center;
+    background-size: cover;
+    &__inner {
+        padding: 15rem 6rem;
+        display: flex;
+        z-index: 1;
+        position: relative;
+        padding: 8rem 0;
+        max-width: 120rem;
+        margin: 0 auto;
+    }
+    &__caption {
+        display: flex;
+        flex: 0 0 53.5%;
+        flex-direction: column;
+    }
+    &__heading {
+        color: $primary-white-color;
+        font-size: 4.5rem;
+        margin-top: 0;
+        padding-left: 3.8rem;
+        margin-bottom: 2.8rem;
+        text-shadow: -12.257px 10.285px 0 rgba(79, 16, 38, 0.18);
+    }
+    &__paragraph {
+        color: #f1c6d5;
+        font-size: 2rem;
+        padding-left: 8px;
+    }
+    &__btn {
+        margin-top: 4.5rem;
+        align-self: start;
+
+        span {
+            padding-right: 1.7rem;
+            font-size: 2rem;
+        }
+
+        &:hover {
+            color: $dark-gray-color;
+        }
+    }
+}
+.category {
+    margin-top: 10rem;
+    &-container {
+        width: 80% !important;
+        margin: 0 auto;
+    }
+    .boy-inner {
+        margin-left: 2rem;
+    }
+    .girl-inner {
+        margin-right: 2rem;
+    }
+    img {
+        width: 20rem;
+        height: 70rem;
+    }
+    a {
+        border: 1px solid #dadada;
+        display: block;
+        text-decoration: none !important;
+        cursor: pointer;
+    }
+
+    &-image {
+        text-align: center;
+        img {
+            width: 20.9rem;
+        }
+        &--boy {
+            background-color: #d5ece0;
+        }
+        &--girl {
+            background-color: #e9d0d9;
+        }
+    }
+    &-caption {
+        color: $dark-gray-color;
+        margin: 0.5em 0;
+        h2,
+        p {
+            text-align: center;
+        }
+        h2 {
+            font-size: 2.8rem;
+            margin: 0;
+            margin-top: 2rem;
+        }
+        p {
+            color: $primary-gray-color;
+            font-size: 1.7rem;
+            margin: 0;
+            margin-bottom: 2rem;
+        }
+    }
+}

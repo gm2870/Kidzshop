@@ -87,9 +87,10 @@ class Slider extends Component {
                                 صنعت چاپ و با استفاده از طراحان گرافیک است{" "}
                             </h3>
                         </div>
+
                         <div className="moreButton_div animated_text">
-                            <button className="moreButton">
-                                نمایش بیشتر{" "}
+                            <button className="btn btn--main moreButton">
+                                نمایش بیشتر
                                 <span id="left_arrow_symbol">&larr;</span>
                             </button>
                         </div>
