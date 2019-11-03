@@ -31,7 +31,7 @@ const feature = () => (
         </section>
         <section className="category">
             <Grid container direction="row" className="category-container">
-                <Grid item xs={12} sm={6} className="boy">
+                <Grid item xs={12} md={6} className="boy">
                     <div className="boy-inner">
                         <Link to="/">
                             <div className="category-image category-image--boy">
@@ -44,7 +44,7 @@ const feature = () => (
                         </Link>
                     </div>
                 </Grid>
-                <Grid xs={12} sm={6} item className="girl">
+                <Grid xs={12} md={6} item className="girl">
                     <div className="girl-inner">
                         <Link to="/">
                             <div className="category-image category-image--girl">

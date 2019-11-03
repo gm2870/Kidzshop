@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 const footer = () => (
     <Auxiliary>
-        <section className="footer">
+        <footer className="footer">
             <Grid container direction="row">
                 <Grid item xs={6} sm={3} className="footer-menu-container">
                     <h2>لینک محصولات</h2>
@@ -144,7 +144,7 @@ const footer = () => (
                     </ul>
                 </Grid>
             </Grid>
-        </section>
+        </footer>
     </Auxiliary>
 );
 export default footer;

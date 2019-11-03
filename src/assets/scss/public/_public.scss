@@ -56,3 +56,37 @@ $breakpoint argument choices:
 svg {
     vertical-align: middle;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit !important;
+}
+.fade-appear {
+    opacity: 0;
+    z-index: 1;
+}
+.fade-appear.fade-appear-active {
+    opacity: 1;
+    transition: opacity 4s linear;
+}
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 4s linear 4s;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 4s linear;
+}
+.fade-exit-done {
+    opacity: 0;
+}

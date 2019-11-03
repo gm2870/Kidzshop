@@ -10,15 +10,24 @@
         padding: 8rem 0;
         max-width: 120rem;
         margin: 0 auto;
+        @include respond(lg) {
+            margin: 0;
+            margin-right: 2rem;
+        }
     }
     &__caption {
         display: flex;
         flex: 0 0 53.5%;
         flex-direction: column;
+
+        @include respond(xs) {
+            flex: unset;
+            width: 32rem;
+        }
     }
     &__heading {
         color: $primary-white-color;
-        font-size: 4.5rem;
+        font-size: 3.5rem;
         margin-top: 0;
         padding-left: 3.8rem;
         margin-bottom: 2.8rem;
@@ -48,12 +57,22 @@
     &-container {
         width: 80% !important;
         margin: 0 auto;
+        @include respond(xs) {
+            width: 90% !important;
+        }
     }
     .boy-inner {
         margin-left: 2rem;
+        @include respond(md) {
+            margin-left: 0;
+            margin-bottom: 2rem;
+        }
     }
     .girl-inner {
         margin-right: 2rem;
+        @include respond(md) {
+            margin-right: 0;
+        }
     }
     img {
         width: 20rem;

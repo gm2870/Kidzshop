@@ -16,6 +16,12 @@
         height: 100%;
     }
     height: 72.5rem;
+    @include respond(md) {
+        height: 54rem;
+    }
+    @include respond(xs) {
+        height: 40rem;
+    }
     .slider_images {
         width: 50%;
         margin-left: auto;
@@ -41,6 +47,10 @@
         top: 12rem;
         left: 0;
         width: 50%;
+        @include respond(xs) {
+            left: 1rem;
+            top: 5rem;
+        }
     }
     .slider_text {
         .animated_text {
@@ -50,11 +60,23 @@
             color: $primary-yellow-color;
             font-size: 6rem;
             font-weight: 700;
+            @include respond(md) {
+                font-size: 4rem;
+            }
+            @include respond(xs) {
+                font-size: 2rem;
+            }
         }
         .slider_text_header2 {
             color: $primary-white-color;
             font-size: 8rem;
             font-weight: 900;
+            @include respond(md) {
+                font-size: 5rem;
+            }
+            @include respond(xs) {
+                font-size: 3rem;
+            }
         }
         .slider_sub_text {
             color: $primary-white-color;

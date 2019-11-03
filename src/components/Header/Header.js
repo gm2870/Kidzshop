@@ -5,7 +5,6 @@ import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import MobileHeader from "./TopHead/MobileHeader";
 
 const Header = props => {
-    // const [isSearchIconClicked, ShowSearchField] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
 
     useEffect(() => {
@@ -26,9 +25,6 @@ const Header = props => {
         }
     };
 
-    // const toggleNav = () => {
-    //     setNavVisibility(!isNavVisible);
-    // };
     return (
         <Auxiliary>
             {isSmallScreen ? (

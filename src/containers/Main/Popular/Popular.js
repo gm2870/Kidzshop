@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CardView from "../../../components/UI/CardView/CardView";
 import * as actions from "../../../store/actions/index";
-
 class Popular extends Component {
     componentDidMount() {
         this.props.onGetPopular();
     }
+
     // incrementHandler = id => () => {
     //     this.props.onIncrement(id);
     // };
