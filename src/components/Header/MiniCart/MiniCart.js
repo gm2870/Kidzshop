@@ -24,7 +24,7 @@ class MiniCart extends Component {
                     <Link to="#" className="item__details">
                         <img
                             className="item__img"
-                            src={`http://localhost/laravel_kidzshop_adminlte/public/images/product/${item.photo}`}
+                            src={`http://localhost/laravel_kidzshop_backend/public/images/${item.photo}`}
                             alt={item.name}
                         />
                         <div>

@@ -74,7 +74,7 @@ class Slider extends Component {
                         </div>
 
                         <div className="moreButton_div animated_text">
-                            <button className="btn btn--main moreButton">
+                            <button className="btn btn--more moreButton">
                                 نمایش بیشتر
                                 <span id="left_arrow_symbol">&larr;</span>
                             </button>

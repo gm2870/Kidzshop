@@ -16,6 +16,7 @@ const addToCart = (state, action) => {
         cart: copiedState.cart,
         totalQty: copiedState.totalQty
     };
+    console.log(updatedState);
     localStorage.setItem("cart_items", JSON.stringify(updatedState));
     return updateObject(state, updatedState);
 };

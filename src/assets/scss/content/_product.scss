@@ -1,0 +1,27 @@
+.product {
+    &__title {
+        font-size: 32px;
+        color: #3a3a3a;
+    }
+    &__price {
+        color: $primary-pink-color;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+    &__description {
+        color: #979797;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 1.75;
+    }
+}
+.gallery {
+    position: relative;
+    &__wrapper {
+    }
+    &__inner {
+    }
+    &__image {
+        width: 100%;
+    }
+}

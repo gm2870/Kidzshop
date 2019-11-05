@@ -26,7 +26,6 @@ export const getProduct = id => {
             `http://localhost/laravel_kidzshop_backend/public/api/products/${id}`
         )
             .then(response => {
-                console.log(response.data.product);
                 dispatch(fetchProductSuccess(response.data.product));
             })
             .catch(error => {

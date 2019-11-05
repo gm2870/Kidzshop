@@ -21,7 +21,7 @@ const feature = () => (
                             کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
                             باشد.
                         </p>
-                        <button className="btn btn--main feature__btn">
+                        <button className="btn btn--more feature__btn">
                             خرید فروشگاه
                             <span id="left_arrow_symbol">&larr;</span>
                         </button>

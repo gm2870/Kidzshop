@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
 // import RemoveIcon from "@material-ui/icons/Remove";
 import ShoppingBasket from "@material-ui/icons/ShoppingCart";
 class CardView extends Component {
-    componentDidMount() {
-        console.log(this.props);
-    }
     render() {
         return (
             <Auxiliary>
@@ -44,28 +41,28 @@ class CardView extends Component {
                                     <span>هزار تومان</span>
                                 </Grid>
                             </Grid>
-                            <Grid className="addToCart_container">
-                                <Grid className="addToCart_btn_container">
-                                    <button
-                                        className="addToCart_btn"
-                                        onClick={this.props.addedToCart}
-                                    >
-                                        <ShoppingBasket
-                                            style={{
-                                                verticalAlign: "middle",
-                                                margin: "0 5px"
-                                            }}
-                                        />
-                                        {!this.props.added ? (
-                                            <span>افزودن به سبد خرید</span>
-                                        ) : (
-                                            <span>مشاهده سبد خرید</span>
-                                        )}
-                                    </button>
-                                </Grid>
-                            </Grid>
                         </Grid>
                     </Link>
+                    <Grid className="addToCart_container">
+                        <Grid className="addToCart_btn_container">
+                            <button
+                                className="btn btn--main addToCart_btn"
+                                onClick={this.props.addedToCart}
+                            >
+                                <ShoppingBasket
+                                    style={{
+                                        verticalAlign: "middle",
+                                        margin: "0 5px"
+                                    }}
+                                />
+                                {!this.props.added ? (
+                                    <span>افزودن به سبد خرید</span>
+                                ) : (
+                                    <span>مشاهده سبد خرید</span>
+                                )}
+                            </button>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Auxiliary>
         );

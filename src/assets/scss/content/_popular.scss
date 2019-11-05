@@ -28,6 +28,9 @@
 }
 .product_body {
     position: relative;
+    a {
+        display: block;
+    }
     &:hover {
         .addToCart_container {
             display: block;
@@ -72,44 +75,44 @@
             font-weight: 900;
         }
     }
-    .addToCart_container {
-        background-color: $primary-white-color;
-        display: none;
-        width: 96.7%;
-        position: absolute;
-        bottom: -3rem;
-        left: 0.49rem;
-        z-index: 7;
-        padding: 0 0.5rem;
+}
+.addToCart_container {
+    background-color: $primary-white-color;
+    display: none;
+    width: 96.7%;
+    position: absolute;
+    bottom: -3rem;
+    left: 0.49rem;
+    z-index: 7;
+    padding: 0 0.5rem;
 
-        .addItem_container {
-            width: 100%;
-            padding: 0.5rem 6.8rem;
-            display: flex;
-            justify-content: space-between;
-            .product_qty {
-                font-size: 1.6rem;
-                line-height: 3.6rem;
-                color: #495057;
-            }
+    .addItem_container {
+        width: 100%;
+        padding: 0.5rem 6.8rem;
+        display: flex;
+        justify-content: space-between;
+        .product_qty {
+            font-size: 1.6rem;
+            line-height: 3.6rem;
+            color: #495057;
         }
-        .addToCart_btn_container {
-            padding: 1rem 0;
-            .addToCart_btn {
-                background-color: $primary-pink-color;
-                color: $primary-white-color;
-                border: $primary-pink-color;
-                display: block;
-                margin: 0 auto;
-                padding: 13.5px 18px;
-                font-size: 18px;
-                line-height: 1.75;
-                border-radius: 30px;
-                cursor: pointer;
-                &:hover {
-                    background-color: $dark-pink-color;
-                }
-            }
+    }
+}
+.addToCart_btn_container {
+    padding: 1rem 0;
+    .addToCart_btn {
+        background-color: $primary-pink-color;
+        color: $primary-white-color;
+        border: $primary-pink-color;
+        display: block;
+        margin: 0 auto;
+        padding: 13.5px 18px;
+        font-size: 18px;
+        line-height: 1.75;
+        border-radius: 30px;
+        cursor: pointer;
+        &:hover {
+            background-color: $dark-pink-color;
         }
     }
 }

@@ -22,6 +22,7 @@ class Popular extends Component {
     };
 
     render() {
+        console.log("rendered popular");
         let products = (
             <CircularProgress
                 className="fetch-popular-spinner"
@@ -37,9 +38,7 @@ class Popular extends Component {
                     name={item.name}
                     price={item.price}
                     availableQty={item.quantity}
-                    added={item.added ? item.added : false}
-                    // incremented={this.incrementHandler(item.id)}
-                    // decremented={this.decrementHandler(item.id)}
+                    added={item.added}
                     addedToCart={this.addToCartHandler(item)}
                 />
             ));

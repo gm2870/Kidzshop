@@ -45,8 +45,6 @@ export const getPopularProducts = () => {
                         id: data[key].id
                     });
                 }
-                console.log(data);
-
                 dispatch(setPopular(fetchPopularProducts));
             })
             .catch(error => {
