@@ -32,6 +32,7 @@ class Popular extends Component {
             products = this.props.popularP.map(item => (
                 <CardView
                     key={item.id}
+                    id={item.id}
                     image={item.photo}
                     name={item.name}
                     price={item.price}

@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/actionTypes";
-// import { removeCartItem, getState } from "../actions";
 
 const initialState = {
     popular: [],

@@ -7,6 +7,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import Logout from "./containers/Auth/Logout/Logout";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
+import Product from "./containers/Main/Product/Product";
 class App extends Component {
     componentDidMount() {
         this.props.onTryStayLoggedin();
@@ -22,6 +23,7 @@ class App extends Component {
                             path="/users/my-account"
                             component={UserAccount}
                         />
+                        <Route path="/products/:id" component={Product} />
                         <Route path="/logout" component={Logout} />
                         <Route path="/" exact component={Main} />
                         <Route component={Main} />

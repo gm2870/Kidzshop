@@ -92,7 +92,6 @@ export const loginAuth = (username, password) => {
                 authData
             )
             .then(response => {
-                console.log(response);
                 if (response.data.status === "true") {
                     const expiresIn = 24 * 60000;
                     const expirationDate = new Date(

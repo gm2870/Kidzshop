@@ -42,9 +42,11 @@ export const getPopularProducts = () => {
                 for (let key in data) {
                     fetchPopularProducts.push({
                         ...data[key],
-                        id: key
+                        id: data[key].id
                     });
                 }
+                console.log(data);
+
                 dispatch(setPopular(fetchPopularProducts));
             })
             .catch(error => {

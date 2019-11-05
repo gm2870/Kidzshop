@@ -6,3 +6,4 @@ export {
     decrementQty,
     removeCartItem
 } from "./cart";
+export { getProduct } from "./product";
