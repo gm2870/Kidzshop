@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import Axios from "axios";
+import { backendBaseUrl } from "../../shared/utility";
 export const fetchProductStart = () => {
     return {
         type: actionTypes.FETCH_PRODUCT_START
@@ -22,9 +23,7 @@ export const getProduct = id => {
     return dispatch => {
         dispatch(fetchProductStart());
 
-        Axios.get(
-            `http://localhost/laravel_kidzshop_backend/public/api/products/${id}`
-        )
+        Axios.get(`${backendBaseUrl}/api/products/${id}`)
             .then(response => {
                 dispatch(fetchProductSuccess(response.data.product));
             })

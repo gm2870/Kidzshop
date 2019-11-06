@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { backendBaseUrl } from "../../../shared/utility";
 class Product extends React.Component {
+    componentDidMount() {
+        this.props.onGetProduct(this.props.match.params.id);
+    }
     addToCartHandler = item => () => {
         this.props.onAddToCart(item);
     };
     render() {
-        console.log(this.props.added);
         return (
             <Grid container direction="row">
                 <Grid item xs={12} sm={6} className="gallery">
@@ -16,7 +19,7 @@ class Product extends React.Component {
                         <div className="gallery__inner">
                             <img
                                 className="gallery__image"
-                                src={`http://localhost/laravel_kidzshop_backend/public/images/${this.props.product.photo}`}
+                                src={`${backendBaseUrl}/images/${this.props.product.photo}`}
                                 alt="عکس"
                             />
                         </div>
@@ -27,7 +30,9 @@ class Product extends React.Component {
                         <nav className="breadcrumb">
                             <Link to="/">خانه</Link>
                             <span className="breadcrumb__separator"> / </span>
-                            <Link to="">تیشرت</Link>
+                            <Link to="">
+                                {this.props.product.category_name}
+                            </Link>
                             <span className="breadcrumb__separator"> / </span>
                             {this.props.product.name}
                         </nav>

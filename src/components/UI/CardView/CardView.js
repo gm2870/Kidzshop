@@ -6,22 +6,23 @@ import { Link } from "react-router-dom";
 // import AddIcon from "@material-ui/icons/Add";
 // import RemoveIcon from "@material-ui/icons/Remove";
 import ShoppingBasket from "@material-ui/icons/ShoppingCart";
+import { backendBaseUrl } from "../../../shared/utility";
 class CardView extends Component {
     render() {
         return (
             <Auxiliary>
                 <Grid className="product_body" item xs={12} sm={6} md={3}>
-                    <Link to={`/products/${this.props.id}`}>
+                    <Link to={`/product/${this.props.id}`}>
                         <Grid className="cardView_body">
                             <Grid className="product_image">
                                 <img
-                                    src={`http://localhost/laravel_kidzshop_backend/public/images/${this.props.image}`}
+                                    src={`${backendBaseUrl}/images/${this.props.image}`}
                                     alt={this.props.name}
                                 />
                             </Grid>
                             <Grid className="product_detatils_body">
                                 <Grid className="product_title">
-                                    <p>لباس</p>
+                                    <p>{this.props.category}</p>
                                 </Grid>
                                 <Grid className="product_name">
                                     <p>{this.props.name}</p>

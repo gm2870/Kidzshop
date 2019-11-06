@@ -23,7 +23,7 @@ class App extends Component {
                             path="/users/my-account"
                             component={UserAccount}
                         />
-                        <Route path="/products/:id" component={Product} />
+                        <Route path="/product/:id" component={Product} />
                         <Route path="/logout" component={Logout} />
                         <Route path="/" exact component={Main} />
                         <Route component={Main} />

@@ -1,5 +1,6 @@
 // import axios from "axios";
 import * as actionTypes from "./actionTypes";
+import { backendBaseUrl } from "../../shared/utility";
 export const incrementQty = id => {
     return {
         type: actionTypes.INCREMENT_QTY,
@@ -35,7 +36,7 @@ export const getPopularFailed = () => {
 };
 export const getPopularProducts = () => {
     return dispatch => {
-        fetch("http://localhost/laravel_kidzshop_backend/public/api/products")
+        fetch(`${backendBaseUrl}/api/products`)
             .then(response => response.json())
             .then(data => {
                 const fetchPopularProducts = [];

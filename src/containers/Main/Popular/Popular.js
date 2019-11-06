@@ -39,6 +39,7 @@ class Popular extends Component {
                     price={item.price}
                     availableQty={item.quantity}
                     added={item.added}
+                    category={item.category_name}
                     addedToCart={this.addToCartHandler(item)}
                 />
             ));

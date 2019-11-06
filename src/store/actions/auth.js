@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { backendBaseUrl } from "../../shared/utility";
 
 export const authStart = () => {
     return {
@@ -50,10 +51,7 @@ export const registerAuth = (username, password, email, repeatPass) => {
             repeatPass: repeatPass
         };
         axios
-            .post(
-                "http://localhost/laravel_kidzshop_backend/public/api/register",
-                authData
-            )
+            .post(`${backendBaseUrl}/api/register`, authData)
             .then(response => {
                 if (response.data.status === "true") {
                     const expirationDate = new Date(
@@ -87,10 +85,7 @@ export const loginAuth = (username, password) => {
             password: password
         };
         axios
-            .post(
-                "http://localhost/laravel_kidzshop_backend/public/api/login",
-                authData
-            )
+            .post(`${backendBaseUrl}/api/login`, authData)
             .then(response => {
                 if (response.data.status === "true") {
                     const expiresIn = 24 * 60000;
