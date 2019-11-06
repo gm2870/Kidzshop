@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Breadcrumb from '../../../components/UI/Breadcrumb/Breadcrumb'
 import { backendBaseUrl } from "../../../shared/utility";
 class Product extends React.Component {
+    state = {
+        added:false
+    }
     componentDidMount() {
         this.props.onGetProduct(this.props.match.params.id);
     }
     addToCartHandler = item => () => {
         this.props.onAddToCart(item);
+       // this.setState({added:true})
     };
     render() {
         return (
@@ -26,16 +31,8 @@ class Product extends React.Component {
                     </figure>
                 </Grid>
                 <Grid item xs={12} sm={6} className="product">
-                    <div className="product__summary">
-                        <nav className="breadcrumb">
-                            <Link to="/">خانه</Link>
-                            <span className="breadcrumb__separator"> / </span>
-                            <Link to="">
-                                {this.props.product.category_name}
-                            </Link>
-                            <span className="breadcrumb__separator"> / </span>
-                            {this.props.product.name}
-                        </nav>
+                    <Breadcrumb {...this.props} />
+                    <div className="product__summary">   
                         <h1 className="product__title">
                             {this.props.product.name}
                         </h1>
