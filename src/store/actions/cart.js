@@ -30,12 +30,12 @@ export const removeCartItem = item => {
     };
 };
 // item comes from cardView component
-export const addToCart = item => {
-    return (dispatch, getState) => {
-        const { popular } = getState();
-        const selectedItem = popular.popular.find(
-            productItem => productItem.id === item.id
-        );
-        addItemToCart(selectedItem);
-    };
-};
+// export const addToCart = item => {
+//     return (dispatch, getState) => {
+//         const { popular } = getState();
+//         const selectedItem = popular.popular.find(
+//             productItem => productItem.id === item.id
+//         );
+//         addItemToCart(selectedItem);
+//     };
+// };

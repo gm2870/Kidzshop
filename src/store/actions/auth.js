@@ -26,14 +26,14 @@ export const logout = () => {
         type: actionTypes.AUTH_LOGOUT
     };
 };
-
-export const setAuthTimeout = () => {
+export const checkAuthTimeout = expirationTime => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
-        }, 24 * 60000);
+        }, expirationTime * 1000);
     };
 };
+
 export const authFail = error => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -103,7 +103,7 @@ export const loginAuth = (username, password) => {
                             response.data.username
                         )
                     );
-                    dispatch(setAuthTimeout(24 * 60000));
+                    dispatch(checkAuthTimeout(24 * 60000));
                 } else {
                     dispatch(authFail(response.data.message));
                 }
@@ -113,8 +113,7 @@ export const loginAuth = (username, password) => {
             });
     };
 };
-
-export const authCheckState = () => {
+export const checkLoginStatus = () => {
     return dispatch => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -129,7 +128,7 @@ export const authCheckState = () => {
                 const userId = localStorage.getItem("userId");
                 dispatch(authSuccess(token, userId));
                 dispatch(
-                    setAuthTimeout(
+                    checkAuthTimeout(
                         (expirationDate.getTime() - new Date().getTime()) / 1000
                     )
                 );

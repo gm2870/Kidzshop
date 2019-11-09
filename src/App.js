@@ -33,16 +33,20 @@ class App extends Component {
         );
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    };
+};
 const mapDispatchToProps = dispatch => {
     return {
-        onTryStayLoggedin: () => dispatch(actions.authCheckState())
+        onTryStayLoggedin: () => dispatch(actions.checkLoginStatus())
     };
 };
 
 export default withRouter(
     connect(
-        null,
+        mapStateToProps,
         mapDispatchToProps
     )(App)
 );

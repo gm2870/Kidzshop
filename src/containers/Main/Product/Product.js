@@ -3,20 +3,29 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Breadcrumb from '../../../components/UI/Breadcrumb/Breadcrumb'
 import { backendBaseUrl } from "../../../shared/utility";
+// import CartButton from "../../../components/UI/cartButton/cartButton";
 class Product extends React.Component {
     state = {
-        added:false
-    }
+        itemAdded: false
+    };
     componentDidMount() {
         this.props.onGetProduct(this.props.match.params.id);
     }
+    buttonHandler = item => () => {
+        this.setState({ itemAdded: true });
+        if (this.props.product.added) {
+            this.props.history.push("/users/login");
+        } else this.props.onAddToCart(item);
+    };
     addToCartHandler = item => () => {
         this.props.onAddToCart(item);
-       // this.setState({added:true})
     };
     render() {
+        const thisItem = JSON.parse(
+            localStorage.getItem("cart_items")
+        ).cart.find(item => item.id === this.props.product.id);
+
         return (
             <Grid container direction="row">
                 <Grid item xs={12} sm={6} className="gallery">
@@ -31,8 +40,18 @@ class Product extends React.Component {
                     </figure>
                 </Grid>
                 <Grid item xs={12} sm={6} className="product">
-                    <Breadcrumb {...this.props} />
-                    <div className="product__summary">   
+                    <nav className="breadcrumb">
+                        <Link to="/">خانه</Link>
+                        <span className="breadcrumb__separator"> / </span>
+                        <Link
+                            to={`/products/${this.props.product.category_name}`}
+                        >
+                            {this.props.product.category_name}
+                        </Link>
+                        <span className="breadcrumb__separator"> / </span>
+                        {this.props.product.name}
+                    </nav>
+                    <div className="product__summary">
                         <h1 className="product__title">
                             {this.props.product.name}
                         </h1>
@@ -49,14 +68,13 @@ class Product extends React.Component {
                                 {this.props.product.price} هزار تومان
                             </p>
                         </div>
-
                         <button
-                            onClick={this.addToCartHandler(this.props.product)}
+                            onClick={this.buttonHandler(this.props.product)}
                             className="btn btn--main addToCart__btn"
                         >
-                            {!this.props.added
-                                ? "افزودن به سبد خرید"
-                                : "مشاهده سبد خرید"}
+                            {thisItem || this.state.itemAdded
+                                ? "ورود و ثبت سفارش"
+                                : "افزودن به سبد خرید"}
                         </button>
                     </div>
                 </Grid>

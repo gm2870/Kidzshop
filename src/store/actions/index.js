@@ -1,4 +1,4 @@
-export { registerAuth, loginAuth, logout, authCheckState } from "./auth";
+export { registerAuth, loginAuth, logout, checkLoginStatus } from "./auth";
 export { getPopularProducts } from "./popular";
 export {
     addItemToCart,

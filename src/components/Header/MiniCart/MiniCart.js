@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../../store/actions/index";
+import { backendBaseUrl } from "../../../shared/utility";
 
 class MiniCart extends Component {
     removeItemHandler = item => () => {
@@ -21,10 +22,17 @@ class MiniCart extends Component {
                     container
                     direction="row"
                 >
-                    <Link to="#" className="item__details">
+                    <Link
+                        to={
+                            this.props.isAuthenticated
+                                ? "/checkout"
+                                : "/users/login"
+                        }
+                        className="item__details"
+                    >
                         <img
                             className="item__img"
-                            src={`http://localhost/laravel_kidzshop_backend/public/images/${item.photo}`}
+                            src={`${backendBaseUrl}/images/${item.photo}`}
                             alt={item.name}
                         />
                         <div>
@@ -73,7 +81,8 @@ class MiniCart extends Component {
 
 const mapStateToProps = state => ({
     items: state.cart.cart,
-    totalQty: state.cart.totalQty
+    totalQty: state.cart.totalQty,
+    isAuthenticated: state.auth.token !== null
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))

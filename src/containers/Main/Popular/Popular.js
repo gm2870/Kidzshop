@@ -9,20 +9,11 @@ class Popular extends Component {
         this.props.onGetPopular();
     }
 
-    // incrementHandler = id => () => {
-    //     this.props.onIncrement(id);
-    // };
-
-    // decrementHandler = id => () => {
-    //     this.props.onDecrement(id);
-    // };
-
     addToCartHandler = item => () => {
         this.props.onAddToCart(item);
     };
 
     render() {
-        console.log("rendered popular");
         let products = (
             <CircularProgress
                 className="fetch-popular-spinner"
@@ -68,8 +59,6 @@ const mapStateToProps = state => ({
     totalQty: state.cart.totalQty
 });
 const mapDispatchToProps = dispatch => ({
-    // onIncrement: id => dispatch(actions.incrementQty(id)),
-    // onDecrement: id => dispatch(actions.decrementQty(id)),
     onGetPopular: () => dispatch(actions.getPopularProducts()),
     onAddToCart: item => dispatch(actions.addItemToCart(item))
 });
