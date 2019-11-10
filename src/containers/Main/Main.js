@@ -3,13 +3,13 @@ import Axiliary from "../../hoc/Auxiliary/Auxiliary";
 import Popular from "./Popular/Popular";
 import ProductWithCarousel from "./ProductWithCarousel/ProductWithCarousel";
 import Slider from "../../components/UI/Slider/Slider";
-import Feature from "../../components/feature/feature";
+import HeroBanner from "../../components/Hero-banner/Hero-banner";
 const main = () => (
     <Axiliary>
         <Slider />
         <ProductWithCarousel />
         <Popular />
-        <Feature />
+        <HeroBanner />
     </Axiliary>
 );
 export default main;

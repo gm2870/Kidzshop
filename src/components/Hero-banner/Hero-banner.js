@@ -4,16 +4,16 @@ import featureBoy from "../../assets/images/feature-boy.png";
 import featureGirl from "../../assets/images/feature-girl.png";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 
-const feature = () => (
+const heroBanner = () => (
     <Auxiliary>
-        <section className="feature">
+        <section className="heroBanner">
             <Grid container direction="row">
-                <div className="feature__inner">
-                    <div className="feature__caption">
-                        <h2 className="feature__heading">
+                <div className="heroBanner__inner">
+                    <div className="heroBanner__caption">
+                        <h2 className="heroBanner__heading">
                             بازی همراه با مد روز
                         </h2>
-                        <p className="feature__paragraph">
+                        <p className="heroBanner__paragraph">
                             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
                             صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
                             و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
@@ -21,7 +21,7 @@ const feature = () => (
                             کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
                             باشد.
                         </p>
-                        <button className="btn btn--more feature__btn">
+                        <button className="btn btn--more heroBanner__btn">
                             خرید فروشگاه
                             <span id="left_arrow_symbol">&larr;</span>
                         </button>
@@ -61,4 +61,4 @@ const feature = () => (
         </section>
     </Auxiliary>
 );
-export default feature;
+export default heroBanner;

@@ -25,7 +25,7 @@ class MiniCart extends Component {
                     <Link
                         to={
                             this.props.isAuthenticated
-                                ? "/checkout"
+                                ? "/cart"
                                 : "/users/login"
                         }
                         className="item__details"

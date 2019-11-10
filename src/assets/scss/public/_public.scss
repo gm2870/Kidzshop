@@ -90,3 +90,10 @@ h6 {
 .fade-exit-done {
     opacity: 0;
 }
+.clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
