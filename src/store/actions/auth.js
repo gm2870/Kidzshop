@@ -11,26 +11,19 @@ export const authStart = () => {
 export const authSuccess = (token, userId, userName) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        sessionToken: token,
+        access_token: "true",
         objectId: userId,
         username: userName
     };
 };
 
-export const logout = () => {
+export const removeLocalStorage = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("expirationDate");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
 
     return {
         type: actionTypes.AUTH_LOGOUT
-    };
-};
-export const checkAuthTimeout = expirationTime => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout());
-        }, expirationTime * 1000);
     };
 };
 
@@ -54,20 +47,13 @@ export const registerAuth = (username, password, email, repeatPass) => {
             .post(`${backendBaseUrl}/api/register`, authData)
             .then(response => {
                 if (response.data.status === "true") {
-                    const expirationDate = new Date(
-                        new Date().getTime() + 24 * 60000
-                    );
-                    localStorage.setItem("token", response.data.sessionId);
-                    localStorage.setItem("expirationDate", expirationDate);
+                    localStorage.setItem("token", response.data.access_token);
                     localStorage.setItem("username", username);
                     localStorage.setItem("userId", response.data.userId);
 
                     dispatch(authSuccess(response.data));
                 } else {
-                    // console.log(response.data);
                     dispatch(authFail(response.data.message));
-
-                    console.log(response.data.message);
                 }
             })
             .catch(error => {
@@ -88,22 +74,16 @@ export const loginAuth = (username, password) => {
             .post(`${backendBaseUrl}/api/login`, authData)
             .then(response => {
                 if (response.data.status === "true") {
-                    const expiresIn = 24 * 60000;
-                    const expirationDate = new Date(
-                        new Date().getTime() + expiresIn
-                    );
-                    localStorage.setItem("token", response.data.sessionId);
-                    localStorage.setItem("expirationDate", expirationDate);
+                    localStorage.setItem("token", response.data.access_token);
                     localStorage.setItem("username", response.data.username);
                     localStorage.setItem("userId", response.data.userId);
 
                     dispatch(
                         authSuccess(
-                            response.data.sessionId,
+                            response.data.access_token,
                             response.data.username
                         )
                     );
-                    dispatch(checkAuthTimeout(24 * 60000));
                 } else {
                     dispatch(authFail(response.data.message));
                 }
@@ -115,24 +95,33 @@ export const loginAuth = (username, password) => {
 };
 export const checkLoginStatus = () => {
     return dispatch => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            dispatch(logout());
-        } else {
-            const expirationDate = new Date(
-                localStorage.getItem("expirationDate")
-            );
-            if (expirationDate <= new Date()) {
-                dispatch(logout());
-            } else {
-                const userId = localStorage.getItem("userId");
-                dispatch(authSuccess(token, userId));
-                dispatch(
-                    checkAuthTimeout(
-                        (expirationDate.getTime() - new Date().getTime()) / 1000
-                    )
-                );
-            }
-        }
+        const token = `Bearer ${localStorage.getItem("token")}`;
+        fetch(`${backendBaseUrl}/api/CheckLoginStatus`, {
+            headers: new Headers({
+                Accept: "aplication/json",
+                Authorization: token
+            })
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.user === null) {
+                    dispatch(removeLocalStorage());
+                }
+            });
+    };
+};
+export const logout = () => {
+    return dispatch => {
+        const token = `Bearer ${localStorage.getItem("token")}`;
+        fetch(`${backendBaseUrl}/api/logout`, {
+            headers: new Headers({
+                Accept: "aplication/json",
+                Authorization: token
+            })
+        })
+            .then(response => response.json())
+            .then(() => {
+                dispatch(removeLocalStorage());
+            });
     };
 };

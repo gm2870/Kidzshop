@@ -1,4 +1,6 @@
 import * as actionTypes from "./actionTypes";
+// import Axios from "axios";
+// import { backendBaseUrl } from "../../shared/utility";
 
 export const incrementQty = id => {
     return {
@@ -29,6 +31,14 @@ export const removeCartItem = item => {
         item: item
     };
 };
+// export const addToCart = item => {
+//     return dispatch => {
+//         const data = { product_id: item.id };
+//         Axios.post(`${backendBaseUrl}/api/cart`, data, {
+//             withCredentials: true
+//         }).then(response => console.log(response));
+//     };
+// };
 // item comes from cardView component
 // export const addToCart = item => {
 //     return (dispatch, getState) => {
@@ -39,3 +49,16 @@ export const removeCartItem = item => {
 //         addItemToCart(selectedItem);
 //     };
 // };
+export const checkCartExpiryStatus = () => {
+    return dispatch => {
+        if (
+            JSON.parse(localStorage.getItem("cart_items")) &&
+            JSON.parse(localStorage.getItem("cart_items")).cart &&
+            new Date(
+                JSON.parse(localStorage.getItem("cart_items")).expirationDate
+            ) <= new Date()
+        ) {
+            localStorage.removeItem("cart_items");
+        }
+    };
+};

@@ -10,9 +10,44 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/index";
 class Cart extends React.Component {
     render() {
+        let cartItems;
+        let cart;
+        if (JSON.parse(localStorage.getItem("cart_items"))) {
+            cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+            cartItems = cart.map(item => (
+                <div key={item.id} className="cart-item">
+                    <div className="cart-item__details">
+                        <img
+                            className="cart-item__image"
+                            src={`${backendBaseUrl}/images/${item.photo}`}
+                            alt="item"
+                        />
+                        <h3 className="cart-item__name">{item.name}</h3>
+                    </div>
+                    <div className="cart-item__actions">
+                        <span className="cart-item__price">
+                            {item.price} هزار تومان
+                        </span>
+                        <ul className="quantity">
+                            <li className="quantity__btn quantity__btn--add">
+                                <AddCircleOutlineIcon />
+                            </li>
+                            <li className="quantity__value">{item.qty}</li>
+                            <li className="quantity__btn quantity__btn--remove">
+                                <RemoveCircleOutlineIcon />
+                            </li>
+                        </ul>
+                        <button className="cart-item__remove">
+                            <HighlightOffIcon />
+                        </button>
+                    </div>
+                </div>
+            ));
+        }
         return (
             <Auxiliary>
                 <div className="cart">
@@ -76,34 +111,8 @@ class Cart extends React.Component {
                             </li>
                         </ul>
                     </div>
-                    <div className="cart-item">
-                        <div className="cart-item__details">
-                            <img
-                                className="cart-item__image"
-                                src={`${backendBaseUrl}/images/car.jpg`}
-                                alt="item"
-                            />
-                            <h3 className="cart-item__name">ماشین کنترلی</h3>
-                        </div>
-                        <div className="cart-item__actions">
-                            <span className="cart-item__price">
-                                25 هزار تومان
-                            </span>
-                            <ul className="quantity">
-                                <li className="quantity__btn quantity__btn--add">
-                                    <AddCircleOutlineIcon />
-                                </li>
-                                <li className="quantity__value">1</li>
-                                <li className="quantity__btn quantity__btn--remove">
-                                    <RemoveCircleOutlineIcon />
-                                </li>
-                            </ul>
-                            <button className="cart-item__remove">
-                                <HighlightOffIcon />
-                            </button>
-                        </div>
-                    </div>
-                    <span className="btn-cartUpdate">بروزرسانی سبد خرید</span>
+                    {cartItems}
+
                     <div className="cart__discount">
                         <div className="cart-coupon__info">
                             <div>
@@ -195,4 +204,16 @@ class Cart extends React.Component {
         );
     }
 }
-export default Cart;
+
+const mapStateToProps = state => ({
+    items: state.cart.cart,
+    totalQty: state.cart.totalQty,
+    isAuthenticated: state.auth.token !== null
+});
+const mapDispatchToProps = dispatch => ({
+    onRemoveCartItem: item => dispatch(actions.removeCartItem(item))
+});
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Cart);

@@ -52,7 +52,7 @@ class MiniCart extends Component {
             ));
         }
         let cartQty;
-        if (localStorage.getItem("cart_items")) {
+        if (JSON.parse(localStorage.getItem("cart_items"))) {
             cartQty =
                 JSON.parse(localStorage.getItem("cart_items")).cart.length ===
                 0 ? (

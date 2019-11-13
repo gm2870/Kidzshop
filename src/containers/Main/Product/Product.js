@@ -4,11 +4,17 @@ import * as actions from "../../../store/actions/index";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { backendBaseUrl } from "../../../shared/utility";
+
 // import CartButton from "../../../components/UI/cartButton/cartButton";
 class Product extends React.Component {
-    state = {
-        itemAdded: false
-    };
+    constructor(props) {
+        super(props);
+        // const { cookies } = props;
+        this.state = {
+            itemAdded: false
+        };
+    }
+
     componentDidMount() {
         this.props.onGetProduct(this.props.match.params.id);
     }
@@ -18,14 +24,23 @@ class Product extends React.Component {
             this.props.history.push("/users/login");
         } else this.props.onAddToCart(item);
     };
-    addToCartHandler = item => () => {
-        this.props.onAddToCart(item);
-    };
-    render() {
-        const thisItem = JSON.parse(
-            localStorage.getItem("cart_items")
-        ).cart.find(item => item.id === this.props.product.id);
 
+    render() {
+        let thisItem = null;
+        if (JSON.parse(localStorage.getItem("cart_items"))) {
+            thisItem = JSON.parse(localStorage.getItem("cart_items")).cart.find(
+                item => item.id === this.props.product.id
+            );
+        }
+        let buttonText = null;
+        if (this.props.isAuthenticated && (thisItem || this.state.itemAdded)) {
+            buttonText = "ثبت سفارش";
+        } else if (
+            !this.props.isAuthenticated &&
+            (thisItem || this.state.itemAdded)
+        ) {
+            buttonText = "ورود و ثبت سفارش";
+        } else buttonText = "افزودن به سبد خرید";
         return (
             <Grid container direction="row">
                 <Grid item xs={12} sm={6} className="gallery">
@@ -72,9 +87,7 @@ class Product extends React.Component {
                             onClick={this.buttonHandler(this.props.product)}
                             className="btn btn--main addToCart__btn"
                         >
-                            {thisItem || this.state.itemAdded
-                                ? "ورود و ثبت سفارش"
-                                : "افزودن به سبد خرید"}
+                            {buttonText}
                         </button>
                     </div>
                 </Grid>
@@ -86,7 +99,8 @@ const mapStateToProps = state => ({
     product: state.product.product,
     error: state.product.error,
     isFetched: state.product.isFetched,
-    added: state.cart.cart.added
+    added: state.cart.cart.added,
+    isAuthenticated: state.auth.token !== null
 });
 const mapDispatchToProps = dispatch => ({
     onGetProduct: id => dispatch(actions.getProduct(id)),

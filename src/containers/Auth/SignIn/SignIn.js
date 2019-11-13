@@ -53,7 +53,6 @@ class SignIn extends Component {
         loading: false,
         siteRules: true
     };
-
     checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
@@ -187,14 +186,11 @@ class SignIn extends Component {
 const mapStateToProps = state => ({
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({
     onAuth: (username, password) =>
         dispatch(actions.loginAuth(username, password))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

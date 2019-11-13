@@ -9,9 +9,14 @@ import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
 import Product from "./containers/Main/Product/Product";
 import Cart from "./containers/Main/Cart/Cart";
+import EmptyCart from "./components/EmptyCart/EmptyCart";
+
 class App extends Component {
     componentDidMount() {
-        this.props.onTryStayLoggedin();
+        if (localStorage.getItem("token") !== null) {
+            this.props.onTryStayLoggedin();
+        }
+        this.props.onCheckCart();
     }
     render() {
         return (
@@ -25,7 +30,12 @@ class App extends Component {
                             component={UserAccount}
                         />
                         <Route path="/product/:id" component={Product} />
-                        <Route path="/cart" component={Cart} />
+                        <Route
+                            path="/cart"
+                            component={
+                                this.props.cart.length !== 0 ? Cart : EmptyCart
+                            }
+                        />
 
                         <Route path="/logout" component={Logout} />
                         <Route path="/" exact component={Main} />
@@ -38,18 +48,16 @@ class App extends Component {
 }
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        cart: state.cart.cart,
+        userId: state.auth.userId
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onTryStayLoggedin: () => dispatch(actions.checkLoginStatus())
+        onTryStayLoggedin: () => dispatch(actions.checkLoginStatus()),
+        onCheckCart: () => dispatch(actions.checkCartExpiryStatus())
     };
 };
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(App)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

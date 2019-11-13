@@ -13,6 +13,7 @@ import authReducer from "./store/reducers/auth";
 import popularReducer from "./store/reducers/popular";
 import cartReducer from "./store/reducers/cart";
 import productReducer from "./store/reducers/product";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({

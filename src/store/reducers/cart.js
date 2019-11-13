@@ -8,16 +8,19 @@ const initialState = {
 const addToCart = (state, action) => {
     const addedItem = action.item;
     addedItem.added = true;
+    addedItem.qty = 1;
     const copiedState = Object.assign({}, state);
     copiedState.totalQty += 1;
+    copiedState.expirationDate = new Date(new Date().getTime() + 3 * 60 * 1000); // in miliseconds
+
     copiedState.cart.push(addedItem);
 
     const updatedState = {
+        ...copiedState,
         cart: copiedState.cart,
         totalQty: copiedState.totalQty
     };
     localStorage.setItem("cart_items", JSON.stringify(updatedState));
-    console.log("addtocart");
     return updateObject(state, updatedState);
 };
 const removeCartItem = (state, action) => {
