@@ -1,6 +1,6 @@
 import React from "react";
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import PaymentIcon from "@material-ui/icons/Payment";
 import SecurityIcon from "@material-ui/icons/Security";
 import ReplayIcon from "@material-ui/icons/Replay";
@@ -13,11 +13,60 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 class Cart extends React.Component {
+    componentDidMount() {
+        document.querySelector("#post").setAttribute("checked", true);
+    }
+    state = {
+        delivery: [
+            {
+                name: "تیپاکس",
+                price: 14,
+                type: "tipax"
+            },
+            {
+                name: "پست",
+                price: 8,
+                type: "post"
+            }
+        ],
+        deliveryPrice: 8
+    };
+    deliveryHandler = price => () => {
+        this.setState({
+            deliveryPrice: price
+        });
+    };
     render() {
+        const radioBoxes = this.state.delivery.map((item, index) => {
+            return (
+                <div className="clearfix" key={index}>
+                    <input
+                        onChange={this.deliveryHandler(item.price)}
+                        type="radio"
+                        name="delivery"
+                        id={item.type}
+                    />
+                    <label htmlFor={item.type}>ارسال {item.name}</label>
+                    <p className="delivery-price">{item.price} هزار تومان</p>
+                </div>
+            );
+        });
+        let authRedirect;
+        if (JSON.parse(localStorage.getItem("cart_items")).totalQty <= 0) {
+            authRedirect = <Redirect to="/cart" />;
+        }
         let cartItems;
         let cart;
+        let totalPrice;
         if (JSON.parse(localStorage.getItem("cart_items"))) {
             cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+            let total = [];
+            cart.forEach(item => {
+                total.push(item.price);
+            });
+            const reducer = (accumulator, currentValue) =>
+                accumulator + currentValue;
+            totalPrice = total.reduce(reducer);
             cartItems = cart.map(item => (
                 <div key={item.id} className="cart-item">
                     <div className="cart-item__details">
@@ -50,6 +99,8 @@ class Cart extends React.Component {
         }
         return (
             <Auxiliary>
+                {authRedirect}
+
                 <div className="cart">
                     <nav className="breadcrumb">
                         <Link to="/">خانه</Link>
@@ -154,33 +205,12 @@ class Cart extends React.Component {
                             <div className="clearfix">
                                 <span className="total-text">جمع جزء</span>
                                 <span className="total-amount">
-                                    50 هزار تومان
+                                    {totalPrice} هزار تومان
                                 </span>
                             </div>
                             <div className="cart-delivery">
                                 <p className="delivery-title">حمل و نقل</p>
-                                <div className="clearfix">
-                                    <input
-                                        type="radio"
-                                        name="delivery"
-                                        id="tipax"
-                                    />
-                                    <label htmlFor="tipax">ارسال تیپاکس</label>
-                                    <p className="delivery-price">
-                                        14 هزار تومان
-                                    </p>
-                                </div>
-                                <div className="clearfix">
-                                    <input
-                                        type="radio"
-                                        name="delivery"
-                                        id="post"
-                                    />
-                                    <label htmlFor="post">ارسال پستی</label>
-                                    <p className="delivery-price">
-                                        8 هزار تومان
-                                    </p>
-                                </div>
+                                {radioBoxes}
                             </div>
                             <p>
                                 این تنها یک تخمین است. قیمت‌ها در هنگام پرداخت
@@ -190,14 +220,23 @@ class Cart extends React.Component {
                             <div className="final-amount clearfix">
                                 <span className="final-amount-text">مجموع</span>
                                 <span className="final-amount-value">
-                                    50 هزار تومان
+                                    {totalPrice + this.state.deliveryPrice}
+                                    هزار تومان
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div className="proceed-to-checkout">
-                        <Link to="/">ادامه خرید</Link>
-                        <Link to="/">ادامه جهت تسویه حساب</Link>
+                        <Link to="/">
+                            <button className="btn btn--main">
+                                ادامه خرید
+                            </button>
+                        </Link>
+                        <Link to="/">
+                            <button className="btn btn--main">
+                                ادامه جهت تسویه حساب
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </Auxiliary>
@@ -208,12 +247,10 @@ class Cart extends React.Component {
 const mapStateToProps = state => ({
     items: state.cart.cart,
     totalQty: state.cart.totalQty,
+    totalPrice: state.cart.totalPrice,
     isAuthenticated: state.auth.token !== null
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

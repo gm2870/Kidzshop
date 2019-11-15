@@ -82,12 +82,9 @@ class MiniCart extends Component {
 const mapStateToProps = state => ({
     items: state.cart.cart,
     totalQty: state.cart.totalQty,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MiniCart);
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);

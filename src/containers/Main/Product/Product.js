@@ -9,7 +9,6 @@ import { backendBaseUrl } from "../../../shared/utility";
 class Product extends React.Component {
     constructor(props) {
         super(props);
-        // const { cookies } = props;
         this.state = {
             itemAdded: false
         };
@@ -21,7 +20,9 @@ class Product extends React.Component {
     buttonHandler = item => () => {
         this.setState({ itemAdded: true });
         if (this.props.product.added) {
-            this.props.history.push("/users/login");
+            if (!this.props.isAuthenticated) {
+                this.props.history.push("/users/login");
+            } else this.props.history.push("/cart");
         } else this.props.onAddToCart(item);
     };
 
@@ -100,13 +101,10 @@ const mapStateToProps = state => ({
     error: state.product.error,
     isFetched: state.product.isFetched,
     added: state.cart.cart.added,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({
     onGetProduct: id => dispatch(actions.getProduct(id)),
     onAddToCart: item => dispatch(actions.addItemToCart(item))
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

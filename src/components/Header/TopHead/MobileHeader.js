@@ -6,15 +6,16 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import user from "../../../assets/images/user.svg";
 import { Paper, InputBase } from "@material-ui/core";
-
+import MiniCart from "../../../components/Header/MiniCart/MiniCart";
 const mobileHeader = () => {
     const [searchIconClicked, setSearchIconSate] = useState(false);
     const onClickedHandler = () => {
         setSearchIconSate(!searchIconClicked);
     };
     let cartQty = 0;
-    if (localStorage.getItem("cart_items")) {
-        cartQty = JSON.parse(localStorage.getItem("cart_items")).length;
+    if (JSON.parse(localStorage.getItem("cart_items"))) {
+        const cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+        cartQty = cart.length;
     }
     return (
         <header className="header mobileHeader">
@@ -31,6 +32,7 @@ const mobileHeader = () => {
                 <div className="cart">
                     <ShoppingCart id="ShoppingCart" />
                     <span className="cart__counter">{cartQty}</span>
+                    <MiniCart />
                 </div>
                 <Link to="/users/login" className="user_icon">
                     <img src={user} alt="user icon" />

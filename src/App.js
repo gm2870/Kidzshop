@@ -16,40 +16,46 @@ class App extends Component {
         if (localStorage.getItem("token") !== null) {
             this.props.onTryStayLoggedin();
         }
-        this.props.onCheckCart();
     }
     render() {
+        let routes = (
+            <Switch>
+                <Route path="/users/login" component={Auth} />
+                <Route path="/users/register" component={Auth} />
+                <Route path="/product/:id" component={Product} />
+                <Route path="/" exact component={Main} />
+                <Route component={Main} />
+            </Switch>
+        );
+        if (this.props.isAuthenticated) {
+            const qty = JSON.parse(localStorage.getItem("cart_items")).totalQty;
+            routes = (
+                <Switch>
+                    <Route path="/users/login" component={Auth} />
+                    <Route path="/users/register" component={Auth} />
+                    <Route path="/users/my-account" component={UserAccount} />
+                    <Route path="/product/:id" component={Product} />
+                    <Route
+                        path="/cart"
+                        component={qty !== 0 ? Cart : EmptyCart}
+                    />
+
+                    <Route path="/logout" component={Logout} />
+                    <Route path="/" exact component={Main} />
+                    <Route component={Main} />
+                </Switch>
+            );
+        }
         return (
             <div>
-                <Layout>
-                    <Switch>
-                        <Route path="/users/login" component={Auth} />
-                        <Route path="/users/register" component={Auth} />
-                        <Route
-                            path="/users/my-account"
-                            component={UserAccount}
-                        />
-                        <Route path="/product/:id" component={Product} />
-                        <Route
-                            path="/cart"
-                            component={
-                                this.props.cart.length !== 0 ? Cart : EmptyCart
-                            }
-                        />
-
-                        <Route path="/logout" component={Logout} />
-                        <Route path="/" exact component={Main} />
-                        <Route component={Main} />
-                    </Switch>
-                </Layout>
+                <Layout>{routes}</Layout>
             </div>
         );
     }
 }
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null,
-        cart: state.cart.cart,
+        isAuthenticated: localStorage.getItem("token") !== null,
         userId: state.auth.userId
     };
 };

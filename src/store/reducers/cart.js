@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../../shared/utility";
 const initialState = {
     cart: [],
-    totalQty: 0
+    totalQty: 0,
+    totalPrice: 0
 };
 
 const addToCart = (state, action) => {
@@ -11,14 +12,13 @@ const addToCart = (state, action) => {
     addedItem.qty = 1;
     const copiedState = Object.assign({}, state);
     copiedState.totalQty += 1;
-    copiedState.expirationDate = new Date(new Date().getTime() + 3 * 60 * 1000); // in miliseconds
-
+    copiedState.totalPrice += addedItem.price;
     copiedState.cart.push(addedItem);
-
+    console.log(copiedState);
     const updatedState = {
-        ...copiedState,
         cart: copiedState.cart,
-        totalQty: copiedState.totalQty
+        totalQty: copiedState.totalQty,
+        totalPrice: copiedState.totalPrice
     };
     localStorage.setItem("cart_items", JSON.stringify(updatedState));
     return updateObject(state, updatedState);

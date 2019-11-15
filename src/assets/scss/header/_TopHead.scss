@@ -80,6 +80,11 @@
             right: -5.5rem;
             min-width: 30rem;
             z-index: 3;
+            @include respond(sm) {
+                right: unset;
+                left: -3rem;
+                top: 9rem;
+            }
             .item {
                 $color: $primary-gray-color;
                 justify-content: right;
@@ -121,9 +126,9 @@
                     color: $color-red;
                     display: flex;
                     margin-right: auto;
-                    margin-left: 10px;
+                    padding: 1rem;
                     position: absolute;
-                    top: 30%;
+                    top: 20%;
                     left: 0;
                 }
             }

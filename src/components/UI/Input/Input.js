@@ -18,6 +18,9 @@ const input = props => {
         case "CheckBox":
             inputElement = <Checkbox />;
             break;
+        case "radio":
+            inputElement = <input type="radio" />;
+            break;
         default:
             inputElement = <TextField className="auth_input" />;
             break;

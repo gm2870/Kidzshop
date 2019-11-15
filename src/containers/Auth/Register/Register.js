@@ -262,14 +262,11 @@ class Register extends Component {
 const mapStateToProps = state => ({
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({
     onAuth: (username, password, email, repeatPass) =>
         dispatch(actions.registerAuth(username, password, email, repeatPass))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
