@@ -12,6 +12,7 @@ import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
+import { Grid } from "@material-ui/core";
 class Cart extends React.Component {
     componentDidMount() {
         document.querySelector("#post").setAttribute("checked", true);
@@ -36,6 +37,9 @@ class Cart extends React.Component {
             deliveryPrice: price
         });
     };
+    removeCartItemHandler = item => () => {
+        this.props.onRemoveCartItem(item);
+    };
     render() {
         const radioBoxes = this.state.delivery.map((item, index) => {
             return (
@@ -52,7 +56,10 @@ class Cart extends React.Component {
             );
         });
         let authRedirect;
-        if (JSON.parse(localStorage.getItem("cart_items")).totalQty <= 0) {
+        if (
+            JSON.parse(localStorage.getItem("cart_items")) &&
+            JSON.parse(localStorage.getItem("cart_items")).cart.length <= 0
+        ) {
             authRedirect = <Redirect to="/cart" />;
         }
         let cartItems;
@@ -60,13 +67,8 @@ class Cart extends React.Component {
         let totalPrice;
         if (JSON.parse(localStorage.getItem("cart_items"))) {
             cart = JSON.parse(localStorage.getItem("cart_items")).cart;
-            let total = [];
-            cart.forEach(item => {
-                total.push(item.price);
-            });
-            const reducer = (accumulator, currentValue) =>
-                accumulator + currentValue;
-            totalPrice = total.reduce(reducer);
+            totalPrice = JSON.parse(localStorage.getItem("cart_items"))
+                .totalPrice;
             cartItems = cart.map(item => (
                 <div key={item.id} className="cart-item">
                     <div className="cart-item__details">
@@ -90,7 +92,10 @@ class Cart extends React.Component {
                                 <RemoveCircleOutlineIcon />
                             </li>
                         </ul>
-                        <button className="cart-item__remove">
+                        <button
+                            className="cart-item__remove"
+                            onClick={this.removeCartItemHandler(item)}
+                        >
                             <HighlightOffIcon />
                         </button>
                     </div>
@@ -108,8 +113,14 @@ class Cart extends React.Component {
                         سبد خرید
                     </nav>
                     <div className="features">
-                        <ul className="features__list">
-                            <li className="feature">
+                        <Grid className="features__list" container>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                className="feature"
+                            >
                                 <div className="feature__inner">
                                     <div className="feature__thumbnail">
                                         <SecurityIcon className="feature__svg" />
@@ -125,8 +136,14 @@ class Cart extends React.Component {
                                         </span>
                                     </div>
                                 </div>
-                            </li>
-                            <li className="feature">
+                            </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                className="feature"
+                            >
                                 <div className="feature__inner">
                                     <div className="feature__thumbnail">
                                         <PaymentIcon className="feature__svg" />
@@ -142,8 +159,14 @@ class Cart extends React.Component {
                                         </span>
                                     </div>
                                 </div>
-                            </li>
-                            <li className="feature">
+                            </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                className="feature"
+                            >
                                 <div className="feature__inner">
                                     <div className="feature__thumbnail">
                                         <ReplayIcon className="feature__svg" />
@@ -159,8 +182,8 @@ class Cart extends React.Component {
                                         </span>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
+                            </Grid>
+                        </Grid>
                     </div>
                     {cartItems}
 
@@ -205,7 +228,8 @@ class Cart extends React.Component {
                             <div className="clearfix">
                                 <span className="total-text">جمع جزء</span>
                                 <span className="total-amount">
-                                    {totalPrice} هزار تومان
+                                    {totalPrice}
+                                    هزار تومان
                                 </span>
                             </div>
                             <div className="cart-delivery">
@@ -226,7 +250,7 @@ class Cart extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="proceed-to-checkout">
+                    <div className="procceed-to-checkout">
                         <Link to="/">
                             <button className="btn btn--main">
                                 ادامه خرید
@@ -248,7 +272,7 @@ const mapStateToProps = state => ({
     items: state.cart.cart,
     totalQty: state.cart.totalQty,
     totalPrice: state.cart.totalPrice,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))

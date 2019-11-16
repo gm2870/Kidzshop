@@ -16,8 +16,7 @@ import MiniCart from "../MiniCart/MiniCart";
 const desktopHeader = props => {
     let cartQty = 0;
     if (JSON.parse(localStorage.getItem("cart_items"))) {
-        const cart = JSON.parse(localStorage.getItem("cart_items")).cart;
-        cartQty = cart.length;
+        cartQty = JSON.parse(localStorage.getItem("cart_items")).cart.length;
     }
 
     return (

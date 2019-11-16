@@ -52,6 +52,7 @@ class MiniCart extends Component {
             ));
         }
         let cartQty;
+
         if (JSON.parse(localStorage.getItem("cart_items"))) {
             cartQty =
                 JSON.parse(localStorage.getItem("cart_items")).cart.length ===
@@ -81,7 +82,6 @@ class MiniCart extends Component {
 
 const mapStateToProps = state => ({
     items: state.cart.cart,
-    totalQty: state.cart.totalQty,
     isAuthenticated: localStorage.getItem("token") !== null
 });
 const mapDispatchToProps = dispatch => ({

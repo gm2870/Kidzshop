@@ -28,7 +28,10 @@ class App extends Component {
             </Switch>
         );
         if (this.props.isAuthenticated) {
-            const qty = JSON.parse(localStorage.getItem("cart_items")).totalQty;
+            let qty;
+            if (JSON.parse(localStorage.getItem("cart_items"))) {
+                qty = JSON.parse(localStorage.getItem("cart_items")).totalQty;
+            }
             routes = (
                 <Switch>
                     <Route path="/users/login" component={Auth} />

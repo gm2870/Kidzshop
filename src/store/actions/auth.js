@@ -112,7 +112,6 @@ export const checkLoginStatus = () => {
 };
 export const logout = () => {
     return dispatch => {
-        console.log("logout");
         const token = `Bearer ${localStorage.getItem("token")}`;
         fetch(`${backendBaseUrl}/api/logout`, {
             headers: new Headers({

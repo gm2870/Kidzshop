@@ -2,7 +2,6 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../../shared/utility";
 const initialState = {
     cart: [],
-    totalQty: 0,
     totalPrice: 0
 };
 
@@ -14,10 +13,8 @@ const addToCart = (state, action) => {
     copiedState.totalQty += 1;
     copiedState.totalPrice += addedItem.price;
     copiedState.cart.push(addedItem);
-    console.log(copiedState);
     const updatedState = {
         cart: copiedState.cart,
-        totalQty: copiedState.totalQty,
         totalPrice: copiedState.totalPrice
     };
     localStorage.setItem("cart_items", JSON.stringify(updatedState));
@@ -32,14 +29,24 @@ const removeCartItem = (state, action) => {
     const updatedCart = copiedState.cart.filter(item2 => item2.id !== item.id);
     const updatedState = {
         cart: updatedCart,
-        totalQty: state.totalQty - 1
+        totalPrice: copiedState.totalPrice - item.price
     };
-    var cartObj = {
-        cart: updatedState.cart,
-        totalQty: updatedState.totalQty
-    };
-
+    console.log(updatedState);
+    let cartObj;
+    if (updatedState.cart.length === 0) {
+        cartObj = {
+            cart: [],
+            totalQty: 0,
+            totalPrice: 0
+        };
+    } else {
+        cartObj = {
+            cart: updatedState.cart,
+            ...updatedState
+        };
+    }
     localStorage.setItem("cart_items", JSON.stringify(cartObj));
+
     return updateObject(state, updatedState);
 };
 const reducer = (state = initialState, action) => {
