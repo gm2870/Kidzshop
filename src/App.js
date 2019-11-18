@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import UserAccount from "./containers/UserAccount/UserAccount";
@@ -8,9 +8,11 @@ import Logout from "./containers/Auth/Logout/Logout";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
 import Product from "./containers/Main/Product/Product";
-import Cart from "./containers/Main/Cart/Cart";
-import EmptyCart from "./components/EmptyCart/EmptyCart";
+// import Cart from "./containers/Main/Cart/Cart";
+// import EmptyCart from "./components/EmptyCart/EmptyCart";
 
+const Cart = React.lazy(() => import("./containers/Main/Cart/Cart"));
+const EmptyCart = React.lazy(() => import("./containers/Main/Cart/Cart"));
 class App extends Component {
     componentDidMount() {
         if (localStorage.getItem("token") !== null) {
@@ -38,13 +40,21 @@ class App extends Component {
                     <Route path="/users/register" component={Auth} />
                     <Route path="/users/my-account" component={UserAccount} />
                     <Route path="/product/:id" component={Product} />
-                    <Route
+                    <Route path="/logout" component={Logout} />
+                    {/* <Route
                         path="/cart"
                         component={qty !== 0 ? Cart : EmptyCart}
+                    /> */}
+                    <Route
+                        path="/cart"
+                        render={() => (
+                            <Suspense fallback={() => <div>loading ...</div>}>
+                                {qty === 0 ? <EmptyCart /> : <Cart />}
+                            </Suspense>
+                        )}
                     />
-
-                    <Route path="/logout" component={Logout} />
                     <Route path="/" exact component={Main} />
+
                     <Route component={Main} />
                 </Switch>
             );
