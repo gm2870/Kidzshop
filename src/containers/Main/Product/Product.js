@@ -17,6 +17,7 @@ class Product extends React.Component {
     componentDidMount() {
         this.props.onGetProduct(this.props.match.params.id);
     }
+
     buttonHandler = item => () => {
         this.setState({ itemAdded: true });
         if (this.props.product.added) {

@@ -12,7 +12,6 @@ const Header = props => {
 
         mediaQuery.addListener(handleMediaQueryChange);
         handleMediaQueryChange(mediaQuery);
-
         return () => {
             mediaQuery.removeListener(handleMediaQueryChange);
         };

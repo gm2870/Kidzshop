@@ -51,28 +51,22 @@ class MiniCart extends Component {
                 </Grid>
             ));
         }
-        let cartQty;
+        let emptyText = null;
 
-        if (JSON.parse(localStorage.getItem("cart_items"))) {
-            cartQty =
-                JSON.parse(localStorage.getItem("cart_items")).cart.length ===
-                0 ? (
-                    <Grid className="empty_cart">
-                        <p id="empty_cart_text">سبد خرید خالی است</p>
-                    </Grid>
-                ) : null;
-        } else {
-            cartQty = (
+        if (
+            this.props.cartQty === 0 ||
+            JSON.parse(localStorage.getItem("cart_items")).totalQty === 0
+        ) {
+            emptyText = (
                 <Grid className="empty_cart">
                     <p id="empty_cart_text">سبد خرید خالی است</p>
                 </Grid>
             );
         }
-
         return (
             <Grid container direction="column" className="cart__items">
                 <Paper style={{ padding: 15 }}>
-                    {cartQty}
+                    {emptyText}
                     {cartItems}
                 </Paper>
             </Grid>
@@ -81,8 +75,7 @@ class MiniCart extends Component {
 }
 
 const mapStateToProps = state => ({
-    items: state.cart.cart,
-    isAuthenticated: localStorage.getItem("token") !== null
+    items: state.cart.cart
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))

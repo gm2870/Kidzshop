@@ -18,7 +18,6 @@ const desktopHeader = props => {
     if (JSON.parse(localStorage.getItem("cart_items"))) {
         cartQty = JSON.parse(localStorage.getItem("cart_items")).cart.length;
     }
-
     return (
         <header className="header">
             <Grid
@@ -47,7 +46,10 @@ const desktopHeader = props => {
                     <div className="cart">
                         <ShoppingCart id="ShoppingCart" />
                         <span className="cart__counter">{cartQty}</span>
-                        <MiniCart />
+                        <MiniCart
+                            cartQty={cartQty}
+                            isAuthenticated={props.isAuthenticated}
+                        />
                     </div>
                     <div>
                         <FavoriteBorder id="like-icon" />
