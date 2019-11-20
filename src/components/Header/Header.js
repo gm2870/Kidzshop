@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DesktopHeader from "./TopHead/DesktopHeader";
 import Navbar from "./Navbar/Navbar";
-import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import MobileHeader from "./TopHead/MobileHeader";
 
 const Header = props => {
@@ -25,14 +24,14 @@ const Header = props => {
     };
 
     return (
-        <Auxiliary>
+        <React.Fragment>
             {isSmallScreen ? (
                 <MobileHeader isAuthenticated={props.isAuthenticated} />
             ) : (
                 <DesktopHeader isAuthenticated={props.isAuthenticated} />
             )}
             {!isSmallScreen ? <Navbar /> : null}
-        </Auxiliary>
+        </React.Fragment>
     );
 };
 export default Header;

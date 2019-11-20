@@ -1,5 +1,4 @@
 import React from "react";
-import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import { Link, Redirect } from "react-router-dom";
 import PaymentIcon from "@material-ui/icons/Payment";
 import SecurityIcon from "@material-ui/icons/Security";
@@ -103,7 +102,7 @@ class Cart extends React.Component {
             ));
         }
         return (
-            <Auxiliary>
+            <React.Fragment>
                 {authRedirect}
 
                 <div className="cart">
@@ -263,7 +262,7 @@ class Cart extends React.Component {
                         </Link>
                     </div>
                 </div>
-            </Auxiliary>
+            </React.Fragment>
         );
     }
 }

@@ -1,9 +1,8 @@
 import React from "react";
-import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 const footer = () => (
-    <Auxiliary>
+    <React.Fragment>
         <footer className="footer">
             <Grid container direction="row">
                 <Grid item xs={6} sm={3} className="footer-menu-container">
@@ -145,6 +144,6 @@ const footer = () => (
                 </Grid>
             </Grid>
         </footer>
-    </Auxiliary>
+    </React.Fragment>
 );
 export default footer;

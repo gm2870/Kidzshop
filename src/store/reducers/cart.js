@@ -14,11 +14,9 @@ const addToCart = (state, action) => {
     copiedState.totalQty += 1;
     copiedState.totalPrice += addedItem.price;
     copiedState.cart.push(addedItem);
-    const updatedState = {
-        ...copiedState
-    };
-    localStorage.setItem("cart_items", JSON.stringify(updatedState));
-    return updateObject(state, updatedState);
+
+    localStorage.setItem("cart_items", JSON.stringify(copiedState));
+    return updateObject(state, copiedState);
 };
 const removeCartItem = (state, action) => {
     const item = JSON.parse(localStorage.getItem("cart_items")).cart.find(

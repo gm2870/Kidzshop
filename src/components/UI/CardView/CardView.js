@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
-import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import { Link } from "react-router-dom";
 import { backendBaseUrl } from "../../../shared/utility";
 class CardView extends Component {
     render() {
         return (
-            <Auxiliary>
+            <React.Fragment>
                 <Grid className="product_body" item xs={12} sm={6} md={3}>
                     <Link to={`/product/${this.props.id}`}>
                         <Grid className="cardView_body">
@@ -41,7 +40,7 @@ class CardView extends Component {
                         </Grid>
                     </Link>
                 </Grid>
-            </Auxiliary>
+            </React.Fragment>
         );
     }
 }
