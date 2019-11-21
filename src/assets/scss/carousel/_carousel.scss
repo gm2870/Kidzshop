@@ -1,5 +1,5 @@
 .carousel {
-    background-color: #fafafa;
+    background-color: $lightgray-background-color;
     padding: 11rem 0;
     &__container {
         position: relative;
@@ -10,8 +10,8 @@
         }
     }
     &__box {
-        border: 1px solid lightgray;
-        background-color: #fff;
+        border: 1px solid $light-gray;
+        background-color: $primary-white-color;
 
         img {
             max-width: 100%;
@@ -81,7 +81,7 @@
     }
 }
 .onSale {
-    border: 1px solid lightgray;
+    border: 1px solid $light-gray;
     padding: 5px 0;
 
     @include respond(md) {

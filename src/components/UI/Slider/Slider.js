@@ -51,7 +51,7 @@ class Slider extends Component {
         );
 
         return (
-            <div className="slider_container">
+            <div className="slider">
                 <Grid
                     className="row"
                     container
@@ -60,17 +60,15 @@ class Slider extends Component {
                     alignItems="center"
                 >
                     <div className="slider__images">{imgItems}</div>
-                    <div className="leftSide_slider">
-                        <div className="slider_text">
-                            <div className="slider_text_header1 animated_text">
+                    <div className="slider__leftSide">
+                        <div className="slider__text">
+                            <div className="slider__text--header1 animated_text">
                                 تابستان پسرانه
                             </div>
-                            <div className="slider_text_header2 animated_text">
+                            <div className="slider__text--header2 animated_text">
                                 پوشاک و لباس
                             </div>
-                            {/* <h3 className="slider_sub_text animated_text"> */}
                             <Paragraph />
-                            {/* </h3> */}
                         </div>
 
                         <div className="moreButton_div animated_text">

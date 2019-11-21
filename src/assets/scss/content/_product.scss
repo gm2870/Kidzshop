@@ -3,8 +3,8 @@
         padding: 0 2rem;
     }
     &__title {
-        font-size: 32px;
-        color: #3a3a3a;
+        font-size: 3.2rem;
+        color: $dark-gray-color;
     }
     &__price {
         color: $primary-pink-color;
@@ -12,9 +12,9 @@
         font-size: 2rem;
     }
     &__description {
-        color: #979797;
+        color: $primary-gray-color;
         font-weight: 300;
-        font-size: 16px;
+        font-size: 1.6rem;
         line-height: 1.75;
     }
 }
@@ -22,8 +22,6 @@
     position: relative;
     &__wrapper {
         margin: 2rem;
-    }
-    &__inner {
     }
     &__image {
         width: 100%;

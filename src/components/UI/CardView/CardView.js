@@ -6,20 +6,19 @@ class CardView extends Component {
     render() {
         return (
             <React.Fragment>
-                <Grid className="product_body" item xs={12} sm={6} md={3}>
+                <Grid item xs={12} sm={6} md={3}>
                     <Link to={`/product/${this.props.id}`}>
-                        <Grid className="cardView_body">
-                            <Grid className="product_image">
-                                <img
-                                    src={`${backendBaseUrl}/images/${this.props.image}`}
-                                    alt={this.props.name}
-                                />
-                            </Grid>
-                            <Grid className="product_detatils_body">
-                                <Grid className="product_title">
-                                    <p>{this.props.category}</p>
-                                </Grid>
-                                <Grid className="product_name">
+                        <div className="card">
+                            <img
+                                className="card__image"
+                                src={`${backendBaseUrl}/images/${this.props.image}`}
+                                alt={this.props.name}
+                            />
+                            <div className="card__details">
+                                <p className="card__details-title">
+                                    {this.props.category}
+                                </p>
+                                <div className="card__details-name">
                                     <p>{this.props.name}</p>
                                     <span
                                         style={{ fontSize: 12, color: "blue" }}
@@ -29,15 +28,15 @@ class CardView extends Component {
                                     <span style={{ fontSize: 10 }}>
                                         {this.props.availableQty}
                                     </span>
-                                </Grid>
-                                <Grid className="product_price">
+                                </div>
+                                <div className="card__details-price">
                                     <span style={{ marginLeft: 5 }}>
                                         {this.props.price}
                                     </span>
                                     <span>هزار تومان</span>
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                                </div>
+                            </div>
+                        </div>
                     </Link>
                 </Grid>
             </React.Fragment>

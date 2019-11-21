@@ -6,7 +6,7 @@ const input = props => {
         case "TextField":
             inputElement = (
                 <TextField
-                    className="auth_input"
+                    className="auth__input"
                     {...props.elementConfig}
                     value={props.value}
                     onChange={props.changed}
@@ -22,11 +22,11 @@ const input = props => {
             inputElement = <input type="radio" />;
             break;
         default:
-            inputElement = <TextField className="auth_input" />;
+            inputElement = <TextField className="auth__input" />;
             break;
     }
     return (
-        <div className="input_body">
+        <div className="input__body">
             <label>{props.labelName}</label>
             {inputElement}
             <p

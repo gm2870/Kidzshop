@@ -195,7 +195,7 @@
             top: 5rem;
             right: 1rem;
             font-size: 20rem;
-            fill: lightgray;
+            fill: $light-gray;
             opacity: 0.5;
         }
 
@@ -240,7 +240,7 @@
             }
             a {
                 color: $primary-pink-color;
-                border-bottom: 1px solid lightgray;
+                border-bottom: 1px solid $light-gray;
                 display: block;
             }
             .final-amount {

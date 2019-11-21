@@ -9,7 +9,7 @@
     z-index: 2;
     transition: opacity 1.5s;
 }
-.slider_container {
+.slider {
     background-color: $primary-pink-color;
     position: relative;
     .row {
@@ -22,17 +22,8 @@
     @include respond(xs) {
         height: 40rem;
     }
-    .slider_images {
-        width: 50%;
-        margin-left: auto;
-        margin-top: 10rem;
-        .animated_img {
-            width: 100%;
-            animation: moveInImg 0.5s ease-out 0.75s;
-            animation-fill-mode: backwards;
-        }
-    }
-    .slider__images {
+
+    &__images {
         position: absolute;
         right: 0;
         top: 5rem;
@@ -41,8 +32,13 @@
         img {
             max-width: 100%;
         }
+        // .animated_img {
+        //     width: 100%;
+        //     animation: moveInImg 0.5s ease-out 0.75s;
+        //     animation-fill-mode: backwards;
+        // }
     }
-    .leftSide_slider {
+    &__leftSide {
         position: absolute;
         top: 12rem;
         left: 0;
@@ -52,11 +48,11 @@
             top: 5rem;
         }
     }
-    .slider_text {
+    &__text {
         .animated_text {
             animation: moveInRight 1s ease-out;
         }
-        .slider_text_header1 {
+        &--header1 {
             color: $primary-yellow-color;
             font-size: 6rem;
             font-weight: 700;
@@ -67,7 +63,7 @@
                 font-size: 2rem;
             }
         }
-        .slider_text_header2 {
+        &--header2 {
             color: $primary-white-color;
             font-size: 8rem;
             font-weight: 900;
@@ -85,6 +81,7 @@
     }
     .moreButton_div {
         text-align: left;
+        margin-left: 2rem;
         .moreButton {
             #left_arrow_symbol {
                 vertical-align: -webkit-baseline-middle;

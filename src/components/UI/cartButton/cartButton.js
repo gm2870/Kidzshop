@@ -1,10 +1,6 @@
 import React from "react";
 
 const cartButton = props => {
-    // const pushToLogin = () => {
-    //     console.log("pushed");
-    // };
-
     return (
         <button
             onClick={props.clicked}
