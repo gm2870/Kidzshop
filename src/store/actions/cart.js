@@ -1,6 +1,4 @@
 import * as actionTypes from "./actionTypes";
-// import Axios from "axios";
-// import { backendBaseUrl } from "../../shared/utility";
 
 export const incrementQty = id => {
     return {

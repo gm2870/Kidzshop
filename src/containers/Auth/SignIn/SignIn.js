@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Input from "../../../components/UI/Input/Input";
 import * as actions from "../../../store/actions/index";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import authBoy from "../../../assets/images/auth_boy.png";
 
 class SignIn extends Component {
     state = {
@@ -147,39 +148,58 @@ class SignIn extends Component {
         }
 
         return (
-            <Grid
-                item
-                xs={12}
-                md={6}
-                style={{ padding: "10rem 0" }}
-                className="form_container"
-            >
-                {authRedirect}
-                <Paper className="form_body">
-                    {this.props.loading ? <Spinner /> : null}
-                    <Link to="/users/register" className="registerTab">
-                        ثبت نام
-                    </Link>
-                    <Link to="/users/login" className="loginTab active">
-                        ورود
-                    </Link>
-                    <form onSubmit={this.submitHandler}>
-                        {form}
-                        <div>
-                            <button className="login_btn">ورود</button>
-                            <Checkbox style={{ padding: "0 2rem 0 5px" }} />
-                            <span id="rememberMe">مرا به خاطر بسپار</span>
-                        </div>
-                        <p style={{ color: "red", display: "inline-block" }}>
-                            {this.state.formMessage}
-                        </p>
-                        {errorMessage}
-                        <p id="lost_password">
-                            رمز عبور خود را فراموش کرده اید؟
-                        </p>
-                    </form>
-                </Paper>
-            </Grid>
+            <React.Fragment>
+                <Grid
+                    container
+                    direction="row"
+                    className="container auth"
+                    justify="center"
+                >
+                    <Grid item className="auth__grid auth__grid--boy" sm={2}>
+                        <img
+                            src={authBoy}
+                            className="auth__image"
+                            alt="auth kid"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={10} md={7} className="form">
+                        {authRedirect}
+                        <Paper className="form__body">
+                            {this.props.loading ? <Spinner /> : null}
+                            <Link to="/users/register" className="registerTab">
+                                ثبت نام
+                            </Link>
+                            <Link to="/users/login" className="loginTab active">
+                                ورود
+                            </Link>
+                            <form onSubmit={this.submitHandler}>
+                                {form}
+                                <div>
+                                    <button className="login_btn">ورود</button>
+                                    <Checkbox
+                                        style={{ padding: "0 2rem 0 5px" }}
+                                    />
+                                    <span id="rememberMe">
+                                        مرا به خاطر بسپار
+                                    </span>
+                                </div>
+                                <p
+                                    style={{
+                                        color: "red",
+                                        display: "inline-block"
+                                    }}
+                                >
+                                    {this.state.formMessage}
+                                </p>
+                                {errorMessage}
+                                <p id="lost_password">
+                                    رمز عبور خود را فراموش کرده اید؟
+                                </p>
+                            </form>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </React.Fragment>
         );
     }
 }

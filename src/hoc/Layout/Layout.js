@@ -7,7 +7,7 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <Header isAuthenticated={this.props.isAuthenticated} />
-                <main>{this.props.children}</main>
+                {this.props.children}
                 <Footer />
             </React.Fragment>
         );

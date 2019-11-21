@@ -1,38 +1,69 @@
+.auth {
+    padding: 5.6rem;
 
-.auth_box {
-    padding: 56px;
+    @include respond(xs) {
+        padding: 3rem 2rem;
+    }
+    &__grid {
+        &--boy {
+            height: 65rem;
+        }
+        &--girl {
+            height: 75rem;
+        }
+        &--boy,
+        &--girl {
+            @include respond(sm) {
+                display: none;
+            }
+        }
+    }
+    &__image {
+        width: 100%;
+    }
 }
-.form_body{
-    position: relative;
-    padding: 56px;
-    label {
-        color: $primary-gray-color;
+.form {
+    padding: 10rem 0;
+    @include respond(md) {
+        padding: 3rem;
+    }
+
+    &__body {
+        position: relative;
+        padding: 5.6rem;
+        @include respond(xs) {
+            padding: 3rem;
+        }
+        label {
+            color: $primary-gray-color;
+        }
     }
 }
 
-.registerTab , .loginTab {
+.registerTab,
+.loginTab {
     display: inline-block;
     width: 50%;
     font-size: 1.6rem;
-    border-radius:50px;
+    border-radius: 50px;
     padding: 16px 20px;
-    border:3px solid $primary-pink-color;
+    border: 3px solid $primary-pink-color;
     margin-bottom: 40px;
     cursor: pointer;
     text-align: center;
 }
-.registerTab{
+.registerTab {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    &.active{
+    &.active {
         background: $primary-pink-color;
         color: $primary-white-color;
     }
 }
 .loginTab {
     border-bottom-right-radius: 0;
-    border-top-right-radius: 0; 
-    &.active{
+    border-top-right-radius: 0;
+    &.active {
         background: $primary-pink-color;
         color: $primary-white-color;
     }
@@ -40,27 +71,27 @@
 .input_body {
     margin-top: 2rem;
 
-    .auth_input{
+    .auth_input {
         width: 100%;
         margin-top: 1rem;
     }
 }
-.login_btn{
+.login_btn {
     font-family: $fontFamily;
-    border:none;
+    border: none;
     font-size: 1.6rem;
     color: $primary-white-color;
     background: $primary-pink-color;
     border-radius: 50px;
-    padding: 1rem 4rem ;
+    padding: 1rem 4rem;
     cursor: pointer;
     margin-top: 2rem;
-    &:enabled:hover{
-        background-color:$dark-pink-color;
+    &:enabled:hover {
+        background-color: $dark-pink-color;
     }
 }
-#rememberMe{
-    color:$primary-gray-color;
+#rememberMe {
+    color: $primary-gray-color;
     font-size: 1.3rem;
 }
 #lost_password {
@@ -68,21 +99,21 @@
     margin-top: 2rem;
     cursor: pointer;
     &:hover {
-        color:$dark-pink-color;
+        color: $dark-pink-color;
     }
 }
 
 .showError {
-    display:block;
-    color:red
+    display: block;
+    color: red;
 }
 .hideError {
     display: none;
 }
-button:disabled{
-    background-color:$light-pink-color;
+button:disabled {
+    background-color: $light-pink-color;
     cursor: not-allowed;
 }
-.emptyInput{
-    border:2px solid red;
+.emptyInput {
+    border: 2px solid red;
 }

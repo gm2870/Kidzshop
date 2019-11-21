@@ -7,6 +7,7 @@ import { Link, Redirect } from "react-router-dom";
 import * as actions from "../../../store/actions/index";
 import Input from "../../../components/UI/Input/Input";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import authGirl from "../../../assets/images/feature-girl.png";
 
 class Register extends Component {
     state = {
@@ -217,45 +218,60 @@ class Register extends Component {
             authRedirect = <Redirect to="/" />;
         }
         return (
-            <Grid
-                item
-                xs={12}
-                md={6}
-                style={{ padding: "10rem 0" }}
-                className="form_container"
-            >
-                {authRedirect}
-                <Paper className="form_body">
-                    {this.props.loading ? <Spinner /> : null}
-                    <Link to="/users/register" className="registerTab active">
-                        ثبت نام
-                    </Link>
-                    <Link to="/users/login" className="loginTab">
-                        ورود
-                    </Link>
-                    <form onSubmit={this.submitHandler}>
-                        {form}
-                        <div>
-                            <div>
-                                <Checkbox
-                                    onChange={this.checkboxHandler}
-                                    checked={this.state.siteRules}
-                                    style={{ padding: "0 0 0 5px" }}
-                                />
+            <React.Fragment>
+                <Grid
+                    container
+                    direction="row"
+                    className="container auth"
+                    justify="center"
+                >
+                    <Grid item className="auth__grid auth__grid--girl" sm={2}>
+                        <img
+                            src={authGirl}
+                            className="auth__image"
+                            alt="auth kid"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={10} md={7} className="form">
+                        {authRedirect}
+                        <Paper className="form__body">
+                            {this.props.loading ? <Spinner /> : null}
+                            <Link
+                                to="/users/register"
+                                className="registerTab active"
+                            >
+                                ثبت نام
+                            </Link>
+                            <Link to="/users/login" className="loginTab">
+                                ورود
+                            </Link>
+                            <form onSubmit={this.submitHandler}>
+                                {form}
+                                <div>
+                                    <div>
+                                        <Checkbox
+                                            onChange={this.checkboxHandler}
+                                            checked={this.state.siteRules}
+                                            style={{ padding: "0 0 0 5px" }}
+                                        />
 
-                                <Link to="/" id="rules">
-                                    با قوانین موافقم
-                                </Link>
-                            </div>
-                            <button className="login_btn">ثبت نام</button>
-                            <p style={{ color: "red" }}>
-                                {this.state.formMessage}
-                            </p>
-                            {errorMessage}
-                        </div>
-                    </form>
-                </Paper>
-            </Grid>
+                                        <Link to="/" id="rules">
+                                            با قوانین موافقم
+                                        </Link>
+                                    </div>
+                                    <button className="login_btn">
+                                        ثبت نام
+                                    </button>
+                                    <p style={{ color: "red" }}>
+                                        {this.state.formMessage}
+                                    </p>
+                                    {errorMessage}
+                                </div>
+                            </form>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </React.Fragment>
         );
     }
 }

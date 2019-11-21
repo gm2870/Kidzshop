@@ -4,8 +4,8 @@ export const updateObject = (oldObject, updatedProperties) => {
         ...updatedProperties
     };
 };
-export const updateObject2 = (oldObject, newValues) => {
-    return Object.assign({}, oldObject, newValues);
-};
+// export const updateObject2 = (oldObject, newValues) => {
+//     return Object.assign({}, oldObject, newValues);
+// };
 export const backendBaseUrl =
     "http://localhost/laravel_kidzshop_backend/public";
