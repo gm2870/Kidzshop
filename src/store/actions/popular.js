@@ -1,28 +1,7 @@
 // import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { backendBaseUrl } from "../../shared/utility";
-export const incrementQty = id => {
-    return {
-        type: actionTypes.INCREMENT_QTY,
-        payload: {
-            id: id
-        }
-    };
-};
-export const decrementQty = id => {
-    return {
-        type: actionTypes.DECREMENT_QTY,
-        payload: {
-            id: id
-        }
-    };
-};
-// export const addToCart = id => {
-//     return {
-//         type: actionTypes.ADD_TO_CART,
-//         id: id
-//     };
-// };
+
 export const setPopular = payload => {
     return {
         type: actionTypes.GET_POPULAR,
