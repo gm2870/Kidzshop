@@ -78,5 +78,4 @@ const mapDispatchToProps = dispatch => {
         onCheckCart: () => dispatch(actions.checkCartExpiryStatus())
     };
 };
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

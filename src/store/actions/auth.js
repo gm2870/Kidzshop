@@ -8,10 +8,10 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId, userName) => {
+export const authSuccess = (access_token, userId, userName) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        access_token: "true",
+        access_token: access_token,
         objectId: userId,
         username: userName
     };
@@ -44,20 +44,29 @@ export const registerAuth = (username, password, email, repeatPass) => {
             repeatPass: repeatPass
         };
         axios
-            .post(`${backendBaseUrl}/api/register`, authData)
+            .post(`${backendBaseUrl}/api/auth/register`, authData)
             .then(response => {
                 if (response.data.status === "true") {
                     localStorage.setItem("token", response.data.access_token);
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("userId", response.data.userId);
+                    localStorage.setItem(
+                        "username",
+                        response.data.user.username
+                    );
+                    localStorage.setItem("userId", response.data.user.id);
 
-                    dispatch(authSuccess(response.data));
+                    dispatch(
+                        authSuccess(
+                            response.data.access_token,
+                            response.data.user.username,
+                            response.data.user.id
+                        )
+                    );
                 } else {
                     dispatch(authFail(response.data.message));
                 }
             })
-            .catch(error => {
-                console.log(error);
+            .catch(response => {
+                dispatch(authFail(response.data.message));
             });
     };
 };
@@ -65,45 +74,50 @@ export const registerAuth = (username, password, email, repeatPass) => {
 export const loginAuth = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-
         const authData = {
             username: username,
             password: password
         };
         axios
-            .post(`${backendBaseUrl}/api/login`, authData)
+            .post(`${backendBaseUrl}/api/auth/login`, authData)
             .then(response => {
                 if (response.data.status === "true") {
                     localStorage.setItem("token", response.data.access_token);
-                    localStorage.setItem("username", response.data.username);
-                    localStorage.setItem("userId", response.data.userId);
-
+                    localStorage.setItem(
+                        "username",
+                        response.data.user.username
+                    );
+                    localStorage.setItem("userId", response.data.user.id);
                     dispatch(
                         authSuccess(
                             response.data.access_token,
-                            response.data.username
+                            response.data.user.username,
+                            response.data.user.id
                         )
                     );
                 } else {
                     dispatch(authFail(response.data.message));
                 }
             })
-            .catch(error => {
-                console.log(error);
+            .catch(response => {
+                dispatch(authFail(response.data.message));
             });
     };
 };
 export const checkLoginStatus = () => {
     return dispatch => {
         const token = `Bearer ${localStorage.getItem("token")}`;
-        fetch(`${backendBaseUrl}/api/CheckLoginStatus`, {
-            headers: new Headers({
+
+        fetch(`${backendBaseUrl}/api/auth/CheckLoginStatus`, {
+            headers: {
                 Accept: "aplication/json",
+                "Content-Type": "aplication/json",
                 Authorization: token
-            })
+            }
         })
             .then(response => response.json())
             .then(response => {
+                console.log(response);
                 if (response.user === null) {
                     dispatch(removeLocalStorage());
                 }
@@ -113,7 +127,7 @@ export const checkLoginStatus = () => {
 export const logout = () => {
     return dispatch => {
         const token = `Bearer ${localStorage.getItem("token")}`;
-        fetch(`${backendBaseUrl}/api/logout`, {
+        fetch(`${backendBaseUrl}/api/auth/logout`, {
             headers: new Headers({
                 Accept: "aplication/json",
                 Authorization: token
