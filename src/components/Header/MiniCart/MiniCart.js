@@ -54,7 +54,7 @@ class MiniCart extends Component {
         let emptyText = null;
 
         if (
-            this.props.cartQty === 0 ||
+            this.props.totalQty === 0 ||
             JSON.parse(localStorage.getItem("cart_items")).totalQty === 0
         ) {
             emptyText = (
@@ -75,7 +75,8 @@ class MiniCart extends Component {
 }
 
 const mapStateToProps = state => ({
-    items: state.cart.cart
+    items: state.cart.cart,
+    totalQty: state.cart.totalQty
 });
 const mapDispatchToProps = dispatch => ({
     onRemoveCartItem: item => dispatch(actions.removeCartItem(item))
