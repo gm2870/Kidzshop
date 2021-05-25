@@ -11,9 +11,12 @@ class MiniCart extends Component {
         this.props.onRemoveCartItem(item);
     };
     render() {
-        let cartItems;
+        let cartItems = null,
+            cart = null,
+            totalQty = 0;
         if (JSON.parse(localStorage.getItem("cart_items"))) {
-            const cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+            cart = JSON.parse(localStorage.getItem("cart_items")).cart;
+            totalQty = JSON.parse(localStorage.getItem("cart_items")).totalQty;
             cartItems = cart.map(item => (
                 <Grid
                     className="item"
@@ -51,23 +54,16 @@ class MiniCart extends Component {
                 </Grid>
             ));
         }
-        let emptyText = null;
-
-        if (
-            this.props.totalQty === 0 ||
-            JSON.parse(localStorage.getItem("cart_items")).totalQty === 0
-        ) {
-            emptyText = (
-                <Grid className="empty_cart">
-                    <p id="empty_cart_text">سبد خرید خالی است</p>
-                </Grid>
-            );
-        }
         return (
             <Grid container direction="column" className="cart__items">
                 <Paper style={{ padding: 15 }}>
-                    {emptyText}
-                    {cartItems}
+                    {totalQty === null || totalQty === 0 ? (
+                        <Grid className="empty_cart">
+                            <p id="empty_cart_text">سبد خرید خالی است</p>
+                        </Grid>
+                    ) : (
+                        cartItems
+                    )}
                 </Paper>
             </Grid>
         );

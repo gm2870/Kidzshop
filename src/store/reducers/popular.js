@@ -2,8 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     popular: [],
-    isFetched: false,
-    loading: false
+    isFetched: false
 };
 
 // const incrementQty = (state, action) => {

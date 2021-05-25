@@ -3,16 +3,16 @@ import { updateObject } from "../../shared/utility";
 
 const initialState = {
     product: {},
-    isFetched: false,
-    loading: false,
-    error: null
+    error: null,
+    isFetched: false
 };
-const getProductstart = (state, action) => {
-    return updateObject(state, { loading: true });
-};
+
 const getProductSuccess = (state, action) => {
-    const product = action.product;
-    return updateObject(state, { loading: false, product: product });
+    return updateObject(state, {
+        product: action.product,
+        loading: false,
+        isFetched: true
+    });
 };
 
 const getProductFailed = (state, action) => {
@@ -23,8 +23,6 @@ const getProductFailed = (state, action) => {
 };
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_PRODUCT_START:
-            return getProductstart(state, action);
         case actionTypes.FETCH_PRODUCT_SUCCESS:
             return getProductSuccess(state, action);
         case actionTypes.FETCH_PRODUCT_FAIL:

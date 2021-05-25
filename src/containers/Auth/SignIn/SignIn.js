@@ -146,7 +146,7 @@ class SignIn extends Component {
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to="/" />;
         }
-
+        console.log("login");
         return (
             <React.Fragment>
                 <Grid

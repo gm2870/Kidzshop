@@ -8,11 +8,10 @@ import Logout from "./containers/Auth/Logout/Logout";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
 import Product from "./containers/Main/Product/Product";
-// import Cart from "./containers/Main/Cart/Cart";
-// import EmptyCart from "./components/EmptyCart/EmptyCart";
 
 const Cart = React.lazy(() => import("./containers/Main/Cart/Cart"));
-const EmptyCart = React.lazy(() => import("./containers/Main/Cart/Cart"));
+const EmptyCart = React.lazy(() => import("./components/EmptyCart/EmptyCart"));
+
 class App extends Component {
     componentDidMount() {
         if (localStorage.getItem("token") !== null) {
@@ -30,9 +29,10 @@ class App extends Component {
             </Switch>
         );
         if (this.props.isAuthenticated) {
-            let qty;
+            let qty = 0;
             if (JSON.parse(localStorage.getItem("cart_items"))) {
                 qty = JSON.parse(localStorage.getItem("cart_items")).totalQty;
+                console.log(qty);
             }
             routes = (
                 <Switch>
@@ -41,14 +41,11 @@ class App extends Component {
                     <Route path="/users/my-account" component={UserAccount} />
                     <Route path="/product/:id" component={Product} />
                     <Route path="/logout" component={Logout} />
-                    {/* <Route
-                        path="/cart"
-                        component={qty !== 0 ? Cart : EmptyCart}
-                    /> */}
+
                     <Route
                         path="/cart"
                         render={() => (
-                            <Suspense fallback={() => <div>loading ...</div>}>
+                            <Suspense fallback={<div>loading ...</div>}>
                                 {qty === 0 ? <EmptyCart /> : <Cart />}
                             </Suspense>
                         )}

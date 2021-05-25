@@ -117,7 +117,6 @@ export const checkLoginStatus = () => {
         })
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 if (response.user === null) {
                     dispatch(removeLocalStorage());
                 }

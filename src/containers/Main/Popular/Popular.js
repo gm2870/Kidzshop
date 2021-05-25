@@ -8,7 +8,6 @@ class Popular extends Component {
     componentDidMount() {
         this.props.onGetPopular();
     }
-
     addToCartHandler = item => () => {
         this.props.onAddToCart(item);
     };
@@ -62,7 +61,4 @@ const mapDispatchToProps = dispatch => ({
     onGetPopular: () => dispatch(actions.getPopularProducts()),
     onAddToCart: item => dispatch(actions.addItemToCart(item))
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Popular);
+export default connect(mapStateToProps, mapDispatchToProps)(Popular);

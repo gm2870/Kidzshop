@@ -7,7 +7,7 @@ import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import user from "../../../assets/images/user.svg";
 import { Paper, InputBase } from "@material-ui/core";
 import MiniCart from "../../../components/Header/MiniCart/MiniCart";
-const mobileHeader = () => {
+const mobileHeader = props => {
     const [searchIconClicked, setSearchIconSate] = useState(false);
     const onClickedHandler = () => {
         setSearchIconSate(!searchIconClicked);
@@ -31,7 +31,10 @@ const mobileHeader = () => {
                 <div className="cart">
                     <ShoppingCart id="ShoppingCart" />
                     <span className="cart__counter">{cartQty}</span>
-                    <MiniCart />
+                    <MiniCart
+                        cartQty={cartQty}
+                        isAuthenticated={props.isAuthenticated}
+                    />
                 </div>
                 <Link to="/users/login" className="user_icon">
                     <img src={user} alt="user icon" />
